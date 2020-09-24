@@ -1,0 +1,31 @@
+{
+  "name": "road-completion",
+  "version": "1.0.0",
+  "description": "## Requirements",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/osmbe/road-completion.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/osmbe/road-completion/issues"
+  },
+  "homepage": "https://github.com/osmbe/road-completion#readme",
+  "dependencies": {
+    "@types/event-stream": "^3.3.34",
+    "@types/geojson": "^7946.0.7",
+    "@types/node": "^14.11.2",
+    "event-stream": "^4.0.1",
+    "jsonstream-next": "^3.0.0"
+  },
+  "devDependencies": {
+    "@tsconfig/recommended": "^1.0.1",
+    "typescript": "^4.0.3"
+  }
+}
