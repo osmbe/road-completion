@@ -3,6 +3,7 @@
 ## Requirements
 
 - [GDAL 2.1+](https://gdal.org/)
+- [tippecanoe](https://github.com/mapbox/tippecanoe)
 
 ## History of the project
 
