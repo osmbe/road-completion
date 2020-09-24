@@ -33,3 +33,7 @@ ogr2ogr -f "GeoJSON" -progress \
 # Convert fields to OpenStreetMap tags
 
 node "../../../script/convert-tags.js" "./convert/UrbAdm_STREET_AXIS.geojson" "UrbAdm_STREET_AXISTagged.geojson"
+
+# Generate buffer
+
+node "../../../script/buffer.js" "./convert/UrbAdm_STREET_AXISTagged.geojson" "UrbAdm_STREET_AXISBuffer.geojson"
