@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/osmbe/road-completion#readme",
   "dependencies": {
+    "@turf/buffer": "^5.1.5",
     "event-stream": "^4.0.1",
     "jsonstream-next": "^3.0.0"
   },
