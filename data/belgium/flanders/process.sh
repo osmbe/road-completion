@@ -28,3 +28,7 @@ ogr2ogr -f "GeoJSON" -progress \
 # Convert fields to OpenStreetMap tags
 
 node "../../../script/convert-tags.js" "./convert/Wegsegment.geojson" "WegsegmentTagged.geojson"
+
+# Generate buffer
+
+node "../../../script/buffer.js" "./convert/WegsegmentTagged.geojson" "WegsegmentBuffer.geojson"
