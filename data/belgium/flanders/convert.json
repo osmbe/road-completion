@@ -1,0 +1,18 @@
+{
+  "MORF": {
+    "*": {
+      "highway": "unclassified"
+    }
+  },
+  "TGBEP": {
+    "1": {
+      "access": "yes"
+    },
+    "3": {
+      "access": "no"
+    },
+    "4": {
+      "access": "private"
+    }
+  }
+}
