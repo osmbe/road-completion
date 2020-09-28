@@ -32,3 +32,12 @@ node "../../../script/convert-tags.js" "./convert/Wegsegment.geojson" "Wegsegmen
 # Generate buffer
 
 node "../../../script/buffer.js" "./convert/WegsegmentTagged.geojson" "WegsegmentBuffer.geojson"
+
+# Generate vector tiles
+
+if [ -d "./process" ]; then rm -r "./process/"; fi
+
+mkdir -p "./process/"
+
+tippecanoe --force --output="./process/WegsegmentTagged.mbtiles" "./convert/WegsegmentTagged.geojson" --layer="roads" --no-feature-limit --no-tile-size-limit
+tippecanoe --force --output="./process/WegsegmentBuffer.mbtiles" "./convert/WegsegmentBuffer.geojson" --layer="buffers" --no-feature-limit --no-tile-size-limit
