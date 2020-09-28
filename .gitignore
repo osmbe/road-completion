@@ -2,3 +2,7 @@ data/*/*/source/
 data/*/*/convert/
 data/*/*/process/
 node_modules/
+*.osm.pbf
+*.geojson
+*.mbtiles
+*.mbtiles-journal
