@@ -5,7 +5,8 @@
     "outDir": "script/"
   },
   "include": [
-    "script/src/*.ts"
+    "script/src/*.ts",
+    "script/src/difference/*.ts"
   ],
   "exclude": []
 }
