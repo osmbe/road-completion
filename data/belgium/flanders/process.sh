@@ -48,4 +48,4 @@ tippecanoe --force --no-feature-limit --no-tile-size-limit \
 
 # Difference
 
-node "../../../script/difference.js" "./process/WegsegmentTagged.mbtiles" "../belgiumBuffer.mbtiles"
+node "../../../script/difference.js" "./process/WegsegmentTagged.mbtiles" "../belgium-buffers.mbtiles"
