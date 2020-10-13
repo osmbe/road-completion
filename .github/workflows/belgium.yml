@@ -1,0 +1,44 @@
+name: Belgium process
+
+on:
+  schedule:
+    - cron:  '0 18 * * *'
+
+jobs:
+
+  openstreetmap-buffers:
+    name: Generate OpenStreetMap buffers
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run process
+        run: sh data/belgium/openstreetmap.sh
+      - name: Upload OpenStreetMap buffers
+        uses: actions/upload-artifact@v2
+        with:
+          name: OpenStreetMap-Belgium-Buffers
+          path: data/belgium/belgium-buffers.mbtiles
+
+  flanders-diff:
+    name: Generate difference for Flanders
+    needs: openstreetmap-buffers
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Download OpenStreetMap buffers
+        uses: actions/download-artifact@v2
+        with:
+          name: OpenStreetMap-Belgium-Buffers
+          path: data/belgium/belgium-buffers.mbtiles
+      - name: Run process
+        run: sh data/belgium/flanders/process.sh
+      - name: Upload difference
+        uses: actions/upload-artifact@v2
+        with:
+          name: Flanders-Difference
+          path: data/belgium/flanders/process/notWithin.geojson
+      - name: Upload statistics
+        uses: actions/upload-artifact@v2
+        with:
+          name: Flanders-Statistics
+          path: data/belgium/flanders/process/stats.json
