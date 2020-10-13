@@ -13,7 +13,7 @@ jobs:
   openstreetmap-buffers:
     name: Generate OpenStreetMap buffers
     runs-on: ubuntu-latest
-    container: osgeo/gdal
+    # container: osgeo/gdal
     steps:
       - uses: actions/checkout@v2
       # - name: Install PROJ
@@ -33,9 +33,10 @@ jobs:
       #     ./configure
       #     make
       #     sudo make install
+      - name: Install GDAL
+        run: sudo apt install gdal-bin
       - name: Install Tippecanoe
         run: |
-          apt install git
           git clone https://github.com/mapbox/tippecanoe.git
           cd tippecanoe
           make -j
@@ -52,7 +53,7 @@ jobs:
     name: Generate difference for Flanders
     needs: openstreetmap-buffers
     runs-on: ubuntu-latest
-    container: osgeo/gdal
+    # container: osgeo/gdal
     steps:
       - uses: actions/checkout@v2
       # - name: Install PROJ
@@ -71,6 +72,8 @@ jobs:
       #     ./configure
       #     make
       #     sudo make install
+      - name: Install GDAL
+        run: sudo apt install gdal-bin
       - name: Install Tippecanoe
         run: |
           git clone https://github.com/mapbox/tippecanoe.git
