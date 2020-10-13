@@ -42,7 +42,9 @@ jobs:
           make -j
           sudo make install
       - name: Run process
-        run: sh data/belgium/openstreetmap.sh
+        run: |
+          npm install
+          sh data/belgium/openstreetmap.sh
       - name: Upload OpenStreetMap buffers
         uses: actions/upload-artifact@v2
         with:
@@ -86,7 +88,9 @@ jobs:
           name: OpenStreetMap-Belgium-Buffers
           path: data/belgium/belgium-buffers.mbtiles
       - name: Run process
-        run: sh data/belgium/flanders/process.sh
+        run: |
+          npm install
+          sh data/belgium/flanders/process.sh
       - name: Upload difference
         uses: actions/upload-artifact@v2
         with:
