@@ -39,5 +39,13 @@ if [ -d "./process" ]; then rm -r "./process/"; fi
 
 mkdir -p "./process/"
 
-tippecanoe --force --output="./process/WegsegmentTagged.mbtiles" "./convert/WegsegmentTagged.geojson" --layer="roads" --no-feature-limit --no-tile-size-limit
-tippecanoe --force --output="./process/WegsegmentBuffer.mbtiles" "./convert/WegsegmentBuffer.geojson" --layer="buffers" --no-feature-limit --no-tile-size-limit
+tippecanoe --force --no-feature-limit --no-tile-size-limit \
+  --maximum-zoom=14 --minimum-zoom=14 \
+  --output="./process/WegsegmentTagged.mbtiles" "./convert/WegsegmentTagged.geojson" --layer="roads"
+# tippecanoe --force --no-feature-limit --no-tile-size-limit \
+#   --maximum-zoom=14 --minimum-zoom=14 \
+#   --output="./process/WegsegmentBuffer.mbtiles" "./convert/WegsegmentBuffer.geojson" --layer="buffers"
+
+# Difference
+
+node "../../../script/difference.js" "./process/WegsegmentTagged.mbtiles" "../belgiumBuffer.mbtiles"
