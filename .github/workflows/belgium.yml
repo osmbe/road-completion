@@ -11,6 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Install GDAL
+        run: sudo apt install gdal-bin
+      - name: Install Tippecanoe
+        run: |
+          git clone https://github.com/mapbox/tippecanoe.git
+          cd tippecanoe
+          make -j
+          make install
       - name: Run process
         run: sh data/belgium/openstreetmap.sh
       - name: Upload OpenStreetMap buffers
