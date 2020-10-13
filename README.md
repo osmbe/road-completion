@@ -4,6 +4,7 @@
 
 - [GDAL 2.1+](https://gdal.org/)
 - [tippecanoe](https://github.com/mapbox/tippecanoe)
+- (Python, might be needed during [TileReduce](https://github.com/mapbox/tile-reduce) install)
 
 ## History of the project
 
