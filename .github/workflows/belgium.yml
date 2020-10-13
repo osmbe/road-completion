@@ -35,6 +35,7 @@ jobs:
       #     sudo make install
       - name: Install Tippecanoe
         run: |
+          apt install git
           git clone https://github.com/mapbox/tippecanoe.git
           cd tippecanoe
           make -j
