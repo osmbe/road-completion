@@ -2,7 +2,7 @@ name: 🇧🇪 Belgium
 
 on:
   schedule:
-    - cron: '15 17 * * *'
+    - cron: '20 19 * * *'
 
 jobs:
 
