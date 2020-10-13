@@ -2,6 +2,10 @@
 
 FILENAME="Wegenregister_SHAPE_20200917"
 
+# Make script directory working directory
+
+cd `dirname "$(realpath $0)"`
+
 # Download & unzip data
 
 mkdir -p "./source/"

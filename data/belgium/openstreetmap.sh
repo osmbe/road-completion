@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# Make script directory working directory
+
+cd `dirname "$(realpath $0)"`
+
 # Download Belgium extract
 
 if [ ! -f "belgium-latest.osm.pbf" ]; then
