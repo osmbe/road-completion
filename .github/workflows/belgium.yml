@@ -37,6 +37,8 @@ jobs:
             "belgium-latest.osm.pbf" "lines"
       - name: Install dependencies
         run: npm install
+      - name: Build
+        run: npm run build
       - name: Generate buffers
         run: node "script/buffer.js" "belgium.geojson" "belgium-buffers.geojson"
       - name: Generate vector tiles
@@ -76,8 +78,10 @@ jobs:
             "Shapefile/Wegsegment.shp"
       - name: Install dependencies
         run: npm install
+      - name: Build
+        run: npm run build
       - name: Convert fields to OpenStreetMap tags
-        run: node "script/convert-tags.js" "Wegsegment.geojson" "WegsegmentTagged.geojson"
+        run: node "script/convert-tags.js" -c "data/belgium/flanders/convert.json" "Wegsegment.geojson" "WegsegmentTagged.geojson"
       - name: Generate buffers
         run: node "script/buffer.js" "WegsegmentTagged.geojson" "WegsegmentBuffers.geojson"
       - name: Generate vector tiles
