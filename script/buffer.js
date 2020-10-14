@@ -17,3 +17,4 @@ fs_1.default.createReadStream(source)
     .pipe(event_stream_1.default.mapSync((feature) => buffer_1.default(feature, 20, { units: "meters" })))
     .pipe(jsonstream_next_1.default.stringify('{"type":"FeatureCollection","features":[\n', ",\n", "\n]}"))
     .pipe(fs_1.default.createWriteStream(`${directory}/${target}`));
+console.log(fs_1.default.realpathSync(`${directory}/${target}`));
