@@ -6,13 +6,10 @@ import { Feature } from "geojson";
 import JSONStream from "jsonstream-next";
 import minimist from "minimist";
 import path from "path";
-import { exit } from "process";
 
-const args = process.argv.slice(2);
-
-const source = args[0];
-const target = args[1];
 const options = minimist(process.argv.slice(2));
+const source = options._[0];
+const target = options._[1];
 
 const directory = path.dirname(source);
 
