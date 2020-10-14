@@ -1,6 +1,7 @@
 data/*/*/source/
 data/*/*/convert/
 data/*/*/process/
+script/**/*.js
 node_modules/
 *.osm.pbf
 *.geojson

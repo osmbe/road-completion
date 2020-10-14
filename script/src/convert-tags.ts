@@ -4,18 +4,19 @@ import es from "event-stream";
 import fs from "fs";
 import { Feature } from "geojson";
 import JSONStream from "jsonstream-next";
+import minimist from "minimist";
 import path from "path";
+import { exit } from "process";
 
 const args = process.argv.slice(2);
 
 const source = args[0];
 const target = args[1];
+const options = minimist(process.argv.slice(2));
 
 const directory = path.dirname(source);
 
-const convert = JSON.parse(
-  fs.readFileSync(path.dirname(directory) + "/convert.json").toString()
-);
+const convert = JSON.parse(fs.readFileSync(options.c).toString());
 const convertKeys = Object.keys(convert);
 
 fs.createReadStream(source)
