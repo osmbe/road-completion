@@ -27,4 +27,6 @@ node "../../script/buffer.js" "./belgium.geojson" "belgium-buffers.geojson"
 # Generate vector tiles
 
 # tippecanoe --force --output="./belgium.mbtiles" "./belgium.geojson" --layer="roads" --no-feature-limit --no-tile-size-limit
-tippecanoe --force --output="./belgium-buffers.mbtiles" "./belgium-buffers.geojson" --layer="buffers" --no-feature-limit --no-tile-size-limit
+tippecanoe --force --no-feature-limit --no-tile-size-limit \
+  --maximum-zoom=14 --minimum-zoom=14 \
+  --output="./belgium-buffers.mbtiles" "./belgium-buffers.geojson" --layer="buffers"
