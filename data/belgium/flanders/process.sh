@@ -35,7 +35,7 @@ node "../../../script/convert-tags.js" -c "./convert.json" "./convert/Wegsegment
 
 # Generate buffer
 
-node "../../../script/buffer.js" "./convert/WegsegmentTagged.geojson" "WegsegmentBuffer.geojson"
+# node "../../../script/buffer.js" "./convert/WegsegmentTagged.geojson" "WegsegmentBuffer.geojson"
 
 # Generate vector tiles
 
