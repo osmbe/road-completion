@@ -8,6 +8,9 @@ import path from "path";
 
 const args = process.argv.slice(2);
 
+console.log(`Roads: ${path.resolve(args[0])}`);
+console.log(`OSM Buffers: ${path.resolve(args[1])}`);
+
 try {
   fs.accessSync(args[0], F_OK | R_OK);
 } catch (err) {
@@ -62,7 +65,8 @@ tileReduce(options)
   .on("end", function () {
     fs.writeFileSync(`${directory}/stats.json`, JSON.stringify(stats));
 
-    const stream = fs.createWriteStream(`${directory}/notWithin.geojson`);
+    const file = `${directory}/notWithin.geojson`;
+    const stream = fs.createWriteStream(file);
 
     stream.write('{"type":"FeatureCollection","features":[\n');
 
@@ -78,4 +82,5 @@ tileReduce(options)
     stream.end();
 
     console.log("Features count: %d", collectionNotWithin.features.length);
+    console.log(`Result: ${path.resolve(file)}`);
   });
