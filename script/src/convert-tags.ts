@@ -17,7 +17,7 @@ console.log(`Source: ${path.resolve(source)}`);
 console.log(`Target: ${path.resolve(target)}`);
 console.log(`Configuration: ${path.resolve(options.c)}`);
 
-if (fileExists(source, target, options.c) !== true) process.exit(1);
+if (fileExists(source, options.c) !== true) process.exit(1);
 
 const directory = path.dirname(source);
 
