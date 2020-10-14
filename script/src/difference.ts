@@ -40,33 +40,38 @@ let collectionNotWithin: FeatureCollection = {
 };
 let stats: any[] = [];
 
-tileReduce(options)
-  .on("reduce", (result: any) => {
-    stats.push(result.stats);
+try {
+  tileReduce(options)
+    .on("reduce", (result: any) => {
+      stats.push(result.stats);
 
-    collectionNotWithin.features = collectionNotWithin.features.concat(
-      result.featuresNotWithin
-    );
-  })
-  .on("end", function () {
-    fs.writeFileSync(`${directory}/stats.json`, JSON.stringify(stats));
+      collectionNotWithin.features = collectionNotWithin.features.concat(
+        result.featuresNotWithin
+      );
+    })
+    .on("end", function () {
+      fs.writeFileSync(`${directory}/stats.json`, JSON.stringify(stats));
 
-    const file = `${directory}/notWithin.geojson`;
-    const stream = fs.createWriteStream(file);
+      const file = `${directory}/notWithin.geojson`;
+      const stream = fs.createWriteStream(file);
 
-    stream.write('{"type":"FeatureCollection","features":[\n');
+      stream.write('{"type":"FeatureCollection","features":[\n');
 
-    collectionNotWithin.features.forEach((feature, index: number) => {
-      stream.write(JSON.stringify(feature));
+      collectionNotWithin.features.forEach((feature, index: number) => {
+        stream.write(JSON.stringify(feature));
 
-      if (index < collectionNotWithin.features.length - 1) {
-        stream.write(",\n");
-      }
+        if (index < collectionNotWithin.features.length - 1) {
+          stream.write(",\n");
+        }
+      });
+
+      stream.write("\n]}");
+      stream.end();
+
+      console.log("Features count: %d", collectionNotWithin.features.length);
+      console.log(`Result: ${path.resolve(file)}`);
     });
-
-    stream.write("\n]}");
-    stream.end();
-
-    console.log("Features count: %d", collectionNotWithin.features.length);
-    console.log(`Result: ${path.resolve(file)}`);
-  });
+} catch (err) {
+  console.error(err);
+  process.exit(1);
+}
