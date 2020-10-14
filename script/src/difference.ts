@@ -19,16 +19,16 @@ const directory = path.dirname(args[0]);
 const options = {
   sourceCover: "road",
   log: true,
-  map: path.join(__dirname, "difference/buffer.js"),
+  map: path.resolve(__dirname, "difference/buffer.js"),
   sources: [
     {
       name: "buffer",
-      mbtiles: fs.realpathSync(args[1]),
+      mbtiles: args[1],
       layers: ["buffers"],
     },
     {
       name: "road",
-      mbtiles: fs.realpathSync(args[0]),
+      mbtiles: args[0],
       layers: ["roads"],
     },
   ],
