@@ -28,12 +28,14 @@
     "@turf/meta": "^5.2",
     "@turf/union": "^5.1",
     "event-stream": "^4.0.1",
-    "jsonstream-next": "^3.0.0"
+    "jsonstream-next": "^3.0.0",
+    "minimist": "^1.2.5"
   },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.1",
     "@types/event-stream": "^3.3.34",
     "@types/geojson": "^7946.0.7",
+    "@types/minimist": "^1.2.0",
     "@types/node": "^14.11.2",
     "typescript": "^4.0.3"
   }
