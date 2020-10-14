@@ -33,19 +33,19 @@ jobs:
           ogr2ogr -f "GeoJSON" -progress \
             -select "name,highway" \
             -where "highway is not null" \
-            "./belgium.geojson" \
-            "./belgium-latest.osm.pbf" "lines"
+            "belgium.geojson" \
+            "belgium-latest.osm.pbf" "lines"
       - name: Install dependencies
         run: npm install
       - name: Generate buffer
-        run: node "script/buffer.js" "./belgium.geojson" "belgium-buffer.geojson"
+        run: node "script/buffer.js" "belgium.geojson" "belgium-buffer.geojson"
       - name: Generate vector tiles
-        run: tippecanoe --force --output="./belgium-buffers.mbtiles" "./belgium-buffers.geojson" --layer="buffers" --no-feature-limit --no-tile-size-limit
+        run: tippecanoe --force --output="belgium-buffers.mbtiles" "belgium-buffers.geojson" --layer="buffers" --no-feature-limit --no-tile-size-limit
       - name: Upload OpenStreetMap buffers
         uses: actions/upload-artifact@v2
         with:
           name: OpenStreetMap-Belgium-Buffers
-          path: data/belgium/belgium-buffers.mbtiles
+          path: belgium-buffers.mbtiles
 
   flanders-diff:
     name: Generate difference for Flanders
