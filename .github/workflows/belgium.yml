@@ -100,7 +100,6 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: OpenStreetMap-Belgium-Buffers
-          path: belgium-buffers.tar.gz
       # See https://github.com/actions/upload-artifact/issues/38
       - name: Extract
         run: tar -xzvf belgium-buffers.tar.gz
