@@ -81,7 +81,10 @@ jobs:
       - name: Generate buffers
         run: node "script/buffer.js" "belgium.geojson" "belgium-buffers.geojson"
       - name: Generate vector tiles
-        run: tippecanoe --force --output="belgium-buffers.mbtiles" "belgium-buffers.geojson" --layer="buffers" --no-feature-limit --no-tile-size-limit
+        run: |
+          tippecanoe --force --no-feature-limit --no-tile-size-limit \
+            --maximum-zoom=14 --minimum-zoom=14 \
+            --output="belgium-buffers.mbtiles" "belgium-buffers.geojson" --layer="buffers"
       - name: Download & Unzip data
         run: |
           wget "https://downloadagiv.blob.core.windows.net/wegenregister/Wegenregister_SHAPE_20200917.zip"
