@@ -44,6 +44,7 @@ if [ -d "./process" ]; then rm -r "./process/"; fi
 mkdir -p "./process/"
 
 tippecanoe --force --no-feature-limit --no-tile-size-limit \
+  --buffer=0 \
   --maximum-zoom=14 --minimum-zoom=14 \
   --output="./process/WegsegmentTagged.mbtiles" "./convert/WegsegmentTagged.geojson" --layer="roads"
 # tippecanoe --force --no-feature-limit --no-tile-size-limit \
