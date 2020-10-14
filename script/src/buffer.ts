@@ -27,3 +27,5 @@ fs.createReadStream(source)
     )
   )
   .pipe(fs.createWriteStream(`${directory}/${target}`));
+
+console.log(fs.realpathSync(`${directory}/${target}`));
