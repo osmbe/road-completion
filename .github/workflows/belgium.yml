@@ -97,8 +97,6 @@ jobs:
             "Shapefile/Wegsegment.shp"
       - name: Convert fields to OpenStreetMap tags
         run: node "script/convert-tags.js" -c "data/belgium/flanders/convert.json" "Wegsegment.geojson" "WegsegmentTagged.geojson"
-      - name: Generate buffers
-        run: node "script/buffer.js" "WegsegmentTagged.geojson" "WegsegmentBuffers.geojson"
       - name: Generate vector tiles
         run: |
           tippecanoe --force --no-feature-limit --no-tile-size-limit \
