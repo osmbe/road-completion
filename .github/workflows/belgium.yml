@@ -39,8 +39,12 @@ jobs:
         run: npm install
       - name: Generate buffer
         run: node "script/buffer.js" "belgium.geojson" "belgium-buffer.geojson"
+      - name: Display the path
+        run: echo $PATH
+      - name: Display the action path
+        run: echo $GITHUB_ACTION_PATH
       - name: Generate vector tiles
-        run: tippecanoe --force --output="belgium-buffers.mbtiles" "belgium-buffers.geojson" --layer="buffers" --no-feature-limit --no-tile-size-limit
+        run: tippecanoe --force --output="belgium-buffers.mbtiles" $PATH/belgium-buffers.geojson --layer="buffers" --no-feature-limit --no-tile-size-limit
       - name: Upload OpenStreetMap buffers
         uses: actions/upload-artifact@v2
         with:
