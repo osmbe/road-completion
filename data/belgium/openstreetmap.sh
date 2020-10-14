@@ -22,7 +22,7 @@ ogr2ogr -f "GeoJSON" -progress \
 
 # Generate buffer
 
-node "../../script/buffer.js" "./belgium.geojson" "belgium-buffer.geojson"
+node "../../script/buffer.js" "./belgium.geojson" "belgium-buffers.geojson"
 
 # Generate vector tiles
 
