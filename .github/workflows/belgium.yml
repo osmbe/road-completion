@@ -65,6 +65,10 @@ jobs:
           cd tippecanoe
           make -j
           sudo make install
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
       - name: Download Belgium extract
         run: wget https://download.geofabrik.de/europe/belgium-latest.osm.pbf
       - name: Convert to GeoJSON
@@ -91,10 +95,6 @@ jobs:
             -lco COORDINATE_PRECISION=6 \
             "Wegsegment.geojson" \
             "Shapefile/Wegsegment.shp"
-      - name: Install dependencies
-        run: npm install
-      - name: Build
-        run: npm run build
       - name: Convert fields to OpenStreetMap tags
         run: node "script/convert-tags.js" -c "data/belgium/flanders/convert.json" "Wegsegment.geojson" "WegsegmentTagged.geojson"
       - name: Generate buffers
