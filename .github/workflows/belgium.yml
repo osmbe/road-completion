@@ -15,45 +15,8 @@ on:
 
 jobs:
 
-  # openstreetmap-buffers:
-  #   name: Generate OpenStreetMap buffers
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: Install GDAL
-  #       run: sudo apt install gdal-bin
-  #     - name: Install Tippecanoe
-  #       run: |
-  #         git clone https://github.com/mapbox/tippecanoe.git
-  #         cd tippecanoe
-  #         make -j
-  #         sudo make install
-  #     - name: Download Belgium extract
-  #       run: wget https://download.geofabrik.de/europe/belgium-latest.osm.pbf
-  #     - name: Convert to GeoJSON
-  #       run: |
-  #         ogr2ogr -f "GeoJSON" -progress \
-  #           -select "name,highway" \
-  #           -where "highway is not null" \
-  #           "belgium.geojson" \
-  #           "belgium-latest.osm.pbf" "lines"
-  #     - name: Install dependencies
-  #       run: npm install
-  #     - name: Build
-  #       run: npm run build
-  #     - name: Generate buffers
-  #       run: node "script/buffer.js" "belgium.geojson" "belgium-buffers.geojson"
-  #     - name: Generate vector tiles
-  #       run: tippecanoe --force --output="belgium-buffers.mbtiles" "belgium-buffers.geojson" --layer="buffers" --no-feature-limit --no-tile-size-limit
-  #     - name: Upload OpenStreetMap buffers
-  #       uses: actions/upload-artifact@v2
-  #       with:
-  #         name: OpenStreetMap-Belgium-Buffers
-  #         path: belgium-buffers.mbtiles
-
-  flanders-diff:
-    name: Generate difference for Flanders
-    # needs: openstreetmap-buffers
+  openstreetmap-buffers:
+    name: Generate OpenStreetMap buffers
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -85,6 +48,30 @@ jobs:
           tippecanoe --force --no-feature-limit --no-tile-size-limit \
             --maximum-zoom=14 --minimum-zoom=14 \
             --output="belgium-buffers.mbtiles" "belgium-buffers.geojson" --layer="buffers"
+      - name: Upload OpenStreetMap buffers
+        uses: actions/upload-artifact@v2
+        with:
+          name: OpenStreetMap-Belgium-Buffers
+          path: belgium-buffers.mbtiles
+
+  flanders-diff:
+    name: Generate difference for Flanders
+    needs: openstreetmap-buffers
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install GDAL
+        run: sudo apt install gdal-bin
+      - name: Install Tippecanoe
+        run: |
+          git clone https://github.com/mapbox/tippecanoe.git
+          cd tippecanoe
+          make -j
+          sudo make install
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
       - name: Download & Unzip data
         run: |
           wget "https://downloadagiv.blob.core.windows.net/wegenregister/Wegenregister_SHAPE_20200917.zip"
@@ -106,11 +93,11 @@ jobs:
             --buffer=0 \
             --maximum-zoom=14 --minimum-zoom=14 \
             --output="WegsegmentTagged.mbtiles" "WegsegmentTagged.geojson" --layer="roads"
-      # - name: Download OpenStreetMap buffers
-      #   uses: actions/download-artifact@v2
-      #   with:
-      #     name: OpenStreetMap-Belgium-Buffers
-      #     path: belgium-buffers.mbtiles
+      - name: Download OpenStreetMap buffers
+        uses: actions/download-artifact@v2
+        with:
+          name: OpenStreetMap-Belgium-Buffers
+          path: belgium-buffers.mbtiles
       - name: Difference
         run: node "script/difference.js" "WegsegmentTagged.mbtiles" "belgium-buffers.mbtiles"
       - name: Upload difference
