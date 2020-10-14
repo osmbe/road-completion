@@ -49,7 +49,7 @@ jobs:
             --maximum-zoom=14 --minimum-zoom=14 \
             --output="belgium-buffers.mbtiles" "belgium-buffers.geojson" --layer="buffers"
       # See https://github.com/actions/upload-artifact/issues/38
-      - name: Compress
+      - name: Compress vector tiles
         run: tar -czvf belgium-buffers.tar.gz belgium-buffers.mbtiles
       - name: Upload OpenStreetMap buffers
         uses: actions/upload-artifact@v2
@@ -96,6 +96,13 @@ jobs:
             --buffer=0 \
             --maximum-zoom=14 --minimum-zoom=14 \
             --output="WegsegmentTagged.mbtiles" "WegsegmentTagged.geojson" --layer="roads"
+      - name: Compress vector tiles
+        run: tar -czvf WegsegmentTagged.tar.gz WegsegmentTagged.mbtiles
+      - name: Upload vector tiles
+        uses: actions/upload-artifact@v2
+        with:
+          name: Wegenregister
+          path: WegsegmentTagged.tar.gz
       - name: Download OpenStreetMap buffers
         uses: actions/download-artifact@v2
         with:
