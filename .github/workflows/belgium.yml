@@ -61,13 +61,6 @@ jobs:
           cd tippecanoe
           make -j
           sudo make install
-      - name: Download OpenStreetMap buffers
-        uses: actions/download-artifact@v2
-        with:
-          name: OpenStreetMap-Belgium-Buffers
-          path: belgium-buffers.mbtiles
-      - name: Install dependencies
-        run: npm install
       - name: Download & Unzip data
         run: |
           wget "https://downloadagiv.blob.core.windows.net/wegenregister/Wegenregister_SHAPE_20200917.zip"
@@ -77,10 +70,12 @@ jobs:
           ogr2ogr -f "GeoJSON" -progress \
             --config SHAPE_ENCODING "ISO-8859-1" \
             -s_srs "EPSG:31370" -t_srs "EPSG:4326" \
-            -sql "@filter.sql" \
+            -sql "@data/belgium/flanders/filter.sql" \
             -lco COORDINATE_PRECISION=6 \
             "Wegsegment.geojson" \
             "Shapefile/Wegsegment.shp"
+      - name: Install dependencies
+        run: npm install
       - name: Convert fields to OpenStreetMap tags
         run: node "script/convert-tags.js" "Wegsegment.geojson" "WegsegmentTagged.geojson"
       - name: Generate buffers
@@ -90,6 +85,11 @@ jobs:
           tippecanoe --force --no-feature-limit --no-tile-size-limit \
             --maximum-zoom=14 --minimum-zoom=14 \
             --output="WegsegmentTagged.mbtiles" "WegsegmentTagged.geojson" --layer="roads"
+      - name: Download OpenStreetMap buffers
+        uses: actions/download-artifact@v2
+        with:
+          name: OpenStreetMap-Belgium-Buffers
+          path: belgium-buffers.mbtiles
       - name: Difference
         run: node "script/difference.js" "WegsegmentTagged.mbtiles" "belgium-buffers.mbtiles"
       - name: Upload difference
