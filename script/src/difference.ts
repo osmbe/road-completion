@@ -3,8 +3,7 @@
 import tileReduce from "@mapbox/tile-reduce";
 import { F_OK, R_OK } from "constants";
 import fs from "fs";
-import { feature, Feature, FeatureCollection } from "@turf/helpers";
-import JSONStream from "jsonstream-next";
+import { FeatureCollection } from "@turf/helpers";
 import path from "path";
 
 const args = process.argv.slice(2);
@@ -50,7 +49,6 @@ let collectionNotWithin: FeatureCollection = {
   type: "FeatureCollection",
   features: [],
 };
-let mergedBuffers: any;
 let stats: any[] = [];
 
 tileReduce(options)
@@ -79,8 +77,5 @@ tileReduce(options)
     stream.write("\n]}");
     stream.end();
 
-    console.log(
-      "Features count: %d",
-      collectionNotWithin.features.length
-    );
+    console.log("Features count: %d", collectionNotWithin.features.length);
   });
