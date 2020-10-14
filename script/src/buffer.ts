@@ -32,5 +32,6 @@ fs.createReadStream(source)
       '{"type":"FeatureCollection","features":[\n',
       ",\n",
       "\n]}"
+    )
   )
   .pipe(fs.createWriteStream(path.resolve(directory, target)));
