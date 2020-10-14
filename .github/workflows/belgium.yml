@@ -89,6 +89,7 @@ jobs:
       - name: Generate vector tiles
         run: |
           tippecanoe --force --no-feature-limit --no-tile-size-limit \
+            --buffer=0 \
             --maximum-zoom=14 --minimum-zoom=14 \
             --output="WegsegmentTagged.mbtiles" "WegsegmentTagged.geojson" --layer="roads"
       - name: Download OpenStreetMap buffers
