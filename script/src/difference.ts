@@ -1,32 +1,18 @@
 "use strict";
 
 import tileReduce from "@mapbox/tile-reduce";
-import { F_OK, R_OK } from "constants";
 import fs from "fs";
 import { FeatureCollection } from "@turf/helpers";
 import path from "path";
+
+import fileExists from "./file-exists";
 
 const args = process.argv.slice(2);
 
 console.log(`Roads: ${path.resolve(args[0])}`);
 console.log(`OSM Buffers: ${path.resolve(args[1])}`);
 
-try {
-  fs.accessSync(args[0], F_OK | R_OK);
-} catch (err) {
-  console.error(
-    `File "${fs.realpathSync(args[0])}" does not exist or is not readable.`
-  );
-  process.exit(1);
-}
-try {
-  fs.accessSync(args[1], F_OK | R_OK);
-} catch (err) {
-  console.error(
-    `File "${fs.realpathSync(args[1])}" does not exist or is not readable.`
-  );
-  process.exit(1);
-}
+if (fileExists(args[0], args[1]) !== true) process.exit(1);
 
 const directory = path.dirname(args[0]);
 

@@ -7,9 +7,17 @@ import JSONStream from "jsonstream-next";
 import minimist from "minimist";
 import path from "path";
 
+import fileExists from "./file-exists";
+
 const options = minimist(process.argv.slice(2));
 const source = options._[0];
 const target = options._[1];
+
+console.log(`Source: ${path.resolve(source)}`);
+console.log(`Target: ${path.resolve(target)}`);
+console.log(`Configuration: ${path.resolve(options.c)}`);
+
+if (fileExists(source, target, options.c) !== true) process.exit(1);
 
 const directory = path.dirname(source);
 
