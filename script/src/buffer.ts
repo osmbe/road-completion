@@ -15,11 +15,12 @@ const source = args[0];
 const target = args[1];
 
 console.log(`Source: ${path.resolve(args[0])}`);
-console.log(`Target: ${path.resolve(args[1])}`);
 
 if (fileExists(args[0]) !== true) process.exit(1);
 
 const directory = path.dirname(source);
+
+console.log(path.resolve(directory, target));
 
 fs.createReadStream(source)
   .pipe(JSONStream.parse("features.*"))
@@ -31,8 +32,5 @@ fs.createReadStream(source)
       '{"type":"FeatureCollection","features":[\n',
       ",\n",
       "\n]}"
-    )
   )
-  .pipe(fs.createWriteStream(`${directory}/${target}`));
-
-console.log(fs.realpathSync(`${directory}/${target}`));
+  .pipe(fs.createWriteStream(path.resolve(directory, target)));

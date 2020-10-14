@@ -52,7 +52,7 @@ try {
     .on("end", function () {
       fs.writeFileSync(`${directory}/stats.json`, JSON.stringify(stats));
 
-      const file = `${directory}/notWithin.geojson`;
+      const file = path.resolve(directory, "notWithin.geojson");
       const stream = fs.createWriteStream(file);
 
       stream.write('{"type":"FeatureCollection","features":[\n');
@@ -69,7 +69,7 @@ try {
       stream.end();
 
       console.log("Features count: %d", collectionNotWithin.features.length);
-      console.log(`Result: ${path.resolve(file)}`);
+      console.log(`Result: ${file}`);
     });
 } catch (err) {
   console.error(err);
