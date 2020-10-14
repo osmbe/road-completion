@@ -48,11 +48,14 @@ jobs:
           tippecanoe --force --no-feature-limit --no-tile-size-limit \
             --maximum-zoom=14 --minimum-zoom=14 \
             --output="belgium-buffers.mbtiles" "belgium-buffers.geojson" --layer="buffers"
+      # See https://github.com/actions/upload-artifact/issues/38
+      - name: Compress
+        run: tar -czvf belgium-buffers.tar.gz belgium-buffers.mbtiles
       - name: Upload OpenStreetMap buffers
         uses: actions/upload-artifact@v2
         with:
           name: OpenStreetMap-Belgium-Buffers
-          path: belgium-buffers.mbtiles
+          path: belgium-buffers.tar.gz
 
   flanders-diff:
     name: Generate difference for Flanders
@@ -97,7 +100,10 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: OpenStreetMap-Belgium-Buffers
-          path: belgium-buffers.mbtiles
+          path: belgium-buffers.tar.gz
+      # See https://github.com/actions/upload-artifact/issues/38
+      - name: Extract
+        run: tar -xzvf belgium-buffers.tar.gz
       - name: Difference
         run: node "script/difference.js" "WegsegmentTagged.mbtiles" "belgium-buffers.mbtiles"
       - name: Upload difference
