@@ -1,14 +1,29 @@
 "use strict";
 
 import tileReduce from "@mapbox/tile-reduce";
+import { F_OK, R_OK } from "constants";
 import fs from "fs";
-import { feature, Feature, FeatureCollection } from "@turf/helpers";
-import JSONStream from "jsonstream-next";
+import { FeatureCollection } from "@turf/helpers";
 import path from "path";
 
-function writeFile() {}
-
 const args = process.argv.slice(2);
+
+try {
+  fs.accessSync(args[0], F_OK | R_OK);
+} catch (err) {
+  console.error(
+    `File "${fs.realpathSync(args[0])}" does not exist or is not readable.`
+  );
+  process.exit(1);
+}
+try {
+  fs.accessSync(args[1], F_OK | R_OK);
+} catch (err) {
+  console.error(
+    `File "${fs.realpathSync(args[1])}" does not exist or is not readable.`
+  );
+  process.exit(1);
+}
 
 const directory = path.dirname(args[0]);
 
@@ -34,7 +49,6 @@ let collectionNotWithin: FeatureCollection = {
   type: "FeatureCollection",
   features: [],
 };
-let mergedBuffers: any;
 let stats: any[] = [];
 
 tileReduce(options)
@@ -63,8 +77,5 @@ tileReduce(options)
     stream.write("\n]}");
     stream.end();
 
-    console.log(
-      "Features count: %d",
-      collectionNotWithin.features.length
-    );
+    console.log("Features count: %d", collectionNotWithin.features.length);
   });
