@@ -1,9 +1,9 @@
 data/*/*/source/
-data/*/*/convert/
-data/*/*/process/
+data/*/*/temp/
+data/**/*.geojson
+!data/**/diff.geojson
 script/**/*.js
 node_modules/
 *.osm.pbf
-*.geojson
 *.mbtiles
 *.mbtiles-journal
