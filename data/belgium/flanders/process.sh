@@ -17,40 +17,42 @@ fi
 
 # Convert to GeoJSON
 
-if [ -d "./convert" ]; then rm -r "./convert/"; fi
+if [ -d "./temp" ]; then rm -r "./temp/"; fi
 
-mkdir -p "./convert/"
+mkdir -p "./temp/"
 
 ogr2ogr -f "GeoJSON" -progress \
   --config SHAPE_ENCODING "ISO-8859-1" \
   -s_srs "EPSG:31370" -t_srs "EPSG:4326" \
   -sql "@filter.sql" \
   -lco COORDINATE_PRECISION=6 \
-  "./convert/Wegsegment.geojson" \
+  "./temp/Wegsegment.geojson" \
   "./source/$FILENAME/Shapefile/Wegsegment.shp"
 
 # Convert fields to OpenStreetMap tags
 
-node "../../../script/convert-tags.js" -c "./convert.json" "./convert/Wegsegment.geojson" "WegsegmentTagged.geojson"
+node "../../../script/convert-tags.js" -c "./convert.json" "./temp/Wegsegment.geojson" "WegsegmentTagged.geojson"
 
 # Generate buffer
 
-# node "../../../script/buffer.js" "./convert/WegsegmentTagged.geojson" "WegsegmentBuffer.geojson"
+# node "../../../script/buffer.js" "./temp/WegsegmentTagged.geojson" "WegsegmentBuffer.geojson"
 
 # Generate vector tiles
-
-if [ -d "./process" ]; then rm -r "./process/"; fi
-
-mkdir -p "./process/"
 
 tippecanoe --force --no-feature-limit --no-tile-size-limit \
   --buffer=0 \
   --maximum-zoom=14 --minimum-zoom=14 \
-  --output="./process/WegsegmentTagged.mbtiles" "./convert/WegsegmentTagged.geojson" --layer="roads"
+  --layer="roads" \
+  --output="./temp/WegsegmentTagged.mbtiles" "./temp/WegsegmentTagged.geojson"
 # tippecanoe --force --no-feature-limit --no-tile-size-limit \
 #   --maximum-zoom=14 --minimum-zoom=14 \
-#   --output="./process/WegsegmentBuffer.mbtiles" "./convert/WegsegmentBuffer.geojson" --layer="buffers"
+#   --layer="buffers" \
+#   --output="./temp/WegsegmentBuffer.mbtiles" "./temp/WegsegmentBuffer.geojson"
 
 # Difference
 
-node "../../../script/difference.js" "./process/WegsegmentTagged.mbtiles" "../belgium-buffers.mbtiles"
+if [ -d "./difference" ]; then rm -r "./difference/"; fi
+
+mkdir -p "./difference/$FILENAME"
+
+node "../../../script/difference.js" --output-dir="./difference/$FILENAME" "./temp/WegsegmentTagged.mbtiles" "../belgium-buffers.mbtiles"
