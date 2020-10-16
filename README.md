@@ -4,6 +4,8 @@
 
 ## History of the project
 
+- [Presentation at FOSS4G Belgium 2017](https://slides.com/benabelshausen-1/deck-1) by [Ben Abelshausen](https://github.com/xivk)
+- [Presentation at State of the Map 2018](https://2018.stateofthemap.org/2018/T097-Road_Completion_in_Belgium_-_Mapping___verifying__all__the_roads_/) by [Ben Abelshausen](https://github.com/xivk)
 - [Open Summer of Code 2018](https://2018.summerofcode.be/roadcompletion.html)
 - [OpenStreetMap Foundation microgrant (2020)](https://wiki.openstreetmap.org/wiki/Microgrants/Microgrants_2020/Proposal/Road_Completion_project)
 
