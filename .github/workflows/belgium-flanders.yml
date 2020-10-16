@@ -23,7 +23,6 @@ jobs:
 
   flanders-diff:
     name: Generate difference for Flanders, Belgium
-    needs: openstreetmap-buffers
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
