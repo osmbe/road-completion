@@ -3,20 +3,18 @@ name: 🇧🇪 Belgium
 on:
   push:
     paths:
-      - data/belgium
       - .github/workflows/belgium.yml
       - script/**/*.ts
-    paths-ignore:
-      - data/belgium/**/diff.geojson
-      - data/belgium/**/stats.json
+      - data/belgium
+      - !data/belgium/**/diff.geojson
+      - !data/belgium/**/stats.json
   pull_request:
     paths:
-      - data/belgium
       - .github/workflows/belgium.yml
       - script/**/*.ts
-    paths-ignore:
-      - data/belgium/**/diff.geojson
-      - data/belgium/**/stats.json
+      - data/belgium
+      - !data/belgium/**/diff.geojson
+      - !data/belgium/**/stats.json
   # schedule:
   #   - cron: '0 0 * * *'
 
