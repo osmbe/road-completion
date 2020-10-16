@@ -129,3 +129,11 @@ jobs:
         with:
           name: Flanders-Statistics
           path: data/belgium/flanders/difference/Wegenregister_SHAPE_20200917/stats.json
+      - name: Push to repository
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add data/belgium/flanders/difference/Wegenregister_SHAPE_20200917/diff.geojson
+          git add data/belgium/flanders/difference/Wegenregister_SHAPE_20200917/stats.json
+          git commit -m "🗃 Update difference for Flanders, Belgium"
+          git push
