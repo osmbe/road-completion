@@ -6,10 +6,17 @@ on:
       - data/belgium
       - .github/workflows/belgium.yml
       - script/**/*.ts
-    pull_request:
+    paths-ignore:
+      - data/belgium/**/diff.geojson
+      - data/belgium/**/stats.json
+  pull_request:
+    paths:
       - data/belgium
       - .github/workflows/belgium.yml
       - script/**/*.ts
+    paths-ignore:
+      - data/belgium/**/diff.geojson
+      - data/belgium/**/stats.json
   # schedule:
   #   - cron: '0 0 * * *'
 
@@ -47,7 +54,8 @@ jobs:
         run: |
           tippecanoe --force --no-feature-limit --no-tile-size-limit \
             --maximum-zoom=14 --minimum-zoom=14 \
-            --output="belgium-buffers.mbtiles" "belgium-buffers.geojson" --layer="buffers"
+            --layer="buffers" \
+            --output="belgium-buffers.mbtiles" "belgium-buffers.geojson"
       # See https://github.com/actions/upload-artifact/issues/38
       - name: Compress vector tiles
         run: tar -czvf belgium-buffers.tar.gz belgium-buffers.mbtiles
@@ -95,7 +103,8 @@ jobs:
           tippecanoe --force --no-feature-limit --no-tile-size-limit \
             --buffer=0 \
             --maximum-zoom=14 --minimum-zoom=14 \
-            --output="WegsegmentTagged.mbtiles" "WegsegmentTagged.geojson" --layer="roads"
+            --layer="roads" \
+            --output="WegsegmentTagged.mbtiles" "WegsegmentTagged.geojson"
       - name: Compress vector tiles
         run: tar -czvf WegsegmentTagged.tar.gz WegsegmentTagged.mbtiles
       - name: Upload vector tiles
@@ -111,14 +120,14 @@ jobs:
       - name: Extract
         run: tar -xzvf belgium-buffers.tar.gz
       - name: Difference
-        run: node "script/difference.js" "WegsegmentTagged.mbtiles" "belgium-buffers.mbtiles"
+        run: node "script/difference.js" --output-dir="data/belgium/flanders/difference/Wegenregister_SHAPE_20200917" "WegsegmentTagged.mbtiles" "belgium-buffers.mbtiles"
       - name: Upload difference
         uses: actions/upload-artifact@v2
         with:
           name: Flanders-Difference
-          path: notWithin.geojson
+          path: data/belgium/flanders/difference/Wegenregister_SHAPE_20200917/diff.geojson
       - name: Upload statistics
         uses: actions/upload-artifact@v2
         with:
           name: Flanders-Statistics
-          path: stats.json
+          path: data/belgium/flanders/difference/Wegenregister_SHAPE_20200917/stats.json
