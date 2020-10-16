@@ -27,3 +27,9 @@
 - [GDAL 2.1+](https://gdal.org/)
 - [tippecanoe](https://github.com/mapbox/tippecanoe)
 - (Python, might be needed during [TileReduce](https://github.com/mapbox/tile-reduce) install)
+
+## Data
+
+| Country           | Region                                                                                              | Source                                                                                                  | MapRoulette |
+|-------------------|-----------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|-------------|
+| :belgium: Belgium | [Vlaanderen (Flanders)](https://github.com/osmbe/road-completion/tree/master/data/belgium/flanders) | [Wegenregister](https://download.vlaanderen.be/Producten/Detail?id=6367&title=Wegenregister_17_09_2020) |             |
