@@ -34,10 +34,6 @@ ogr2ogr -f "GeoJSON" -progress \
 
 node "../../../script/convert-tags.js" -c "./convert.json" "./temp/Wegsegment.geojson" "WegsegmentTagged.geojson"
 
-# Generate buffer
-
-# node "../../../script/buffer.js" "./temp/WegsegmentTagged.geojson" "WegsegmentBuffer.geojson"
-
 # Generate vector tiles
 
 tippecanoe --force --no-feature-limit --no-tile-size-limit \
@@ -45,10 +41,6 @@ tippecanoe --force --no-feature-limit --no-tile-size-limit \
   --maximum-zoom=14 --minimum-zoom=14 \
   --layer="roads" \
   --output="./temp/WegsegmentTagged.mbtiles" "./temp/WegsegmentTagged.geojson"
-# tippecanoe --force --no-feature-limit --no-tile-size-limit \
-#   --maximum-zoom=14 --minimum-zoom=14 \
-#   --layer="buffers" \
-#   --output="./temp/WegsegmentBuffer.mbtiles" "./temp/WegsegmentBuffer.geojson"
 
 # Generate MapRoulette NotAnIssue buffers vector tiles
 
