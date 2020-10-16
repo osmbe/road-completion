@@ -21,8 +21,8 @@ on:
 
 jobs:
 
-  flanders-diff:
-    name: Generate difference for Flanders, Belgium
+  diff:
+    name: Generate difference
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
