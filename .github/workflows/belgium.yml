@@ -15,8 +15,9 @@ on:
       - "data/belgium"
       - "!data/belgium/**/diff.geojson"
       - "!data/belgium/**/stats.json"
-  # schedule:
-  #   - cron: '0 0 * * *'
+  # Run every Sunday at 12:00 UTC
+  schedule:
+    - cron: '0 12 * * 0'
 
 jobs:
 
