@@ -1,71 +1,28 @@
-name: 🇧🇪 Belgium
+name: 🇧🇪 Flanders, Belgium
 
 on:
   push:
     paths:
-      - ".github/workflows/belgium.yml"
+      - ".github/workflows/belgium-flanders.yml"
       - "script/**/*.ts"
-      - "data/belgium"
-      - "!data/belgium/**/diff.geojson"
-      - "!data/belgium/**/stats.json"
+      - "data/belgium/flanders"
+      - "!data/belgium/flanders/**/diff.geojson"
+      - "!data/belgium/flanders/**/stats.json"
   pull_request:
     paths:
-      - ".github/workflows/belgium.yml"
+      - ".github/workflows/belgium-flanders.yml"
       - "script/**/*.ts"
-      - "data/belgium"
-      - "!data/belgium/**/diff.geojson"
-      - "!data/belgium/**/stats.json"
+      - "data/belgium/flanders"
+      - "!data/belgium/flanders/**/diff.geojson"
+      - "!data/belgium/flanders/**/stats.json"
   # Run every Sunday at 12:00 UTC
   schedule:
     - cron: '0 12 * * 0'
 
 jobs:
 
-  openstreetmap-buffers:
-    name: Generate OpenStreetMap buffers
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Install GDAL
-        run: sudo apt install gdal-bin
-      - name: Install Tippecanoe
-        run: |
-          git clone https://github.com/mapbox/tippecanoe.git
-          cd tippecanoe
-          make -j
-          sudo make install
-      - name: Install dependencies
-        run: npm install
-      - name: Build
-        run: npm run build
-      - name: Download Belgium extract
-        run: wget https://download.geofabrik.de/europe/belgium-latest.osm.pbf
-      - name: Convert to GeoJSON
-        run: |
-          ogr2ogr -f "GeoJSON" -progress \
-            -select "name,highway" \
-            -where "highway is not null" \
-            "belgium.geojson" \
-            "belgium-latest.osm.pbf" "lines"
-      - name: Generate buffers
-        run: node "script/buffer.js" "belgium.geojson" "belgium-buffers.geojson"
-      # - name: Generate vector tiles
-      #   run: |
-      #     tippecanoe --force --no-feature-limit --no-tile-size-limit \
-      #       --maximum-zoom=14 --minimum-zoom=14 \
-      #       --layer="buffers" \
-      #       --output="belgium-buffers.mbtiles" "belgium-buffers.geojson"
-      # See https://github.com/actions/upload-artifact/issues/38
-      - name: Compress GeoJSON
-        run: tar -czvf belgium-buffers.tar.gz belgium-buffers.geojson
-      - name: Upload OpenStreetMap buffers
-        uses: actions/upload-artifact@v2
-        with:
-          name: OpenStreetMap-Belgium-Buffers-GeoJSON
-          path: belgium-buffers.tar.gz
-
   flanders-diff:
-    name: Generate difference for Flanders
+    name: Generate difference for Flanders, Belgium
     needs: openstreetmap-buffers
     runs-on: ubuntu-latest
     steps:
@@ -82,11 +39,22 @@ jobs:
         run: npm install
       - name: Build
         run: npm run build
-      - name: Download & Unzip data
+      - name: Download OpenStreetMap Belgium extract
+        run: wget https://download.geofabrik.de/europe/belgium-latest.osm.pbf
+      - name: Convert (and filter) OpenStreetMap to GeoJSON
+        run: |
+          ogr2ogr -f "GeoJSON" -progress \
+            -select "name,highway" \
+            -where "highway is not null" \
+            "belgium.geojson" \
+            "belgium-latest.osm.pbf" "lines"
+      - name: Generate OpenStreetMap buffers
+        run: node "script/buffer.js" "belgium.geojson" "belgium-buffers.geojson"
+      - name: Download & Unzip Wegenregister data
         run: |
           wget "https://downloadagiv.blob.core.windows.net/wegenregister/Wegenregister_SHAPE_20200917.zip"
           unzip "Wegenregister_SHAPE_20200917.zip"
-      - name: Convert to GeoJSON
+      - name: Convert (and filter) Wegenregister to GeoJSON
         run: |
           ogr2ogr -f "GeoJSON" -progress \
             --config SHAPE_ENCODING "ISO-8859-1" \
@@ -95,33 +63,20 @@ jobs:
             -lco COORDINATE_PRECISION=6 \
             "Wegsegment.geojson" \
             "Shapefile/Wegsegment.shp"
-      - name: Convert fields to OpenStreetMap tags
+      - name: Convert Wegenregister fields to OpenStreetMap tags
         run: node "script/convert-tags.js" -c "data/belgium/flanders/convert.json" "Wegsegment.geojson" "WegsegmentTagged.geojson"
-      - name: Generate vector tiles
+      - name: Generate Wegenregister vector tiles
         run: |
           tippecanoe --force --no-feature-limit --no-tile-size-limit \
             --buffer=0 \
             --maximum-zoom=14 --minimum-zoom=14 \
             --layer="roads" \
             --output="WegsegmentTagged.mbtiles" "WegsegmentTagged.geojson"
-      - name: Compress vector tiles
-        run: tar -czvf WegsegmentTagged.tar.gz WegsegmentTagged.mbtiles
-      - name: Upload vector tiles
-        uses: actions/upload-artifact@v2
-        with:
-          name: Wegenregister
-          path: WegsegmentTagged.tar.gz
       - name: Download MapRoulette false positive
         run: wget -O "maproulette.geojson" "https://maproulette.org/api/v2/challenge/view/14646?status=2"
       - name: Generate MapRoulette buffers
         run: node "script/buffer.js" "maproulette.geojson" "maproulette-buffers.geojson"
-      - name: Download OpenStreetMap buffers
-        uses: actions/download-artifact@v2
-        with:
-          name: OpenStreetMap-Belgium-Buffers-GeoJSON
-      - name: Extract
-        run: tar -xzvf belgium-buffers.tar.gz
-      - name: Merge MapRoulette buffers to OpenStreetMap buffers
+      - name: Merge MapRoulette buffers to OpenStreetMap buffers and generate vector tiles
         run: |
           tippecanoe --force --no-feature-limit --no-tile-size-limit \
             --maximum-zoom=14 --minimum-zoom=14 \
