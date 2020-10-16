@@ -48,19 +48,19 @@ jobs:
             "belgium-latest.osm.pbf" "lines"
       - name: Generate buffers
         run: node "script/buffer.js" "belgium.geojson" "belgium-buffers.geojson"
-      - name: Generate vector tiles
-        run: |
-          tippecanoe --force --no-feature-limit --no-tile-size-limit \
-            --maximum-zoom=14 --minimum-zoom=14 \
-            --layer="buffers" \
-            --output="belgium-buffers.mbtiles" "belgium-buffers.geojson"
+      # - name: Generate vector tiles
+      #   run: |
+      #     tippecanoe --force --no-feature-limit --no-tile-size-limit \
+      #       --maximum-zoom=14 --minimum-zoom=14 \
+      #       --layer="buffers" \
+      #       --output="belgium-buffers.mbtiles" "belgium-buffers.geojson"
       # See https://github.com/actions/upload-artifact/issues/38
-      - name: Compress vector tiles
-        run: tar -czvf belgium-buffers.tar.gz belgium-buffers.mbtiles
+      - name: Compress GeoJSON
+        run: tar -czvf belgium-buffers.tar.gz belgium-buffers.geojson
       - name: Upload OpenStreetMap buffers
         uses: actions/upload-artifact@v2
         with:
-          name: OpenStreetMap-Belgium-Buffers
+          name: OpenStreetMap-Belgium-Buffers-GeoJSON
           path: belgium-buffers.tar.gz
 
   flanders-diff:
@@ -110,13 +110,23 @@ jobs:
         with:
           name: Wegenregister
           path: WegsegmentTagged.tar.gz
+      - name: Download MapRoulette false positive
+        run: wget -O "maproulette.geojson" "https://maproulette.org/api/v2/challenge/view/14646?status=2"
+      - name: Generate MapRoulette buffers
+        run: node "script/buffer.js" "maproulette.geojson" "maproulette-buffers.geojson"
       - name: Download OpenStreetMap buffers
         uses: actions/download-artifact@v2
         with:
-          name: OpenStreetMap-Belgium-Buffers
-      # See https://github.com/actions/upload-artifact/issues/38
+          name: OpenStreetMap-Belgium-Buffers-GeoJSON
       - name: Extract
         run: tar -xzvf belgium-buffers.tar.gz
+      - name: Merge MapRoulette buffers to OpenStreetMap buffers
+        run: |
+          tippecanoe --force --no-feature-limit --no-tile-size-limit \
+            --maximum-zoom=14 --minimum-zoom=14 \
+            --layer="buffers" \
+            --output="belgium-buffers.mbtiles" \
+            "belgium-buffers.geojson" "maproulette-buffers.geojson"
       - name: Difference
         run: node "script/difference.js" --output-dir="data/belgium/flanders/difference/Wegenregister_SHAPE_20200917" "WegsegmentTagged.mbtiles" "belgium-buffers.mbtiles"
       - name: Upload difference
