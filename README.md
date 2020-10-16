@@ -1,5 +1,7 @@
 # Road Completion project
 
+*Inspired by ["Quality analysis for OpenStreetMap"](https://blog.mapbox.com/quality-analysis-for-openstreetmap-a9058eb79c9a) by [@MateoV](https://github.com/MateoV) from [Mapbox](https://www.mapbox.com/)*
+
 ## History of the project
 
 - [Open Summer of Code 2018](https://2018.summerofcode.be/roadcompletion.html)
