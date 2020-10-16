@@ -1,11 +1,5 @@
 # Road Completion project
 
-## Requirements
-
-- [GDAL 2.1+](https://gdal.org/)
-- [tippecanoe](https://github.com/mapbox/tippecanoe)
-- (Python, might be needed during [TileReduce](https://github.com/mapbox/tile-reduce) install)
-
 ## History of the project
 
 - [Open Summer of Code 2018](https://2018.summerofcode.be/roadcompletion.html)
@@ -25,3 +19,9 @@
 1. Generate vector tiles from OpenStreetMap (+ MapRoulette) buffers
 1. Process difference : all the roads from the source data that are not in the OpenStreetMap (+ MapRoulette) buffers
 1. Update MapRoulette challenge with latest data (*optional*)
+
+## Requirements
+
+- [GDAL 2.1+](https://gdal.org/)
+- [tippecanoe](https://github.com/mapbox/tippecanoe)
+- (Python, might be needed during [TileReduce](https://github.com/mapbox/tile-reduce) install)
