@@ -1,5 +1,5 @@
-name: "Generate OpenStreetMap buffers"
-description: "Download OpenStreetMap extract, filter highways, and generate buffers"
+name: "Generate MapRoulette buffers"
+description: "Download MapRoulette false positive and generate buffers"
 inputs:
   challenge-id:
     description: "MapRoulette challenge id"
