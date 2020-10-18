@@ -1,0 +1,11 @@
+name: "Install Tippecanoe"
+description: "Install Tippecanoe from source (GitHub repository)"
+# inputs:
+# outputs:
+runs:
+  using: "composite"
+  steps:
+    - run: git clone https://github.com/mapbox/tippecanoe.git
+    - run: cd tippecanoe
+    - run: make -j
+    - run: sudo make install

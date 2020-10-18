@@ -29,11 +29,7 @@ jobs:
       - name: Install GDAL
         run: sudo apt install gdal-bin
       - name: Install Tippecanoe
-        run: |
-          git clone https://github.com/mapbox/tippecanoe.git
-          cd tippecanoe
-          make -j
-          sudo make install
+        uses: actions/install-tippecanoe
       - name: Install dependencies
         run: npm install
       - name: Build
