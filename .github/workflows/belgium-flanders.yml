@@ -3,7 +3,7 @@ name: 🇧🇪 Flanders, Belgium
 on:
   # Run every Sunday at 12:00 UTC
   schedule:
-    - cron: '0 12 * * 0'
+    - cron: "0 12 * * 0"
   push:
     paths:
       - ".github/workflows/belgium-flanders.yml"
