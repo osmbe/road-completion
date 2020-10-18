@@ -7,6 +7,7 @@ on:
   push:
     paths:
       - ".github/workflows/belgium-flanders.yml"
+      - ".github/actions"
       - "script/**/*.ts"
       - "data/belgium/flanders"
       - "!data/belgium/flanders/**/diff.geojson"
@@ -14,6 +15,7 @@ on:
   pull_request:
     paths:
       - ".github/workflows/belgium-flanders.yml"
+      - ".github/actions"
       - "script/**/*.ts"
       - "data/belgium/flanders"
       - "!data/belgium/flanders/**/diff.geojson"
