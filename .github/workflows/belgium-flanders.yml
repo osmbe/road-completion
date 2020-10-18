@@ -36,17 +36,10 @@ jobs:
         run: npm install
       - name: Build
         run: npm run build
-      - name: Download OpenStreetMap Belgium extract
-        run: wget https://download.geofabrik.de/europe/belgium-latest.osm.pbf
-      - name: Convert (and filter) OpenStreetMap to GeoJSON
-        run: |
-          ogr2ogr -f "GeoJSON" -progress \
-            -select "name,highway" \
-            -where "highway is not null" \
-            "belgium.geojson" \
-            "belgium-latest.osm.pbf" "lines"
       - name: Generate OpenStreetMap buffers
-        run: node "script/buffer.js" "belgium.geojson" "belgium-buffers.geojson"
+        uses: ./.github/actions/openstreetmap-buffers
+        with:
+          country: europe/belgium
       - name: Download & Unzip Wegenregister data
         run: |
           wget "https://downloadagiv.blob.core.windows.net/wegenregister/Wegenregister_SHAPE_20200917.zip"
@@ -79,7 +72,7 @@ jobs:
             --maximum-zoom=14 --minimum-zoom=14 \
             --layer="buffers" \
             --output="belgium-buffers.mbtiles" \
-            "belgium-buffers.geojson" "maproulette-buffers.geojson"
+            "openstreetmap-buffers.geojson" "maproulette-buffers.geojson"
       - name: Difference
         run: node "script/difference.js" --output-dir="data/belgium/flanders/difference/Wegenregister_SHAPE_20200917" "WegsegmentTagged.mbtiles" "belgium-buffers.mbtiles"
       - name: Upload difference

@@ -1,0 +1,31 @@
+name: "Generate OpenStreetMap buffers"
+description: "Download OpenStreetMap extract, filter highways, and generate buffers"
+inputs:
+  country:
+    description: "Continent + Country (Format: `<continent>/<country>`)"
+    required: true
+# outputs:
+runs:
+  using: "composite"
+  steps:
+    - name: Download OpenStreetMap extract
+      run: wget -O openstreetmap-latest.osm.pbf https://download.geofabrik.de/${{ inputs.country }}-latest.osm.pbf
+      shell: bash
+    - name: Convert (and filter) OpenStreetMap to GeoJSON
+      run: |
+        ogr2ogr -f "GeoJSON" -progress \
+          -select "name,highway" \
+          -where "highway is not null" \
+          "openstreetmap.geojson" \
+          "openstreetmap-latest.osm.pbf" "lines"
+      shell: bash
+    - name: Generate OpenStreetMap buffers
+      run: node "script/buffer.js" "openstreetmap.geojson" "openstreetmap-buffers.geojson"
+      shell: bash
+    # - name: Generate vector tiles
+    #   run: |
+    #     tippecanoe --force --no-feature-limit --no-tile-size-limit \
+    #       --maximum-zoom=14 --minimum-zoom=14 \
+    #       --layer="buffers" \
+    #       --output="openstreetmap-buffers.mbtiles" \
+    #       "openstreetmap-buffers.geojson"
