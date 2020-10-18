@@ -9,7 +9,7 @@ on:
       - ".github/workflows/belgium-flanders.yml"
       - ".github/actions/*/action.yml"
       - "script/**/*.ts"
-      - "data/belgium/flanders"
+      - "data/belgium/flanders/**"
       - "!data/belgium/flanders/**/diff.geojson"
       - "!data/belgium/flanders/**/stats.json"
   pull_request:
@@ -17,7 +17,7 @@ on:
       - ".github/workflows/belgium-flanders.yml"
       - ".github/actions/*/action.yml"
       - "script/**/*.ts"
-      - "data/belgium/flanders"
+      - "data/belgium/flanders/**"
       - "!data/belgium/flanders/**/diff.geojson"
       - "!data/belgium/flanders/**/stats.json"
 
