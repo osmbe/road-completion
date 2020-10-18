@@ -1,6 +1,9 @@
 name: 🇧🇪 Flanders, Belgium
 
 on:
+  # Run every Sunday at 12:00 UTC
+  schedule:
+    - cron: '0 12 * * 0'
   push:
     paths:
       - ".github/workflows/belgium-flanders.yml"
@@ -15,9 +18,6 @@ on:
       - "data/belgium/flanders"
       - "!data/belgium/flanders/**/diff.geojson"
       - "!data/belgium/flanders/**/stats.json"
-  # Run every Sunday at 12:00 UTC
-  schedule:
-    - cron: '0 12 * * 0'
 
 jobs:
 
