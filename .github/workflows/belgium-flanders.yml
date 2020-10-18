@@ -29,7 +29,7 @@ jobs:
       - name: Install GDAL
         run: sudo apt install gdal-bin
       - name: Install Tippecanoe
-        uses: actions/install-tippecanoe
+        uses: ./.github/actions/install-tippecanoe
       - name: Install dependencies
         run: npm install
       - name: Build
