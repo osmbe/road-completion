@@ -7,9 +7,8 @@ runs:
   steps:
     - run: git clone https://github.com/mapbox/tippecanoe.git
       shell: bash
-    - run: cd tippecanoe
-      shell: bash
-    - run: make -j
-      shell: bash
-    - run: sudo make install
+    - run: |
+        cd tippecanoe
+        make -j
+        sudo make install
       shell: bash
