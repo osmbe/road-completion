@@ -62,10 +62,10 @@ jobs:
             --maximum-zoom=14 --minimum-zoom=14 \
             --layer="roads" \
             --output="WegsegmentTagged.mbtiles" "WegsegmentTagged.geojson"
-      - name: Download MapRoulette false positive
-        run: wget -O "maproulette.geojson" "https://maproulette.org/api/v2/challenge/view/14646?status=2"
       - name: Generate MapRoulette buffers
-        run: node "script/buffer.js" "maproulette.geojson" "maproulette-buffers.geojson"
+        uses: ./.github/actions/maproulette-buffers
+        with:
+          challenge-id: 14646
       - name: Merge MapRoulette buffers to OpenStreetMap buffers and generate vector tiles
         run: |
           tippecanoe --force --no-feature-limit --no-tile-size-limit \

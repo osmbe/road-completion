@@ -1,0 +1,14 @@
+name: "Generate OpenStreetMap buffers"
+description: "Download OpenStreetMap extract, filter highways, and generate buffers"
+inputs:
+  challenge-id:
+    description: "MapRoulette challenge id"
+    required: true
+# outputs:
+runs:
+  using: "composite"
+  steps:
+    - name: Download MapRoulette false positive
+      run: wget -O "maproulette.geojson" "https://maproulette.org/api/v2/challenge/view/${{ inputs.challenge-id }}?status=2"
+    - name: Generate MapRoulette buffers
+      run: node "script/buffer.js" "maproulette.geojson" "maproulette-buffers.geojson"
