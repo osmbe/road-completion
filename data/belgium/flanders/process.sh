@@ -13,7 +13,7 @@ mkdir -p "./source/"
 
 if [ ! -d "./source/$FILENAME" ]; then
   wget -O "./source/$FILENAME.zip" "https://downloadagiv.blob.core.windows.net/wegenregister/$FILENAME.zip"
-  unzip "./source/$FILENAME.zip" -d "./source/$FILENAME/"
+  unzip "./source/$FILENAME.zip" -d "./source/$FILENAME/" "Shapefile/Wegsegment.*"
 fi
 
 # Convert to GeoJSON
