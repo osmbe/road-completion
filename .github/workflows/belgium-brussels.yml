@@ -65,6 +65,11 @@ jobs:
         uses: ./.github/actions/maproulette-buffers
         with:
           challenge-id: 14669
+      - name: Upload MapRoulette false positive
+        uses: actions/upload-artifact@v2
+        with:
+          name: MapRoulette-FalsePositive
+          path: maproulette.geojson
       - name: Merge MapRoulette buffers to OpenStreetMap buffers and generate vector tiles
         run: |
           tippecanoe --force --no-feature-limit --no-tile-size-limit \
