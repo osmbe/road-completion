@@ -40,7 +40,7 @@ jobs:
         uses: ./.github/actions/openstreetmap-buffers
         with:
           country: europe/belgium
-      - name: Download & Unzip Wegenregister data
+      - name: Download & Unzip UrbIS data
         run: |
           wget "https://s.irisnet.be/v1/AUTH_ce3f7c74-fbd7-4b46-8d85-53d10d86904f/UrbAdm/UrbAdm_SHP.zip"
           unzip "UrbAdm_SHP.zip"
