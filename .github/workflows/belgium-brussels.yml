@@ -1,0 +1,94 @@
+name: 🇧🇪 Brussels, Belgium
+
+on:
+  # Run every Sunday at 12:00 UTC
+  schedule:
+    - cron: "0 12 * * 0"
+  push:
+    paths:
+      - ".github/workflows/belgium-brussels.yml"
+      - ".github/actions/*/action.yml"
+      - "script/**/*.ts"
+      - "data/belgium/brussels/**"
+      - "!data/belgium/brussels/**/diff.geojson"
+      - "!data/belgium/brussels/**/stats.json"
+  pull_request:
+    paths:
+      - ".github/workflows/belgium-brussels.yml"
+      - ".github/actions/*/action.yml"
+      - "script/**/*.ts"
+      - "data/belgium/brussels/**"
+      - "!data/belgium/brussels/**/diff.geojson"
+      - "!data/belgium/brussels/**/stats.json"
+
+jobs:
+
+  diff:
+    name: Generate difference
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install GDAL
+        run: sudo apt install gdal-bin
+      - name: Install Tippecanoe
+        uses: ./.github/actions/install-tippecanoe
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
+      - name: Generate OpenStreetMap buffers
+        uses: ./.github/actions/openstreetmap-buffers
+        with:
+          country: europe/belgium
+      - name: Download & Unzip Wegenregister data
+        run: |
+          wget "https://s.irisnet.be/v1/AUTH_ce3f7c74-fbd7-4b46-8d85-53d10d86904f/UrbAdm/UrbAdm_SHP.zip"
+          unzip "UrbAdm_SHP.zip"
+      - name: Convert (and filter) UrbIS to GeoJSON
+        run: |
+          ogr2ogr -f "GeoJSON" -progress \
+            -s_srs "EPSG:31370" -t_srs "EPSG:4326" \
+            -sql "@data/belgium/brussels/filter.sql" \
+            -lco COORDINATE_PRECISION=6 \
+            "UrbAdm_STREET_AXIS.geojson" \
+            "shp/UrbAdm_STREET_AXIS.shp"
+      - name: Convert UrbIS fields to OpenStreetMap tags
+        run: node "script/convert-tags.js" -c "data/belgium/brussels/convert.json" "UrbAdm_STREET_AXIS.geojson" "UrbAdm_STREET_AXISTagged.geojson"
+      - name: Generate UrbIS vector tiles
+        run: |
+          tippecanoe --force --no-feature-limit --no-tile-size-limit \
+            --buffer=0 \
+            --maximum-zoom=14 --minimum-zoom=14 \
+            --layer="roads" \
+            --output="UrbAdm_STREET_AXISTagged.mbtiles" "UrbAdm_STREET_AXISTagged.geojson"
+      - name: Generate MapRoulette buffers
+        uses: ./.github/actions/maproulette-buffers
+        with:
+          challenge-id: 14669
+      - name: Merge MapRoulette buffers to OpenStreetMap buffers and generate vector tiles
+        run: |
+          tippecanoe --force --no-feature-limit --no-tile-size-limit \
+            --maximum-zoom=14 --minimum-zoom=14 \
+            --layer="buffers" \
+            --output="belgium-buffers.mbtiles" \
+            "openstreetmap-buffers.geojson" "maproulette-buffers.geojson"
+      - name: Difference
+        run: node "script/difference.js" --output-dir="data/belgium/brussels/difference" "UrbAdm_STREET_AXISTagged.mbtiles" "belgium-buffers.mbtiles"
+      - name: Upload difference
+        uses: actions/upload-artifact@v2
+        with:
+          name: Brussels-Difference
+          path: data/belgium/brussels/difference/diff.geojson
+      - name: Upload statistics
+        uses: actions/upload-artifact@v2
+        with:
+          name: Brussels-Statistics
+          path: data/belgium/brussels/difference/stats.json
+      - name: Push to repository
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add data/belgium/brussels/difference/diff.geojson
+          git add data/belgium/brussels/difference/stats.json
+          git commit -m "🗃 Update difference for Brussels, Belgium"
+          git push
