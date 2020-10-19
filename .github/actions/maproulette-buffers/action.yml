@@ -11,6 +11,11 @@ runs:
     - name: Download MapRoulette false positive
       run: wget -O "maproulette.geojson" "https://maproulette.org/api/v2/challenge/view/${{ inputs.challenge-id }}?status=2"
       shell: bash
+    - name: Upload
+      uses: actions/upload-artifact@v2
+      with:
+        name: MapRoulette-FalsePositive
+        path: maproulette.geojson
     - name: Generate MapRoulette buffers
       run: node "script/buffer.js" "maproulette.geojson" "maproulette-buffers.geojson"
       shell: bash
