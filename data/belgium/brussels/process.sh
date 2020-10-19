@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Make script directory working directory
+
+cd `dirname "$(realpath $0)"`
 
 # Download & unzip data
 
@@ -12,28 +15,33 @@ fi
 
 # Convert to GeoJSON
 
-if [ -d "./convert" ]; then rm -r "./convert/"; fi
+if [ -d "./temp" ]; then rm -r "./temp/"; fi
 
-mkdir -p "./convert/"
+mkdir -p "./temp/"
 
 ogr2ogr -f "GeoJSON" -progress \
   -s_srs "EPSG:31370" -t_srs "EPSG:4326" \
   -sql "@filter.sql" \
   -lco COORDINATE_PRECISION=6 \
-  "./convert/UrbAdm_STREET_AXIS.geojson" \
+  "./temp/UrbAdm_STREET_AXIS.geojson" \
   "./source/UrbAdm_SHP/shp/UrbAdm_STREET_AXIS.shp"
-
-# ogr2ogr -f "GeoJSON" -progress \
-#   -s_srs "EPSG:31370" -t_srs "EPSG:4326" \
-#   -sql "@filter.sql" \
-#   -lco COORDINATE_PRECISION=6 \
-#   "./convert/UrbAdm_STREET_SURFACE_LEVEL0.geojson" \
-#   "./source/UrbAdm_SHP/shp/UrbAdm_STREET_SURFACE_LEVEL0.shp"
 
 # Convert fields to OpenStreetMap tags
 
-node "../../../script/convert-tags.js" "./convert/UrbAdm_STREET_AXIS.geojson" "UrbAdm_STREET_AXISTagged.geojson"
+node "../../../script/convert-tags.js" -c "./convert.json" "./temp/UrbAdm_STREET_AXIS.geojson" "UrbAdm_STREET_AXISTagged.geojson"
 
-# Generate buffer
+# Generate vector tiles
 
-node "../../../script/buffer.js" "./convert/UrbAdm_STREET_AXISTagged.geojson" "UrbAdm_STREET_AXISBuffer.geojson"
+tippecanoe --force --no-feature-limit --no-tile-size-limit \
+  --buffer=0 \
+  --maximum-zoom=14 --minimum-zoom=14 \
+  --layer="roads" \
+  --output="./temp/UrbAdm_STREET_AXISTagged.mbtiles" "./temp/UrbAdm_STREET_AXISTagged.geojson"
+
+# Difference
+
+if [ -d "./difference" ]; then rm -r "./difference/"; fi
+
+mkdir -p "./difference"
+
+node "../../../script/difference.js" --output-dir="./difference" "./temp/UrbAdm_STREET_AXISTagged.mbtiles" "../belgium-buffers.mbtiles"

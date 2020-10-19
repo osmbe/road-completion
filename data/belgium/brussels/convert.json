@@ -1,1 +1,61 @@
-{}
+{
+  "TYPE": {
+    "S": {
+      "highway": "unclassified"
+    },
+    "I": {
+      "highway": "unclassified"
+    },
+    "T": {
+      "highway": "unclassified",
+      "tunnel": "yes"
+    },
+    "PT": {
+      "highway": "footway",
+      "tunnel": "yes"
+    },
+    "B": {
+      "highway": "unclassified",
+      "bridge": "yes"
+    },
+    "PB": {
+      "highway": "footway",
+      "bridge": "yes"
+    },
+    "A": {
+      "highway": "unclassified"
+    },
+    "P": {
+      "highway": "unclassified",
+      "place": "square"
+    },
+    "G": {
+      "highway": "pedestrian",
+      "covered": "yes"
+    },
+    "W": {
+      "highway": "unclassified"
+    },
+    "C": {
+      "highway": "unclassified",
+      "psv": "designated"
+    },
+    "AC": {
+      "highway": "unclassified",
+      "psv": "designated"
+    },
+    "IC": {
+      "highway": "unclassified"
+    },
+    "K": {
+      "highway": "service",
+      "service": "parking_aisle"
+    },
+    "SC": {
+      "highway": "unclassified"
+    },
+    "IL": {
+      "highway": "unclassified"
+    }
+  }
+}
