@@ -65,3 +65,33 @@ See [Brussels, Belgium configuration file](../data/belgium/brussels/convert.json
 
 Scrip: `difference.js`  
 Source: [`src/difference.ts`](./src/difference.ts)
+
+### Description
+
+Using [TileReduce](https://github.com/mapbox/tile-reduce), the process does tile by tile:
+
+1. Normalize all roads and buffers in current tile
+1. Flatten all roads and buffers in current tile
+1. Merge all the OpenStreetMap (+ Map Roulette) with() in current tile
+1. Get all roads that are not entirely within the merged buffer in current tile
+
+### Usage
+
+```shell
+node "difference.js" --output-dir="path/to/directory" "path/to/mysource.mbtiles" "path/to/mybuffers.mbtiles"
+```
+
+### Result files
+
+#### `stats.json`
+
+Contains statistics about the difference process:
+
+- Coordinates of the tile (`[x, y, zoom_level]`)
+- Number of roads in the tile
+- Number of buffers in the tile
+- Number of roads that are not entirely within the merged buffer in the tile
+
+#### `diff.geojson`
+
+Contains all the roads that are not entirely within the buffers.
