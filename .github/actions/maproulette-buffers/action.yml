@@ -12,5 +12,5 @@ runs:
       run: wget -O "maproulette.geojson" "https://maproulette.org/api/v2/challenge/view/${{ inputs.challenge-id }}?status=2"
       shell: bash
     - name: Generate MapRoulette buffers
-      run: node "script/buffer.js" "maproulette.geojson" "maproulette-buffers.geojson"
+      run: node "script/buffer.js" --radius=20 "maproulette.geojson" "maproulette-buffers.geojson"
       shell: bash
