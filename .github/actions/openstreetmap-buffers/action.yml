@@ -14,13 +14,18 @@ runs:
     - name: Convert (and filter) OpenStreetMap to GeoJSON
       run: |
         ogr2ogr -f "GeoJSON" -progress \
-          -select "name,highway" \
-          -where "highway is not null" \
-          "openstreetmap.geojson" \
-          "openstreetmap-latest.osm.pbf" "lines"
+          -sql "SELECT name, highway FROM lines WHERE highway IS NOT NULL" \
+          "openstreetmap-lines.geojson" \
+          "openstreetmap-latest.osm.pbf"
+        ogr2ogr -f "GeoJSON" -progress \
+          -sql "SELECT name, hstore_get_value(other_tags, 'highway') AS highway FROM multipolygons WHERE hstore_get_value(other_tags, 'highway') is not null" \
+          "openstreetmap-polygons.geojson" \
+          "openstreetmap-latest.osm.pbf"
       shell: bash
     - name: Generate OpenStreetMap buffers
-      run: node "script/buffer.js" "openstreetmap.geojson" "openstreetmap-buffers.geojson"
+      run: |
+        node "script/buffer.js" --radius=20 "openstreetmap-lines.geojson" "openstreetmap-lines-buffers.geojson"
+        node "script/buffer.js" --radius=5 "openstreetmap-polygons.geojson" "openstreetmap-polygons-buffers.geojson"
       shell: bash
     # - name: Generate vector tiles
     #   run: |
@@ -28,4 +33,4 @@ runs:
     #       --maximum-zoom=14 --minimum-zoom=14 \
     #       --layer="buffers" \
     #       --output="openstreetmap-buffers.mbtiles" \
-    #       "openstreetmap-buffers.geojson"
+    #       "openstreetmap-lines-buffers.geojson" "openstreetmap-polygons-buffers.geojson"

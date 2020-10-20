@@ -77,7 +77,7 @@ jobs:
             --maximum-zoom=14 --minimum-zoom=14 \
             --layer="buffers" \
             --output="belgium-buffers.mbtiles" \
-            "openstreetmap-buffers.geojson" "maproulette-buffers.geojson"
+            "openstreetmap-lines-buffers.geojson" "openstreetmap-polygons-buffers.geojson" "maproulette-buffers.geojson"
       - name: Difference
         run: node "script/difference.js" --output-dir="data/belgium/flanders/difference/Wegenregister_SHAPE_20200917" "WegsegmentTagged.mbtiles" "belgium-buffers.mbtiles"
       - name: Upload difference
