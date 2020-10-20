@@ -32,6 +32,7 @@
 
 ## Data
 
-| Country           | Region                                                                                              | Source                                                                                                  | MapRoulette |
-|-------------------|-----------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|-------------|
-| :belgium: Belgium | [Vlaanderen (Flanders)](https://github.com/osmbe/road-completion/tree/master/data/belgium/flanders) | [Wegenregister](https://download.vlaanderen.be/Producten/Detail?id=6367&title=Wegenregister_17_09_2020) |             |
+| Country           | Region                                                                                                     | Source                                                                                                  | MapRoulette |
+|-------------------|------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|-------------|
+| :belgium: Belgium | [Vlaanderen (Flanders)](https://github.com/osmbe/road-completion/tree/master/data/belgium/flanders)        | [Wegenregister](https://download.vlaanderen.be/Producten/Detail?id=6367&title=Wegenregister_17_09_2020) |             |
+| :belgium: Belgium | [Bruxelles/Brussel (Brussels)](https://github.com/osmbe/road-completion/tree/master/data/belgium/brussels) | [UrbIS-Adm](https://bric.brussels/en/our-solutions/urbis-solutions/urbis-data/urbis-adm)               |             |
