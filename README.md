@@ -32,7 +32,15 @@
 
 ## Data
 
-| Country           | Region                                                                                                     | Source                                                                                                  | MapRoulette |
-|-------------------|------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|-------------|
-| :belgium: Belgium | [Bruxelles/Brussel (Brussels)](https://github.com/osmbe/road-completion/tree/master/data/belgium/brussels) | [UrbIS-Adm](https://bric.brussels/en/our-solutions/urbis-solutions/urbis-data/urbis-adm)               |             |
-| :belgium: Belgium | [Vlaanderen (Flanders)](https://github.com/osmbe/road-completion/tree/master/data/belgium/flanders)        | [Wegenregister](https://download.vlaanderen.be/Producten/Detail?id=6367&title=Wegenregister_17_09_2020) |             |
+| Country           | Region                                   | Source                    | MapRoulette |
+|-------------------|------------------------------------------|---------------------------|-------------|
+| :belgium: Belgium | [Bruxelles/Brussel (Brussels)][be-bru-1] | [UrbIS-Adm][be-bru-2]     |             |
+| :belgium: Belgium | [Vlaanderen (Flanders)][be-vla-1]        | [Wegenregister][be-vla-2] |             |
+| :belgium: Belgium | [Wallonie (Wallonia)][be-wal-1]          | [PICC][be-wal-2]          |             |
+
+[be-bru-1]: https://github.com/osmbe/road-completion/tree/master/data/belgium/brussels
+[be-bru-2]: https://bric.brussels/en/our-solutions/urbis-solutions/urbis-data/urbis-adm
+[be-vla-1]: https://github.com/osmbe/road-completion/tree/master/data/belgium/flanders
+[be-vla-2]: https://download.vlaanderen.be/Producten/Detail?id=6367&title=Wegenregister_17_09_2020
+[be-wal-1]: https://github.com/osmbe/road-completion/tree/master/data/belgium/wallonia
+[be-wal-2]: http://geoportail.wallonie.be/catalogue/b795de68-726c-4bdf-a62a-a42686aa5b6f.html
