@@ -65,7 +65,7 @@ jobs:
       - name: Generate MapRoulette buffers
         uses: ./.github/actions/maproulette-buffers
         with:
-          challenge-id: 14646
+          challenge-id: 14645
       - name: Upload MapRoulette false positive
         uses: actions/upload-artifact@v2
         with:
