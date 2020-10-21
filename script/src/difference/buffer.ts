@@ -15,31 +15,33 @@ module.exports = (
   write: Function,
   done: Function
 ) => {
-  const roads: any = flatten(normalize(sources.road.roads));
-  const buffers: any = flatten(normalize(sources.buffer.buffers));
-
-  // write(tile);
-
-  // let buffer = buffers.features[0] as Feature<Polygon, Properties>;
-  // buffers.features.shift();
-  // buffers.features.forEach((feature) => {
-  //   buffer = turf.union(buffer, feature as Feature<Polygon, Properties>);
-  // });
-
-  const mergedBuffers = union(
-    ...(buffers.features as Feature<Polygon, Properties>[])
-  );
-
-  const featuresNotWithin = roads.features.filter(
-    (feature: Feature) => booleanWithin(feature, mergedBuffers) !== true
-  );
-
   const stats = {
     tile,
-    roads: roads.features.length,
-    buffers: buffers.features.length,
-    notWithin: featuresNotWithin.length,
+    roads: 0,
+    buffers: 0,
+    notWithin: 0,
   };
 
-  done(null, { stats, featuresNotWithin, mergedBuffers });
+  try {
+    const roads: any = flatten(normalize(sources.road.roads));
+    const buffers: any = flatten(normalize(sources.buffer.buffers));
+
+    stats.roads = roads.features.length;
+    stats.buffers = buffers.features.length;
+
+    const mergedBuffers = union(
+      ...(buffers.features as Feature<Polygon, Properties>[])
+    );
+
+    const featuresNotWithin = roads.features.filter(
+      (feature: Feature) => booleanWithin(feature, mergedBuffers) !== true
+    );
+
+    stats.notWithin = featuresNotWithin.length;
+
+    done(null, { stats, featuresNotWithin });
+  } catch (err) {
+    // @todo Should do something with the error
+    done(null, { stats, featuresNotWithin: null });
+  }
 };

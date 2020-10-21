@@ -1,7 +1,7 @@
 "use strict";
 
 import tileReduce from "@mapbox/tile-reduce";
-import { FeatureCollection } from "@turf/helpers";
+import { Feature, FeatureCollection } from "@turf/helpers";
 import fs from "fs";
 import minimist from "minimist";
 import path from "path";
@@ -46,13 +46,26 @@ try {
       },
     ],
   })
-    .on("reduce", (result: any) => {
-      stats.push(result.stats);
+    .on(
+      "reduce",
+      (result: {
+        stats: Array<{
+          tile: [number, number, number];
+          roads: number;
+          buffers: number;
+          notWithin: number;
+        }>;
+        featuresNotWithin: Feature[];
+      }) => {
+        stats.push(result.stats);
 
-      collectionNotWithin.features = collectionNotWithin.features.concat(
-        result.featuresNotWithin
-      );
-    })
+        if (result.featuresNotWithin !== null) {
+          collectionNotWithin.features = collectionNotWithin.features.concat(
+            result.featuresNotWithin
+          );
+        }
+      }
+    )
     .on("end", function () {
       fs.writeFileSync(`${directory}/stats.json`, JSON.stringify(stats));
 
