@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc"
+    "build": "tsc --removeComments"
   },
   "repository": {
     "type": "git",
@@ -23,8 +23,8 @@
     "@turf/boolean-within": "^6.0",
     "@turf/buffer": "^5.1.5",
     "@turf/flatten": "^5.1.5",
-    "@turf/helpers": "^5.1",
-    "@turf/meta": "^5.2",
+    "@turf/helpers": "^6.1",
+    "@turf/meta": "^6.0",
     "@turf/union": "^5.1",
     "event-stream": "^4.0.1",
     "jsonstream-next": "^3.0.0",
