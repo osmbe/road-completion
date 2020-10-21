@@ -1,0 +1,19 @@
+{
+  "NATUR_CODE": {
+    "ATR": {
+      "highway":"motorway"
+    },
+    "CHA": {
+      "highway":"path"
+    },
+    "VCO": {
+      "highway":"residential"
+    },
+    "NTL": {
+      "highway":"primary"
+    },
+    "RNG": {
+      "highway":"motorway"
+    }
+  }
+}
