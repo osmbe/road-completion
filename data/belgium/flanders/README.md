@@ -4,6 +4,10 @@ Source: <https://download.vlaanderen.be/Producten/Detail?id=6367&title=Wegenregi
 
 ## Filters
 
+### `LSTRNM` + `RSTRNM`
+
+Filter out all the roads without a name.
+
 ### `STATUS` (*Status*)
 
 ```sql
