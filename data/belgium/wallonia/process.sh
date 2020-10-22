@@ -38,86 +38,86 @@ fi
 
 # Convert to GeoJSON
 
-# if [ -d "./temp" ]; then rm -r "./temp/"; fi
+if [ -d "./temp" ]; then rm -r "./temp/"; fi
 
-# mkdir -p "./temp/"
+mkdir -p "./temp/"
 
-# ogr2ogr -f "GeoJSON" -progress \
-#   -s_srs "EPSG:31370" -t_srs "EPSG:4326" -dim "XY" \
-#   -makevalid \
-#   -sql "@filter.sql" \
-#   -lco COORDINATE_PRECISION=6 \
-#   "./temp/BRA_VOIRIE_AXE.geojson" \
-#   "./source/PICC_vDIFF_SHAPE_31370_PROV_BRABANT_WALLON/VOIRIE_AXE.shp"
-# ogr2ogr -f "GeoJSON" -progress \
-#   -s_srs "EPSG:31370" -t_srs "EPSG:4326" -dim "XY" \
-#   -makevalid \
-#   -sql "@filter.sql" \
-#   -lco COORDINATE_PRECISION=6 \
-#   "./temp/HAI_VOIRIE_AXE.geojson" \
-#   "./source/PICC_vDIFF_SHAPE_31370_PROV_HAINAUT/VOIRIE_AXE.shp"
-# ogr2ogr -f "GeoJSON" -progress \
-#   -s_srs "EPSG:31370" -t_srs "EPSG:4326" -dim "XY" \
-#   -makevalid \
-#   -sql "@filter.sql" \
-#   -lco COORDINATE_PRECISION=6 \
-#   "./temp/LIE_VOIRIE_AXE.geojson" \
-#   "./source/PICC_vDIFF_SHAPE_31370_PROV_LIEGE/VOIRIE_AXE.shp"
-# ogr2ogr -f "GeoJSON" -progress \
-#   -s_srs "EPSG:31370" -t_srs "EPSG:4326" -dim "XY" \
-#   -makevalid \
-#   -sql "@filter.sql" \
-#   -lco COORDINATE_PRECISION=6 \
-#   "./temp/NAM_VOIRIE_AXE.geojson" \
-#   "./source/PICC_vDIFF_SHAPE_31370_PROV_NAMUR/VOIRIE_AXE.shp"
-# ogr2ogr -f "GeoJSON" -progress \
-#   -s_srs "EPSG:31370" -t_srs "EPSG:4326" -dim "XY" \
-#   -makevalid \
-#   -sql "@filter.sql" \
-#   -lco COORDINATE_PRECISION=6 \
-#   "./temp/LUX_VOIRIE_AXE.geojson" \
-#   "./source/PICC_vDIFF_SHAPE_31370_PROV_LUXEMBOURG/VOIRIE_AXE.shp"
+ogr2ogr -f "GeoJSON" -progress \
+  -s_srs "EPSG:31370" -t_srs "EPSG:4326" -dim "XY" \
+  -makevalid \
+  -sql "@filter.sql" \
+  -lco COORDINATE_PRECISION=6 \
+  "./temp/BRA_VOIRIE_AXE.geojson" \
+  "./source/PICC_vDIFF_SHAPE_31370_PROV_BRABANT_WALLON/VOIRIE_AXE.shp"
+ogr2ogr -f "GeoJSON" -progress \
+  -s_srs "EPSG:31370" -t_srs "EPSG:4326" -dim "XY" \
+  -makevalid \
+  -sql "@filter.sql" \
+  -lco COORDINATE_PRECISION=6 \
+  "./temp/HAI_VOIRIE_AXE.geojson" \
+  "./source/PICC_vDIFF_SHAPE_31370_PROV_HAINAUT/VOIRIE_AXE.shp"
+ogr2ogr -f "GeoJSON" -progress \
+  -s_srs "EPSG:31370" -t_srs "EPSG:4326" -dim "XY" \
+  -makevalid \
+  -sql "@filter.sql" \
+  -lco COORDINATE_PRECISION=6 \
+  "./temp/LIE_VOIRIE_AXE.geojson" \
+  "./source/PICC_vDIFF_SHAPE_31370_PROV_LIEGE/VOIRIE_AXE.shp"
+ogr2ogr -f "GeoJSON" -progress \
+  -s_srs "EPSG:31370" -t_srs "EPSG:4326" -dim "XY" \
+  -makevalid \
+  -sql "@filter.sql" \
+  -lco COORDINATE_PRECISION=6 \
+  "./temp/NAM_VOIRIE_AXE.geojson" \
+  "./source/PICC_vDIFF_SHAPE_31370_PROV_NAMUR/VOIRIE_AXE.shp"
+ogr2ogr -f "GeoJSON" -progress \
+  -s_srs "EPSG:31370" -t_srs "EPSG:4326" -dim "XY" \
+  -makevalid \
+  -sql "@filter.sql" \
+  -lco COORDINATE_PRECISION=6 \
+  "./temp/LUX_VOIRIE_AXE.geojson" \
+  "./source/PICC_vDIFF_SHAPE_31370_PROV_LUXEMBOURG/VOIRIE_AXE.shp"
 
 # Convert fields to OpenStreetMap tags
 
-# node "../../../script/convert-tags.js" -c "./convert.json" "./temp/BRA_VOIRIE_AXE.geojson" "BRA_VOIRIE_AXETagged.geojson"
-# node "../../../script/convert-tags.js" -c "./convert.json" "./temp/HAI_VOIRIE_AXE.geojson" "HAI_VOIRIE_AXETagged.geojson"
-# node "../../../script/convert-tags.js" -c "./convert.json" "./temp/LIE_VOIRIE_AXE.geojson" "LIE_VOIRIE_AXETagged.geojson"
-# node "../../../script/convert-tags.js" -c "./convert.json" "./temp/NAM_VOIRIE_AXE.geojson" "NAM_VOIRIE_AXETagged.geojson"
-# node "../../../script/convert-tags.js" -c "./convert.json" "./temp/LUX_VOIRIE_AXE.geojson" "LUX_VOIRIE_AXETagged.geojson"
+node "../../../script/convert-tags.js" -c "./convert.json" "./temp/BRA_VOIRIE_AXE.geojson" "BRA_VOIRIE_AXETagged.geojson"
+node "../../../script/convert-tags.js" -c "./convert.json" "./temp/HAI_VOIRIE_AXE.geojson" "HAI_VOIRIE_AXETagged.geojson"
+node "../../../script/convert-tags.js" -c "./convert.json" "./temp/LIE_VOIRIE_AXE.geojson" "LIE_VOIRIE_AXETagged.geojson"
+node "../../../script/convert-tags.js" -c "./convert.json" "./temp/NAM_VOIRIE_AXE.geojson" "NAM_VOIRIE_AXETagged.geojson"
+node "../../../script/convert-tags.js" -c "./convert.json" "./temp/LUX_VOIRIE_AXE.geojson" "LUX_VOIRIE_AXETagged.geojson"
 
 # Generate vector tiles
 
-# tippecanoe --force --no-feature-limit --no-tile-size-limit \
-#   --buffer=0 \
-#   --maximum-zoom=14 --minimum-zoom=14 \
-#   --layer="roads" \
-#   --output="./temp/BRA_VOIRIE_AXETagged.mbtiles" \
-#   "./temp/BRA_VOIRIE_AXETagged.geojson"
-# tippecanoe --force --no-feature-limit --no-tile-size-limit \
-#   --buffer=0 \
-#   --maximum-zoom=14 --minimum-zoom=14 \
-#   --layer="roads" \
-#   --output="./temp/HAI_VOIRIE_AXETagged.mbtiles" \
-#   "./temp/HAI_VOIRIE_AXETagged.geojson"
-# tippecanoe --force --no-feature-limit --no-tile-size-limit \
-#   --buffer=0 \
-#   --maximum-zoom=14 --minimum-zoom=14 \
-#   --layer="roads" \
-#   --output="./temp/LIE_VOIRIE_AXETagged.mbtiles" \
-#   "./temp/LIE_VOIRIE_AXETagged.geojson"
-# tippecanoe --force --no-feature-limit --no-tile-size-limit \
-#   --buffer=0 \
-#   --maximum-zoom=14 --minimum-zoom=14 \
-#   --layer="roads" \
-#   --output="./temp/NAM_VOIRIE_AXETagged.mbtiles" \
-#   "./temp/NAM_VOIRIE_AXETagged.geojson"
-# tippecanoe --force --no-feature-limit --no-tile-size-limit \
-#   --buffer=0 \
-#   --maximum-zoom=14 --minimum-zoom=14 \
-#   --layer="roads" \
-#   --output="./temp/LUX_VOIRIE_AXETagged.mbtiles" \
-#   "./temp/LUX_VOIRIE_AXETagged.geojson"
+tippecanoe --force --no-feature-limit --no-tile-size-limit \
+  --buffer=0 \
+  --maximum-zoom=14 --minimum-zoom=14 \
+  --layer="roads" \
+  --output="./temp/BRA_VOIRIE_AXETagged.mbtiles" \
+  "./temp/BRA_VOIRIE_AXETagged.geojson"
+tippecanoe --force --no-feature-limit --no-tile-size-limit \
+  --buffer=0 \
+  --maximum-zoom=14 --minimum-zoom=14 \
+  --layer="roads" \
+  --output="./temp/HAI_VOIRIE_AXETagged.mbtiles" \
+  "./temp/HAI_VOIRIE_AXETagged.geojson"
+tippecanoe --force --no-feature-limit --no-tile-size-limit \
+  --buffer=0 \
+  --maximum-zoom=14 --minimum-zoom=14 \
+  --layer="roads" \
+  --output="./temp/LIE_VOIRIE_AXETagged.mbtiles" \
+  "./temp/LIE_VOIRIE_AXETagged.geojson"
+tippecanoe --force --no-feature-limit --no-tile-size-limit \
+  --buffer=0 \
+  --maximum-zoom=14 --minimum-zoom=14 \
+  --layer="roads" \
+  --output="./temp/NAM_VOIRIE_AXETagged.mbtiles" \
+  "./temp/NAM_VOIRIE_AXETagged.geojson"
+tippecanoe --force --no-feature-limit --no-tile-size-limit \
+  --buffer=0 \
+  --maximum-zoom=14 --minimum-zoom=14 \
+  --layer="roads" \
+  --output="./temp/LUX_VOIRIE_AXETagged.mbtiles" \
+  "./temp/LUX_VOIRIE_AXETagged.geojson"
 
 # Difference
 
