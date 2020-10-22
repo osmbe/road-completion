@@ -4,6 +4,10 @@ Source: <http://geoportail.wallonie.be/catalogue/b795de68-726c-4bdf-a62a-a42686a
 
 ## Filters
 
+### `RUE_NOM1` + `RUE_NOM2`
+
+Filter out all the roads without a name.
+
 ## Tags
 
 ### `NATUR_CODE`
