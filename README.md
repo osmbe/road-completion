@@ -50,3 +50,13 @@
 [be-wal-1]: https://github.com/osmbe/road-completion/tree/master/data/belgium/wallonia
 [be-wal-2]: http://geoportail.wallonie.be/catalogue/b795de68-726c-4bdf-a62a-a42686aa5b6f.html
 [be-wal-3]: https://maproulette.org/browse/challenges/14681
+
+### Replicate
+
+If you want to run the comparison process in your country/region, you simply have to replicate one of the existing regions (for instance, [Flanders](https://github.com/osmbe/road-completion/tree/master/data/belgium/flanders)) :
+
+- `process.sh` is the comparison shell script (see [example](https://github.com/osmbe/road-completion/blob/master/data/belgium/flanders/process.sh))
+- `filter.sql` is the SQL query to filter your data (see [example](https://github.com/osmbe/road-completion/blob/master/data/belgium/flanders/filter.sql) and [usage](https://github.com/osmbe/road-completion/blob/master/data/belgium/flanders/process.sh#L25-L31))
+- `convert.json` is the tag conversion (from your data to OSM tag(s)) (see [documentation](https://github.com/osmbe/road-completion/blob/master/script/README.md#convert-source-field-to-openstreetmap-tag) and [example](https://github.com/osmbe/road-completion/blob/master/data/belgium/flanders/convert.json))
+
+You can find more documentation about the scripts here : <https://github.com/osmbe/road-completion/blob/master/script/README.md>
