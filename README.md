@@ -6,6 +6,7 @@
 
 - [Post in Joost Schouppe's diary](https://www.openstreetmap.org/user/joost%20schouppe/diary/39250)
 - [Birds of a feather session at State of the Map 2016](https://wiki.openstreetmap.org/wiki/State_Of_The_Map_2016/Informal_Sessions#Mapping_with_open_geodata)
+- [Project page in OpenStreetMap wiki](https://wiki.openstreetmap.org/wiki/WikiProject_Belgium/Road_completion_project)
 - [Talk at FOSS4G Belgium 2017](https://slides.com/benabelshausen-1/deck-1) by [Ben Abelshausen](https://github.com/xivk)
 - [Talk at State of the Map 2018](https://2018.stateofthemap.org/2018/T097-Road_Completion_in_Belgium_-_Mapping___verifying__all__the_roads_/) by [Ben Abelshausen](https://github.com/xivk)
 - [Open Summer of Code 2018](https://2018.summerofcode.be/roadcompletion.html)
