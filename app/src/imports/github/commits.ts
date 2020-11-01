@@ -16,7 +16,7 @@ export default async function (path: string) {
   });
 
   return Promise.all(
-    response.data.slice(0, 3).map(async (commit) => {
+    response.data.map(async (commit) => {
       const content = await getContent(path, commit.sha);
 
       const stats = content.reduce((sum, value) => {
