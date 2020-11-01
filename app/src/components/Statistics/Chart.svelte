@@ -30,6 +30,9 @@
         scales: {
           xAxes: [{
             type: 'time',
+            ticks: {
+              max: new Date()
+            },
             time: {
               unit: 'week',
               tooltipFormat: 'dddd, MMMM Do YYYY, HH:mm:ss'
