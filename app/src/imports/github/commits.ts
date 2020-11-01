@@ -28,7 +28,7 @@ export default async function (path: string) {
       });
 
       const dirname = path.match(/.*\//);
-      const diff = `https://github.com/${OWNER}/${REPOSITORY}/blob/${commit.sha}/${dirname}/diff.geojson`;
+      const diff = `https://github.com/${OWNER}/${REPOSITORY}/blob/${commit.sha}/${dirname}diff.geojson`;
 
       return {
         path,
