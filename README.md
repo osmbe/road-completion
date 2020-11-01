@@ -4,7 +4,7 @@
 
 ## History of the project
 
-- [Post in Joost Schouppe's diary](https://www.openstreetmap.org/user/joost%20schouppe/diary/39250)
+- [Diary post](https://www.openstreetmap.org/user/joost%20schouppe/diary/39250) by [Joost Schouppe](https://github.com/joostschouppe)
 - [Birds of a feather session at State of the Map 2016](https://wiki.openstreetmap.org/wiki/State_Of_The_Map_2016/Informal_Sessions#Mapping_with_open_geodata)
 - [Project page in OpenStreetMap wiki](https://wiki.openstreetmap.org/wiki/WikiProject_Belgium/Road_completion_project)
 - [Talk at FOSS4G Belgium 2017](https://slides.com/benabelshausen-1/deck-1) by [Ben Abelshausen](https://github.com/xivk)
