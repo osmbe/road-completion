@@ -2,8 +2,11 @@ name: Build and Deploy app
 
 on:
   push:
-    branches:
-      - master
+    path:
+      - "app/**"
+  pull_request:
+    paths:
+      - "app/**"
 
 jobs:
   build-and-deploy:
