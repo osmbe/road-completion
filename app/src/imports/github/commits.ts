@@ -27,8 +27,12 @@ export default async function (path: string) {
         return sum;
       });
 
+      const dirname = path.match(/.*\//);
+      const diff = `https://github.com/${OWNER}/${REPOSITORY}/blob/${commit.sha}/${dirname}/diff.geojson`;
+
       return {
         path,
+        diff,
         datetime: new Date(commit.commit.author.date),
         message: commit.commit.message,
         sha: commit.sha,

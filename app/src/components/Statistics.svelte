@@ -36,7 +36,11 @@
       </td>
       <td class="has-text-right">{ commit.stats.roads }</td>
       <td class="has-text-right">{ commit.stats.buffers }</td>
-      <td class="has-text-right">{ commit.stats.notWithin }</td>
+      <td class="has-text-right">
+        <a target="_blank" rel="external" href="{ commit.diff }">
+        { commit.stats.notWithin }
+        </a>
+      </td>
     </tr>
     {/each}
   </tbody>
