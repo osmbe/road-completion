@@ -19,12 +19,17 @@ export default async function (path: string) {
     response.data.map(async (commit) => {
       const content = await getContent(path, commit.sha);
 
-      const stats = content.reduce((sum, value) => {
-        sum.roads += value.roads;
-        sum.buffers += value.buffers;
-        sum.notWithin += value.notWithin;
-
-        return sum;
+      const stats = {
+        tiles: 0,
+        roads: 0,
+        buffers: 0,
+        notWithin: 0
+      };
+      content.forEach((s) => {
+        stats.tiles++;
+        stats.roads += s.roads;
+        stats.buffers += s.buffers;
+        stats.notWithin += s.notWithin;
       });
 
       const dirname = path.match(/.*\//);

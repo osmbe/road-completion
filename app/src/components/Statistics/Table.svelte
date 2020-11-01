@@ -18,6 +18,7 @@
       <th>Roads</th>
       <th>OpenStreetMap</th>
       <th>"Missing" roads</th>
+      <th>Tiles</th>
     </tr>
   </thead>
   <tbody>
@@ -41,6 +42,7 @@
         { commit.stats.notWithin }
         </a>
       </td>
+      <td class="has-text-right">{ commit.stats.tiles }</td>
     </tr>
     {/each}
   </tbody>
