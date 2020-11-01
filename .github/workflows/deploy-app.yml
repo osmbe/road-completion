@@ -17,7 +17,8 @@ jobs:
       - name: Install and Build
         run: |
           npm install
-          npm run deploy-app
+          npm run export
+        working-directory: app
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@3.6.2
