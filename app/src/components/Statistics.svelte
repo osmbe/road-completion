@@ -1,47 +1,25 @@
 <script>
-  import moment from 'moment';
+  import Chart from './Statistics/Chart.svelte';
+  import Table from './Statistics/Table.svelte';
 
   export let commits;
 </script>
 
 <style>
-  time {
-    cursor: help;
+  .columns {
+    max-height: 300px;
+  }
+
+  .column {
+    overflow-y: auto;
   }
 </style>
 
-<table class="table is-striped">
-  <thead>
-    <tr>
-      <th>Commit</th>
-      <th>Date</th>
-      <th>Roads</th>
-      <th>OpenStreetMap</th>
-      <th>"Missing" roads</th>
-    </tr>
-  </thead>
-  <tbody>
-    {#each commits as commit}
-    <tr>
-      <td>
-        <a target="_blank" rel="external" href="{ commit.url }">
-          { commit.message }
-        </a>
-      </td>
-      <td>
-        <time datetime="{ moment(commit.datetime).format() }"
-          title="{ moment(commit.datetime).format('dddd, MMMM Do YYYY, HH:mm:ss') }">
-          { moment(commit.datetime).fromNow() }
-        </time>
-      </td>
-      <td class="has-text-right">{ commit.stats.roads }</td>
-      <td class="has-text-right">{ commit.stats.buffers }</td>
-      <td class="has-text-right">
-        <a target="_blank" rel="external" href="{ commit.diff }">
-        { commit.stats.notWithin }
-        </a>
-      </td>
-    </tr>
-    {/each}
-  </tbody>
-</table>
+<div class="columns">
+  <div class="column is-4">
+    <Chart {commits} />
+  </div>
+  <div class="column">
+    <Table {commits} />
+  </div>
+</div>
