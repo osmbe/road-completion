@@ -4,6 +4,7 @@ on:
   push:
     path:
       - "app/**"
+      - "data/**/stats.json"
   pull_request:
     paths:
       - "app/**"
