@@ -23,6 +23,9 @@ export async function get(req, res) {
     "be-wallonia-nam": await getCommits(
       "data/belgium/wallonia/difference/NAM/stats.json"
     ),
+    "xk": await getCommits(
+      "data/kosovo/difference/stats.json"
+    ),
   };
 
   res.writeHead(200, {

@@ -49,4 +49,7 @@
 
   <hr>
 
+  <h2 class="title is-2">Kosovo</h2>
+  <Statistics commits={commits['xk']}></Statistics>
+
 </div>
