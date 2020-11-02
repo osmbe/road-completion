@@ -20,6 +20,7 @@
       data: {
         datasets: [{
           data,
+          cubicInterpolationMode: "monotone",
           fill: true,
         }]
       },
