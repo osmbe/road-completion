@@ -40,6 +40,7 @@
 | :belgium: Belgium | [Bruxelles/Brussel (Brussels)][be-bru-1] | [UrbIS-Adm][be-bru-2]     | [Challenge][be-bru-3] |
 | :belgium: Belgium | [Vlaanderen (Flanders)][be-vla-1]        | [Wegenregister][be-vla-2] | [Challenge][be-vla-3] |
 | :belgium: Belgium | [Wallonie (Wallonia)][be-wal-1]          | [PICC][be-wal-2]          | [Challenge][be-wal-3] |
+| :kosovo: Kosovo   |                                          | [AKK][xk-2]               |                       |
 
 [be-bru-1]: https://github.com/osmbe/road-completion/tree/master/data/belgium/brussels
 [be-bru-2]: https://bric.brussels/en/our-solutions/urbis-solutions/urbis-data/urbis-adm
@@ -50,6 +51,7 @@
 [be-wal-1]: https://github.com/osmbe/road-completion/tree/master/data/belgium/wallonia
 [be-wal-2]: http://geoportail.wallonie.be/catalogue/b795de68-726c-4bdf-a62a-a42686aa5b6f.html
 [be-wal-3]: https://maproulette.org/browse/challenges/14681
+[xk-2]: https://ak.rks-gov.net/en/
 
 ### Replicate
 
