@@ -1,5 +1,5 @@
-data/*/*/source/
-data/*/*/temp/
+data/**/source/
+data/**/temp/
 data/**/*.geojson
 !data/**/diff.geojson
 script/**/*.js
