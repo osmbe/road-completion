@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# MAPROULETTE_CHALLENGE=14646
+MAPROULETTE_CHALLENGE=14681
 
 # Make script directory working directory
 
@@ -119,6 +119,20 @@ tippecanoe --force --no-feature-limit --no-tile-size-limit \
   --output="./temp/LUX_VOIRIE_AXETagged.mbtiles" \
   "./temp/LUX_VOIRIE_AXETagged.geojson"
 
+# Generate MapRoulette NotAnIssue buffers vector tiles
+
+wget -O "./temp/maproulette.geojson" "https://maproulette.org/api/v2/challenge/view/$MAPROULETTE_CHALLENGE?status=2"
+
+node "../../../script/buffer.js" "./temp/maproulette.geojson" "maproulette-buffers.geojson"
+
+# Merge MapRoulette buffers to OpenStreetMap buffers
+
+tippecanoe --force --no-feature-limit --no-tile-size-limit \
+  --maximum-zoom=14 --minimum-zoom=14 \
+  --layer="buffers" \
+  --output="./temp/belgium-buffers.mbtiles" \
+  "../belgium-buffers.geojson" "./temp/maproulette-buffers.geojson"
+
 # Difference
 
 if [ -d "./difference/BRA" ]; then rm -r "./difference/BRA"; fi
@@ -133,11 +147,11 @@ mkdir -p "./difference/LIE"
 mkdir -p "./difference/NAM"
 mkdir -p "./difference/LUX"
 
-node "../../../script/difference.js" --output-dir="./difference/BRA" "./temp/BRA_VOIRIE_AXETagged.mbtiles" "../belgium-buffers.mbtiles"
-node "../../../script/difference.js" --output-dir="./difference/HAI" "./temp/HAI_VOIRIE_AXETagged.mbtiles" "../belgium-buffers.mbtiles"
-node "../../../script/difference.js" --output-dir="./difference/LIE" "./temp/LIE_VOIRIE_AXETagged.mbtiles" "../belgium-buffers.mbtiles"
-node "../../../script/difference.js" --output-dir="./difference/NAM" "./temp/NAM_VOIRIE_AXETagged.mbtiles" "../belgium-buffers.mbtiles"
-node "../../../script/difference.js" --output-dir="./difference/LUX" "./temp/LUX_VOIRIE_AXETagged.mbtiles" "../belgium-buffers.mbtiles"
+node "../../../script/difference.js" --output-dir="./difference/BRA" "./temp/BRA_VOIRIE_AXETagged.mbtiles" "./temp/belgium-buffers.mbtiles"
+node "../../../script/difference.js" --output-dir="./difference/HAI" "./temp/HAI_VOIRIE_AXETagged.mbtiles" "./temp/belgium-buffers.mbtiles"
+node "../../../script/difference.js" --output-dir="./difference/LIE" "./temp/LIE_VOIRIE_AXETagged.mbtiles" "./temp/belgium-buffers.mbtiles"
+node "../../../script/difference.js" --output-dir="./difference/NAM" "./temp/NAM_VOIRIE_AXETagged.mbtiles" "./temp/belgium-buffers.mbtiles"
+node "../../../script/difference.js" --output-dir="./difference/LUX" "./temp/LUX_VOIRIE_AXETagged.mbtiles" "./temp/belgium-buffers.mbtiles"
 
 # Merge diff GeoJSON
 
