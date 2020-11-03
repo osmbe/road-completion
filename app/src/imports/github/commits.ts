@@ -35,11 +35,15 @@ export default async function (path: string) {
       const dirname = path.match(/.*\//);
       const diff = `https://github.com/${OWNER}/${REPOSITORY}/blob/${commit.sha}/${dirname}diff.geojson`;
 
+      const title = commit.commit.message.substring(0, commit.commit.message.indexOf("\n"));
+      const message = commit.commit.message.substring(commit.commit.message.indexOf("\n"));
+
       return {
         path,
         diff,
         datetime: new Date(commit.commit.author.date),
-        message: commit.commit.message,
+        title,
+        message,
         sha: commit.sha,
         url: commit.html_url,
         stats

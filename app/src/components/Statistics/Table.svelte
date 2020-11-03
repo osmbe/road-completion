@@ -8,6 +8,10 @@
   time {
     cursor: help;
   }
+
+  td.nowrap {
+    white-space: nowrap;
+  }
 </style>
 
 <table class="table is-striped">
@@ -26,10 +30,10 @@
     <tr>
       <td>
         <a target="_blank" rel="external" href="{ commit.url }">
-          { commit.message }
+          { commit.title || commit.message }
         </a>
       </td>
-      <td>
+      <td class="nowrap">
         <time datetime="{ moment(commit.datetime).format() }"
           title="{ moment(commit.datetime).format('dddd, MMMM Do YYYY, HH:mm:ss') }">
           { moment(commit.datetime).fromNow() }
