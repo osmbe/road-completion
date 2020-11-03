@@ -6,8 +6,6 @@
 
 OpenStreetMap (OSM) is extremly good at quickly creating a usable map. It is less good at getting to 100% finished on a specific topic. The last 2% of roads might take forever to get mapped in OpenStreetMap. This project aims to find these 2% with the help of external road data. This can be governement data or machine learned data. We then offer the missing roads as microtasks to the mapping community. This means that after we have "finished" the work, the OpenStreetMap data will be at least as complete as the reference dataset - so any trust placed in that reference can now be place in OpenStreetMap as well!
 
-
-
 ## History of the project
 
 - [Diary post](https://www.openstreetmap.org/user/joost%20schouppe/diary/39250) by [Joost Schouppe](https://github.com/joostschouppe)
@@ -41,12 +39,12 @@ OpenStreetMap (OSM) is extremly good at quickly creating a usable map. It is les
 
 ## Data
 
-| Country           | Region                                   | Source                    | MapRoulette           |
-|-------------------|------------------------------------------|---------------------------|-----------------------|
-| :belgium: Belgium | [Bruxelles/Brussel (Brussels)][be-bru-1] | [UrbIS-Adm][be-bru-2]     | [Challenge][be-bru-3] |
-| :belgium: Belgium | [Vlaanderen (Flanders)][be-vla-1]        | [Wegenregister][be-vla-2] | [Challenge][be-vla-3] |
-| :belgium: Belgium | [Wallonie (Wallonia)][be-wal-1]          | [PICC][be-wal-2]          | [Challenge][be-wal-3] |
-| :kosovo: Kosovo   |                                          | [AKK][xk-2]               |                       |
+| Country                 | Region                                   | Source                    | MapRoulette           |
+|-------------------------|------------------------------------------|---------------------------|-----------------------|
+| :belgium: Belgium       | [Bruxelles/Brussel (Brussels)][be-bru-1] | [UrbIS-Adm][be-bru-2]     | [Challenge][be-bru-3] |
+| :belgium: Belgium       | [Vlaanderen (Flanders)][be-vla-1]        | [Wegenregister][be-vla-2] | [Challenge][be-vla-3] |
+| :belgium: Belgium       | [Wallonie (Wallonia)][be-wal-1]          | [PICC][be-wal-2]          | [Challenge][be-wal-3] |
+| :kosovo: [Kosovo][xk-1] |                                          | [AKK][xk-2]               |                       |
 
 [be-bru-1]: https://github.com/osmbe/road-completion/tree/master/data/belgium/brussels
 [be-bru-2]: https://bric.brussels/en/our-solutions/urbis-solutions/urbis-data/urbis-adm
@@ -57,6 +55,7 @@ OpenStreetMap (OSM) is extremly good at quickly creating a usable map. It is les
 [be-wal-1]: https://github.com/osmbe/road-completion/tree/master/data/belgium/wallonia
 [be-wal-2]: http://geoportail.wallonie.be/catalogue/b795de68-726c-4bdf-a62a-a42686aa5b6f.html
 [be-wal-3]: https://maproulette.org/browse/challenges/14681
+[xk-1]: https://github.com/osmbe/road-completion/tree/master/data/kosovo
 [xk-2]: https://ak.rks-gov.net/en/
 
 [Stats about current datasets](https://osmbe.github.io/road-completion/)
@@ -71,10 +70,8 @@ If you want to run the comparison process in your country/region, you simply hav
 
 You can find more documentation about the scripts here : <https://github.com/osmbe/road-completion/blob/master/script/README.md>
 
-
 ## Scope
 
 This set-up is ideal if there are relatively few missing roads. If there are whole swats of network missing in OSM, you might consider a tool like [Cygnus](https://www.openstreetmap.org/user/mvexel/diary/36746) instead.
 
 The current matching is based on a simple buffer - so both OSM and the ref dataset need to be af high geometric quality to result in a reasonable amount of tasks. However, you are invited to create more advanced comparison processes. Next on our roadmap is adding attribute comparisons, for example to compare street names.
-
