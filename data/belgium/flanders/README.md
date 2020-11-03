@@ -28,7 +28,7 @@ Filter out all the roads without a name.
 ### `BEHEER` (*Beheer*)
 
 ```sql
-"BEHEER" <> 4
+"BEHEER" <> -8
 ```
 
 *De organisatie die verantwoordelijk is voor het fysieke onderhoud en beheer van de weg op het terrein.*
