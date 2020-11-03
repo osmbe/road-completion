@@ -59,6 +59,8 @@ OpenStreetMap (OSM) is extremly good at quickly creating a usable map. It is les
 [be-wal-3]: https://maproulette.org/browse/challenges/14681
 [xk-2]: https://ak.rks-gov.net/en/
 
+[Stats about current datasets](https://osmbe.github.io/road-completion/)
+
 ## Replicate
 
 If you want to run the comparison process in your country/region, you simply have to replicate one of the existing regions (for instance, [Flanders](https://github.com/osmbe/road-completion/tree/master/data/belgium/flanders)) :
