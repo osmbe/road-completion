@@ -39,6 +39,8 @@ OpenStreetMap (OSM) is extremly good at quickly creating a usable map. It is les
 
 ## Data
 
+📉 [Statistics about datasets process](https://osmbe.github.io/road-completion/)
+
 | Country                 | Region                                   | Source                    | MapRoulette           |
 |-------------------------|------------------------------------------|---------------------------|-----------------------|
 | :belgium: Belgium       | [Bruxelles/Brussel (Brussels)][be-bru-1] | [UrbIS-Adm][be-bru-2]     | [Challenge][be-bru-3] |
@@ -57,8 +59,6 @@ OpenStreetMap (OSM) is extremly good at quickly creating a usable map. It is les
 [be-wal-3]: https://maproulette.org/browse/challenges/14681
 [xk-1]: https://github.com/osmbe/road-completion/tree/master/data/kosovo
 [xk-2]: https://ak.rks-gov.net/en/
-
-[Stats about current datasets](https://osmbe.github.io/road-completion/)
 
 ## Replicate
 
