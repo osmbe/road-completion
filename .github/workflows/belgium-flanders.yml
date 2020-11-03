@@ -91,6 +91,7 @@ jobs:
           name: Flanders-Statistics
           path: data/belgium/flanders/difference/Wegenregister_SHAPE_20200917/stats.json
       - name: Push to repository
+        if: ${{ github.event != 'pull_request' }}
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
