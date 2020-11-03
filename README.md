@@ -2,6 +2,12 @@
 
 *Software set-up inspired by ["Quality analysis for OpenStreetMap"](https://blog.mapbox.com/quality-analysis-for-openstreetmap-a9058eb79c9a) by [Matt Greene](https://github.com/MateoV) from [Mapbox](https://www.mapbox.com/)*
 
+## Goals
+
+OpenStreetMap (OSM) is extremly good at quickly creating a usable map. It is less good at getting to 100% finished on a specific topic. The last 2% of roads might take forever to get mapped in OpenStreetMap. This project aims to find these 2% with the help of external road data. This can be governement data or machine learned data. We then offer the missing roads as microtasks to the mapping community. This means that after we have "finished" the work, the OpenStreetMap data will be at least as complete as the reference dataset - so any trust placed in that reference can now be place in OpenStreetMap as well!
+
+
+
 ## History of the project
 
 - [Diary post](https://www.openstreetmap.org/user/joost%20schouppe/diary/39250) by [Joost Schouppe](https://github.com/joostschouppe)
@@ -53,7 +59,7 @@
 [be-wal-3]: https://maproulette.org/browse/challenges/14681
 [xk-2]: https://ak.rks-gov.net/en/
 
-### Replicate
+## Replicate
 
 If you want to run the comparison process in your country/region, you simply have to replicate one of the existing regions (for instance, [Flanders](https://github.com/osmbe/road-completion/tree/master/data/belgium/flanders)) :
 
@@ -62,3 +68,11 @@ If you want to run the comparison process in your country/region, you simply hav
 - `convert.json` is the tag conversion (from your data to OSM tag(s)) (see [documentation](https://github.com/osmbe/road-completion/blob/master/script/README.md#convert-source-field-to-openstreetmap-tag) and [example](https://github.com/osmbe/road-completion/blob/master/data/belgium/flanders/convert.json))
 
 You can find more documentation about the scripts here : <https://github.com/osmbe/road-completion/blob/master/script/README.md>
+
+
+## Scope
+
+This set-up is ideal if there are relatively few missing roads. If there are whole swats of network missing in OSM, you might consider a tool like [Cygnus](https://www.openstreetmap.org/user/mvexel/diary/36746) instead.
+
+The current matching is based on a simple buffer - so both OSM and the ref dataset need to be af high geometric quality to result in a reasonable amount of tasks. However, you are invited to create more advanced comparison processes. Next on our roadmap is adding attribute comparisons, for example to compare street names.
+
