@@ -10,6 +10,7 @@ on:
       - ".github/actions/*/action.yml"
       - "script/**/*.ts"
       - "data/belgium/brussels/**"
+      - "!data/belgium/brussels/README.md"
       - "!data/belgium/brussels/**/diff.geojson"
       - "!data/belgium/brussels/**/stats.json"
   pull_request:
@@ -18,6 +19,7 @@ on:
       - ".github/actions/*/action.yml"
       - "script/**/*.ts"
       - "data/belgium/brussels/**"
+      - "!data/belgium/brussels/README.md"
       - "!data/belgium/brussels/**/diff.geojson"
       - "!data/belgium/brussels/**/stats.json"
 

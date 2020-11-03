@@ -10,6 +10,7 @@ on:
       - ".github/actions/*/action.yml"
       - "script/**/*.ts"
       - "data/belgium/flanders/**"
+      - "!data/belgium/flanders/README.md"
       - "!data/belgium/flanders/**/diff.geojson"
       - "!data/belgium/flanders/**/stats.json"
   pull_request:
@@ -18,6 +19,7 @@ on:
       - ".github/actions/*/action.yml"
       - "script/**/*.ts"
       - "data/belgium/flanders/**"
+      - "!data/belgium/flanders/README.md"
       - "!data/belgium/flanders/**/diff.geojson"
       - "!data/belgium/flanders/**/stats.json"
 
