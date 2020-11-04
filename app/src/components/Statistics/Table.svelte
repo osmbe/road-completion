@@ -14,14 +14,14 @@
   }
 </style>
 
-<table class="table is-striped">
+<table class="table is-fullwidth is-striped">
   <thead>
     <tr>
       <th colspan="2">Commit</th>
       <th>Date</th>
       <th>Roads</th>
-      <th>OpenStreetMap</th>
-      <th>"Missing" roads</th>
+      <th>OSM</th>
+      <th>"Missing"</th>
       <th>Tiles</th>
     </tr>
   </thead>
