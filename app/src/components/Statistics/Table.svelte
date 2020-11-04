@@ -5,7 +5,7 @@
 </script>
 
 <style>
-  time {
+  .has-tooltip {
     cursor: help;
   }
 
@@ -17,7 +17,7 @@
 <table class="table is-striped">
   <thead>
     <tr>
-      <th>Commit</th>
+      <th colspan="2">Commit</th>
       <th>Date</th>
       <th>Roads</th>
       <th>OpenStreetMap</th>
@@ -28,13 +28,18 @@
   <tbody>
     {#each commits as commit}
     <tr>
+      {#if commit.status == 'script'}
+      <td class="has-text-center has-tooltip" title="Process has been updated">🔨</td>
+      {:else}
+      <td></td>
+      {/if}
       <td>
         <a target="_blank" rel="external" href="{ commit.url }">
           { commit.title || commit.message }
         </a>
       </td>
       <td class="nowrap">
-        <time datetime="{ moment(commit.datetime).format() }"
+        <time class="has-tooltip" datetime="{ moment(commit.datetime).format() }"
           title="{ moment(commit.datetime).format('dddd, MMMM Do YYYY, HH:mm:ss') }">
           { moment(commit.datetime).fromNow() }
         </time>
