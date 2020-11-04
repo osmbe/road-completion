@@ -1,8 +1,8 @@
-<script context="module">
+<script context="module" lang="ts">
   export function preload() {
     return this.fetch(`commits.json`)
-      .then((r) => r.json())
-      .then((commits) => {
+      .then((r: Response) => r.json())
+      .then((commits: Record<string, Array<{ path: string; diff: string; datetime: Date; title: string; message: string; sha: string, url: string; stats: any; status: string; }>>) => {
         return { commits }
       });
   }
@@ -11,7 +11,7 @@
 <script lang="ts">
   import Statistics from '../components/Statistics.svelte';
 
-  export let commits;
+  export let commits: Record<string, Array<{ path: string; diff: string; datetime: Date; title: string; message: string; sha: string, url: string; stats: any; status: string; }>>;
 </script>
 
 <svelte:head>

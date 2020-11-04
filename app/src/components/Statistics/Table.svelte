@@ -1,7 +1,7 @@
-<script>
+<script lang="ts">
   import moment from 'moment';
 
-  export let commits;
+  export let commits: Array<{ path: string; diff: string; datetime: Date; title: string; message: string; sha: string, url: string; stats: any; status: string; }>;
 </script>
 
 <style>

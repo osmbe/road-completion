@@ -1,9 +1,9 @@
-<script>
+<script lang="ts">
   import { onMount } from "svelte";
 
-  export let commits;
+  export let commits: Array<{ path: string; diff: string; datetime: Date; title: string; message: string; sha: string, url: string; stats: any; status: string; }>;
 
-  let container;
+  let container: HTMLCanvasElement;
 
   onMount(async () => {
     const { default: Chart } = await import("chart.js");
@@ -15,7 +15,7 @@
       }
     });
 
-    const chart = new Chart(container, {
+    new Chart(container, {
       type: 'line',
       data: {
         datasets: [{

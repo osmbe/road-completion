@@ -1,8 +1,8 @@
-<script>
+<script lang="ts">
   import Chart from './Statistics/Chart.svelte';
   import Table from './Statistics/Table.svelte';
 
-  export let commits;
+  export let commits: Array<{ path: string; diff: string; datetime: Date; title: string; message: string; sha: string, url: string; stats: any; status: string; }>;
 </script>
 
 <style>
