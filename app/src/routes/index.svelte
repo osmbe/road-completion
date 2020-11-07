@@ -1,10 +1,16 @@
 <script context="module" lang="ts">
-  export function preload() {
-    return this.fetch(`commits.json`)
-      .then((r: Response) => r.json())
-      .then((commits: Record<string, Array<{ path: string; diff: string; datetime: Date; title: string; message: string; sha: string, url: string; stats: any; status: string; }>>) => {
-        return { commits }
-      });
+  import { PATHS } from "../imports/constants";
+
+  export async function preload() {
+
+    const promises = Object.keys(PATHS).map(async (slug: string) => {
+      const response: Response = await this.fetch(`commits/${slug}.json`);
+      return await response.json();
+    });
+
+    const commits = await Promise.all(promises);
+
+    return { commits }
   }
 </script>
 
@@ -26,30 +32,30 @@
 
   <h2 class="title is-2">Belgium</h2>
   <h3 class="title is-3">Bruxelles/Brussel (Brussels)</h3>
-  <Statistics commits={commits['be-brussels']}></Statistics>
+  <Statistics commits={commits[0]}></Statistics>
 
   <hr>
 
   <h3 class="title is-3">Vlaanderen (Flanders)</h3>
-  <Statistics commits={commits['be-flanders']}></Statistics>
+  <Statistics commits={commits[1]}></Statistics>
 
   <hr>
 
   <h3 class="title is-3">Wallonie (Wallonia)</h3>
   <h4 class="subtitle is-4">Brabant-Wallon</h4>
-  <Statistics commits={commits['be-wallonia-bra']}></Statistics>
+  <Statistics commits={commits[2]}></Statistics>
   <h4 class="subtitle is-4">Hainaut</h4>
-  <Statistics commits={commits['be-wallonia-hai']}></Statistics>
+  <Statistics commits={commits[3]}></Statistics>
   <h4 class="subtitle is-4">Liège</h4>
-  <Statistics commits={commits['be-wallonia-lie']}></Statistics>
+  <Statistics commits={commits[4]}></Statistics>
   <h4 class="subtitle is-4">Luxembourg</h4>
-  <Statistics commits={commits['be-wallonia-lux']}></Statistics>
+  <Statistics commits={commits[5]}></Statistics>
   <h4 class="subtitle is-4">Namur</h4>
-  <Statistics commits={commits['be-wallonia-nam']}></Statistics>
+  <Statistics commits={commits[6]}></Statistics>
 
   <hr>
 
   <h2 class="title is-2">Kosovo</h2>
-  <Statistics commits={commits['xk']}></Statistics>
+  <Statistics commits={commits[7]}></Statistics>
 
 </div>
