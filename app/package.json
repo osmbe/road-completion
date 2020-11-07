@@ -11,7 +11,6 @@
     "validate": "svelte-check --ignore src/node_modules/@sapper"
   },
   "dependencies": {
-    "bootstrap": "^4.5.3",
     "bulma": "^0.9.1",
     "chart.js": "^2.9.4",
     "compression": "^1.7.4",
