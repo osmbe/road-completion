@@ -44,7 +44,7 @@ tippecanoe --force --no-feature-limit --no-tile-size-limit \
 
 wget -O "./temp/maproulette.geojson" "https://maproulette.org/api/v2/challenge/view/$MAPROULETTE_CHALLENGE?status=2"
 
-node "../../../script/buffer.js" "./temp/maproulette.geojson" "maproulette-buffers.geojson"
+node "../../../script/buffer.js" --radius=20 "./temp/maproulette.geojson" "maproulette-buffers.geojson"
 
 # Merge MapRoulette buffers to OpenStreetMap buffers
 
