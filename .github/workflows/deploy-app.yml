@@ -25,6 +25,8 @@ jobs:
           npm install
           npm run export:githubio
         working-directory: app
+        env:
+          TOKEN: ${{ secrets.TOKEN }}
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@3.6.2

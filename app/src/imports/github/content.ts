@@ -4,7 +4,7 @@ import { OWNER, REPOSITORY } from "../constants";
 
 export default async function (path: string, ref: string) {
   const octokit = new Octokit({
-    auth: process.env.GITHUB_TOKEN || null
+    auth: process.env.TOKEN || null
   });
 
   const response = await octokit.repos.getContent({
