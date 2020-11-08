@@ -2,8 +2,10 @@ name: Build and Deploy app
 
 on:
   push:
-    path:
+    paths:
+      - ".github/workflows/deploy-app.yml"
       - "app/**"
+      - "data/**/diff.json"
       - "data/**/stats.json"
   pull_request:
     paths:
