@@ -9,19 +9,15 @@ on:
       - ".github/workflows/belgium-brussels.yml"
       - ".github/actions/*/action.yml"
       - "script/**/*.ts"
-      - "data/belgium/brussels/**"
-      - "!data/belgium/brussels/README.md"
-      - "!data/belgium/brussels/**/diff.geojson"
-      - "!data/belgium/brussels/**/stats.json"
+      - "data/belgium/brussels/convert.json"
+      - "data/belgium/brussels/filter.sql"
   pull_request:
     paths:
       - ".github/workflows/belgium-brussels.yml"
       - ".github/actions/*/action.yml"
       - "script/**/*.ts"
-      - "data/belgium/brussels/**"
-      - "!data/belgium/brussels/README.md"
-      - "!data/belgium/brussels/**/diff.geojson"
-      - "!data/belgium/brussels/**/stats.json"
+      - "data/belgium/brussels/convert.json"
+      - "data/belgium/brussels/filter.sql"
 
 jobs:
 

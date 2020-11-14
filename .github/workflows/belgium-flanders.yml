@@ -9,19 +9,15 @@ on:
       - ".github/workflows/belgium-flanders.yml"
       - ".github/actions/*/action.yml"
       - "script/**/*.ts"
-      - "data/belgium/flanders/**"
-      - "!data/belgium/flanders/README.md"
-      - "!data/belgium/flanders/**/diff.geojson"
-      - "!data/belgium/flanders/**/stats.json"
+      - "data/belgium/flanders/convert.json"
+      - "data/belgium/flanders/filter.sql"
   pull_request:
     paths:
       - ".github/workflows/belgium-flanders.yml"
       - ".github/actions/*/action.yml"
       - "script/**/*.ts"
-      - "data/belgium/flanders/**"
-      - "!data/belgium/flanders/README.md"
-      - "!data/belgium/flanders/**/diff.geojson"
-      - "!data/belgium/flanders/**/stats.json"
+      - "data/belgium/flanders/convert.json"
+      - "data/belgium/flanders/filter.sql"
 
 jobs:
 
