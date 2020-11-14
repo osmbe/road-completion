@@ -5,7 +5,7 @@ on:
     paths:
       - ".github/workflows/deploy-app.yml"
       - "app/**"
-      - "data/**/diff.json"
+      - "data/**/diff.geojson"
       - "data/**/stats.json"
   pull_request:
     paths:
