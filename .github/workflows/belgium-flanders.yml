@@ -52,6 +52,7 @@ jobs:
             -s_srs "EPSG:31370" -t_srs "EPSG:4326" \
             -sql "@data/belgium/flanders/filter.sql" \
             -lco COORDINATE_PRECISION=6 \
+            -lco ID_FIELD=WS_OIDN \
             "Wegsegment.geojson" \
             "Shapefile/Wegsegment.shp"
       - name: Convert Wegenregister fields to OpenStreetMap tags
