@@ -2,11 +2,7 @@ name: Build and Deploy app
 
 on:
   push:
-    paths:
-      - ".github/workflows/deploy-app.yml"
-      - "app/**"
-      - "data/**/diff.geojson"
-      - "data/**/stats.json"
+    branches: [ master ]
   pull_request:
     paths:
       - "app/**"
