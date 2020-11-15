@@ -27,7 +27,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install GDAL
-        run: sudo apt install gdal-bin
+        run: |
+          sudo apt-add-repository ppa:ubuntugis/ubuntugis-unstable
+          sudo apt update
+          sudo apt install gdal-bin
       - name: Install Tippecanoe
         uses: ./.github/actions/install-tippecanoe
       - name: Install dependencies
