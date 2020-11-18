@@ -25,7 +25,6 @@ ogr2ogr -f "GeoJSON" -progress \
   -s_srs "EPSG:31370" -t_srs "EPSG:4326" \
   -sql "@filter.sql" \
   -lco COORDINATE_PRECISION=6 \
-  -lco ID_FIELD=ID \
   "./temp/UrbAdm_STREET_AXIS.geojson" \
   "./source/UrbAdm_SHP/shp/UrbAdm_STREET_AXIS.shp"
 
