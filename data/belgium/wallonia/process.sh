@@ -47,7 +47,7 @@ ogr2ogr -f "GeoJSON" -progress \
   -makevalid \
   -sql "@filter.sql" \
   -lco COORDINATE_PRECISION=6 \
-  -lco ID_FIELD=OBJECTID -lco ID_TYPE=Integer \
+  -fieldTypeToString "All" \
   "./temp/BRA_VOIRIE_AXE.geojson" \
   "./source/PICC_vDIFF_SHAPE_31370_PROV_BRABANT_WALLON/VOIRIE_AXE.shp"
 ogr2ogr -f "GeoJSON" -progress \
@@ -55,7 +55,7 @@ ogr2ogr -f "GeoJSON" -progress \
   -makevalid \
   -sql "@filter.sql" \
   -lco COORDINATE_PRECISION=6 \
-  -lco ID_FIELD=OBJECTID -lco ID_TYPE=Integer \
+  -fieldTypeToString "All" \
   "./temp/HAI_VOIRIE_AXE.geojson" \
   "./source/PICC_vDIFF_SHAPE_31370_PROV_HAINAUT/VOIRIE_AXE.shp"
 ogr2ogr -f "GeoJSON" -progress \
@@ -63,7 +63,7 @@ ogr2ogr -f "GeoJSON" -progress \
   -makevalid \
   -sql "@filter.sql" \
   -lco COORDINATE_PRECISION=6 \
-  -lco ID_FIELD=OBJECTID -lco ID_TYPE=Integer \
+  -fieldTypeToString "All" \
   "./temp/LIE_VOIRIE_AXE.geojson" \
   "./source/PICC_vDIFF_SHAPE_31370_PROV_LIEGE/VOIRIE_AXE.shp"
 ogr2ogr -f "GeoJSON" -progress \
@@ -71,7 +71,7 @@ ogr2ogr -f "GeoJSON" -progress \
   -makevalid \
   -sql "@filter.sql" \
   -lco COORDINATE_PRECISION=6 \
-  -lco ID_FIELD=OBJECTID -lco ID_TYPE=Integer \
+  -fieldTypeToString "All" \
   "./temp/NAM_VOIRIE_AXE.geojson" \
   "./source/PICC_vDIFF_SHAPE_31370_PROV_NAMUR/VOIRIE_AXE.shp"
 ogr2ogr -f "GeoJSON" -progress \
@@ -79,7 +79,7 @@ ogr2ogr -f "GeoJSON" -progress \
   -makevalid \
   -sql "@filter.sql" \
   -lco COORDINATE_PRECISION=6 \
-  -lco ID_FIELD=OBJECTID -lco ID_TYPE=Integer \
+  -fieldTypeToString "All" \
   "./temp/LUX_VOIRIE_AXE.geojson" \
   "./source/PICC_vDIFF_SHAPE_31370_PROV_LUXEMBOURG/VOIRIE_AXE.shp"
 
