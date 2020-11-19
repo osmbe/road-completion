@@ -54,6 +54,7 @@ jobs:
             -s_srs "EPSG:31370" -t_srs "EPSG:4326" \
             -sql "@data/belgium/brussels/filter.sql" \
             -lco COORDINATE_PRECISION=6 \
+            -fieldTypeToString "All" \
             "UrbAdm_STREET_AXIS.geojson" \
             "shp/UrbAdm_STREET_AXIS.shp"
       - name: Convert UrbIS fields to OpenStreetMap tags
