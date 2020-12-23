@@ -61,6 +61,6 @@ tippecanoe --force --no-feature-limit --no-tile-size-limit \
 
 if [ -d "./difference" ]; then rm -r "./difference/"; fi
 
-mkdir -p "./difference/$FILENAME"
+mkdir -p "./difference"
 
-node "../../../script/difference.js" --output-dir="./difference/$FILENAME" "./temp/WegsegmentTagged.mbtiles" "./temp/belgium-buffers.mbtiles"
+node "../../../script/difference.js" --output-dir="./difference" "./temp/WegsegmentTagged.mbtiles" "./temp/belgium-buffers.mbtiles"
