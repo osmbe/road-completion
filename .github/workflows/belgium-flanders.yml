@@ -46,8 +46,8 @@ jobs:
           country: europe/belgium
       - name: Download & Unzip Wegenregister data
         run: |
-          wget "https://downloadagiv.blob.core.windows.net/wegenregister/Wegenregister_SHAPE_20200917.zip"
-          unzip "Wegenregister_SHAPE_20200917.zip" "Shapefile/Wegsegment.*"
+          wget "https://downloadagiv.blob.core.windows.net/wegenregister/Wegenregister_SHAPE_20201217.zip"
+          unzip "Wegenregister_SHAPE_20201217.zip" "Shapefile/Wegsegment.*"
       - name: Convert (and filter) Wegenregister to GeoJSON
         run: |
           ogr2ogr -f "GeoJSON" -progress \
@@ -84,25 +84,25 @@ jobs:
             --output="belgium-buffers.mbtiles" \
             "openstreetmap-lines-buffers.geojson" "openstreetmap-polygons-buffers.geojson" "maproulette-buffers.geojson"
       - name: Difference
-        run: node "script/difference.js" --output-dir="data/belgium/flanders/difference/Wegenregister_SHAPE_20200917" "WegsegmentTagged.mbtiles" "belgium-buffers.mbtiles"
+        run: node "script/difference.js" --output-dir="data/belgium/flanders/difference/Wegenregister_SHAPE_20201217" "WegsegmentTagged.mbtiles" "belgium-buffers.mbtiles"
       - name: Upload difference
         uses: actions/upload-artifact@v2
         with:
           name: Flanders-Difference
-          path: data/belgium/flanders/difference/Wegenregister_SHAPE_20200917/diff.geojson
+          path: data/belgium/flanders/difference/Wegenregister_SHAPE_20201217/diff.geojson
       - name: Upload statistics
         uses: actions/upload-artifact@v2
         with:
           name: Flanders-Statistics
-          path: data/belgium/flanders/difference/Wegenregister_SHAPE_20200917/stats.json
+          path: data/belgium/flanders/difference/Wegenregister_SHAPE_20201217/stats.json
       - name: Commit changes
         if: ${{ github.event != 'pull_request' }}
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
           git pull
-          git add data/belgium/flanders/difference/Wegenregister_SHAPE_20200917/diff.geojson
-          git add data/belgium/flanders/difference/Wegenregister_SHAPE_20200917/stats.json
+          git add data/belgium/flanders/difference/Wegenregister_SHAPE_20201217/diff.geojson
+          git add data/belgium/flanders/difference/Wegenregister_SHAPE_20201217/stats.json
           git commit -m "🗃 Update difference for Flanders, Belgium"
       - name: Push changes
         if: ${{ github.event != 'pull_request' }}
