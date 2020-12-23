@@ -6,9 +6,9 @@ cd `dirname "$(realpath $0)"`
 
 # Download Belgium extract
 
-if [ ! -f "belgium-latest.osm.pbf" ]; then
-  wget https://download.geofabrik.de/europe/belgium-latest.osm.pbf
-fi
+if [ -f "belgium-latest.osm.pbf" ]; then rm "belgium-latest.osm.pbf"; fi
+
+wget https://download.geofabrik.de/europe/belgium-latest.osm.pbf
 
 # Convert to GeoJSON
 
