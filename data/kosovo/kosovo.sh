@@ -6,9 +6,9 @@ cd `dirname "$(realpath $0)"`
 
 # Download Kosovo extract
 
-if [ ! -f "kosovo-latest.osm.pbf" ]; then
-  wget https://download.geofabrik.de/europe/kosovo-latest.osm.pbf
-fi
+if [ -f "kosovo-latest.osm.pbf" ]; then rm "kosovo-latest.osm.pbf"; fi
+
+wget https://download.geofabrik.de/europe/kosovo-latest.osm.pbf
 
 # Convert to GeoJSON
 
