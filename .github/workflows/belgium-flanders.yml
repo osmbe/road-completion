@@ -47,7 +47,7 @@ jobs:
       - name: Download & Unzip Wegenregister data
         run: |
           wget "https://downloadagiv.blob.core.windows.net/wegenregister/Wegenregister_SHAPE_20201217.zip"
-          unzip "Wegenregister_SHAPE_20201217.zip" "Shapefile/Wegsegment.*"
+          unzip "Wegenregister_SHAPE_20201217.zip" "Wegenregister_SHAPE_20201217/Shapefile/Wegsegment.*"
       - name: Convert (and filter) Wegenregister to GeoJSON
         run: |
           ogr2ogr -f "GeoJSON" -progress \
