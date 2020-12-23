@@ -47,7 +47,7 @@ jobs:
       - name: Download & Unzip Wegenregister data
         run: |
           wget "https://downloadagiv.blob.core.windows.net/wegenregister/Wegenregister_SHAPE_20201217.zip"
-          unzip "Wegenregister_SHAPE_20201217.zip" "Wegenregister_SHAPE_20201217/Shapefile/Wegsegment.*"
+          unzip -j "Wegenregister_SHAPE_20201217.zip" "Wegenregister_SHAPE_20201217/Shapefile/Wegsegment.*"
       - name: Convert (and filter) Wegenregister to GeoJSON
         run: |
           ogr2ogr -f "GeoJSON" -progress \
@@ -57,7 +57,7 @@ jobs:
             -lco COORDINATE_PRECISION=6 \
             -fieldTypeToString "All" \
             "Wegsegment.geojson" \
-            "Shapefile/Wegsegment.shp"
+            "Wegsegment.shp"
       - name: Convert Wegenregister fields to OpenStreetMap tags
         run: node "script/convert-tags.js" -c "data/belgium/flanders/convert.json" "Wegsegment.geojson" "WegsegmentTagged.geojson"
       - name: Generate Wegenregister vector tiles

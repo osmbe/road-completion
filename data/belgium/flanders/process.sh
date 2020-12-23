@@ -13,7 +13,7 @@ mkdir -p "./source/"
 
 if [ ! -d "./source/$FILENAME" ]; then
   wget -O "./source/$FILENAME.zip" "https://downloadagiv.blob.core.windows.net/wegenregister/$FILENAME.zip"
-  unzip "./source/$FILENAME.zip" -d "./source/$FILENAME/" "$FILENAME/Shapefile/Wegsegment.*"
+  unzip -j "./source/$FILENAME.zip" -d "./source/$FILENAME/" "$FILENAME/Shapefile/Wegsegment.*"
 fi
 
 # Convert to GeoJSON
@@ -29,7 +29,7 @@ ogr2ogr -f "GeoJSON" -progress \
   -lco COORDINATE_PRECISION=6 \
   -fieldTypeToString "All" \
   "./temp/Wegsegment.geojson" \
-  "./source/$FILENAME/Shapefile/Wegsegment.shp"
+  "./source/$FILENAME/Wegsegment.shp"
 
 # Convert fields to OpenStreetMap tags
 
