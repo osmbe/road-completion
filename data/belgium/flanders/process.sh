@@ -55,7 +55,7 @@ tippecanoe --force --no-feature-limit --no-tile-size-limit \
   --maximum-zoom=14 --minimum-zoom=14 \
   --layer="buffers" \
   --output="./temp/belgium-buffers.mbtiles" \
-  "../belgium-lines-buffers.geojson" "../belgium-lines-buffers.geojson" "./temp/maproulette-buffers.geojson"
+  "../belgium-lines-buffers.geojson" "../belgium-polygons-buffers.geojson" "./temp/maproulette-buffers.geojson"
 
 # Difference
 
