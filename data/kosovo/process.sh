@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# MAPROULETTE_CHALLENGE=14646
+MAPROULETTE_CHALLENGE=14761
 
 # Make script directory working directory
 
@@ -47,10 +47,24 @@ tippecanoe --force --no-feature-limit --no-tile-size-limit \
   --output="./temp/RoadSegmentViewTagged.mbtiles" \
   "./temp/RoadSegmentViewTagged.geojson"
 
+# Generate MapRoulette NotAnIssue buffers vector tiles
+
+wget -O "./temp/maproulette.geojson" "https://maproulette.org/api/v2/challenge/view/$MAPROULETTE_CHALLENGE?status=2"
+
+node "../../script/buffer.js" --radius=20 "./temp/maproulette.geojson" "maproulette-buffers.geojson"
+
+# Merge MapRoulette buffers to OpenStreetMap buffers
+
+tippecanoe --force --no-feature-limit --no-tile-size-limit \
+  --maximum-zoom=14 --minimum-zoom=14 \
+  --layer="buffers" \
+  --output="./temp/kosovo-buffers.mbtiles" \
+  "./kosovo-lines-buffers.geojson" "./kosovo-polygons-buffers.geojson" "./temp/maproulette-buffers.geojson"
+
 # Difference
 
 if [ -d "./difference" ]; then rm -r "./difference"; fi
 
 mkdir -p "./difference"
 
-node "../../script/difference.js" --output-dir="./difference" "./temp/RoadSegmentViewTagged.mbtiles" "kosovo-buffers.mbtiles"
+node "../../script/difference.js" --output-dir="./difference" "./temp/RoadSegmentViewTagged.mbtiles" "./temp/kosovo-buffers.mbtiles"
