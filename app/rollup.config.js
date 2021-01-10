@@ -37,8 +37,10 @@ export default {
         "process.env.TOKEN": JSON.stringify(token),
       }),
       svelte({
-        dev,
-        hydratable: true,
+        compilerOptions: {
+          dev,
+          hydratable: true,
+        },
         preprocess: sveltePreprocess({
           scss: {
             includePaths: ["src"],
@@ -104,8 +106,11 @@ export default {
         "process.env.TOKEN": JSON.stringify(token),
       }),
       svelte({
-        generate: "ssr",
-        hydratable: true,
+        compilerOptions: {
+          generate: "ssr",
+          hydratable: true,
+          dev,
+        },
         preprocess: sveltePreprocess({
           scss: {
             includePaths: ["src"],
@@ -114,7 +119,6 @@ export default {
             plugins: [require("autoprefixer")],
           },
         }),
-        dev,
       }),
       url({
         sourceDir: path.resolve(__dirname, "src/node_modules/images"),
