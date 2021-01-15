@@ -23,7 +23,7 @@ jobs:
 
   diff-brussels:
     name: Generate difference for Brussels, Belgium
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
         with:
