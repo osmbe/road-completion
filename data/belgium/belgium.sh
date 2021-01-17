@@ -20,7 +20,7 @@ ogr2ogr -f "GeoJSON" -progress \
   "./belgium-lines.geojson" \
   "./belgium-latest.osm.pbf"
 ogr2ogr -f "GeoJSON" -progress \
-  -sql "SELECT name, hstore_get_value(other_tags, 'highway') AS highway FROM multipolygons WHERE hstore_get_value(other_tags, 'highway') is not null" \
+  -sql "SELECT name, hstore_get_value(other_tags, 'highway') AS highway, place FROM multipolygons WHERE (hstore_get_value(other_tags, 'highway') is not null) OR (place = 'square')" \
   "./belgium-polygons.geojson" \
   "./belgium-latest.osm.pbf"
 
