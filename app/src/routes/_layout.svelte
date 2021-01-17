@@ -1,5 +1,7 @@
-<style lang="scss" global>
-  @import "../sass/global.scss";
+<script>
+</script>
+
+<style>
 </style>
 
 <main>

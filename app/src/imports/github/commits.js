@@ -5,19 +5,19 @@ import getContent from "./content";
 
 import { OWNER, REPOSITORY } from "../constants";
 
-export default async function (path: string) {
+export default async function (path) {
   const octokit = new Octokit({
     auth: process.env.TOKEN || null
   });
 
-  const response = await octokit.repos.listCommits({
+  const { data } = await octokit.repos.listCommits({
     owner: OWNER,
     repo: REPOSITORY,
     path
   });
 
   return Promise.all(
-    response.data.map(async (commit) => {
+    data.map(async (commit) => {
       const content = await getContent(path, commit.sha);
       const details = await getCommit(commit.sha);
 

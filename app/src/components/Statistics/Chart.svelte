@@ -1,12 +1,12 @@
-<script lang="ts">
+<script>
   import { onMount } from "svelte";
 
-  export let commits: Array<{ path: string; diff: string; datetime: Date; title: string; message: string; sha: string, url: string; stats: any; status: string; }>;
+  export let commits;
 
-  let container: HTMLCanvasElement;
+  let container;
 
   onMount(async () => {
-    const { default: Chart } = await import("chart.js");
+    const { Chart } = await import("chart.js");
 
     const data = commits.map((commit) => {
       return {

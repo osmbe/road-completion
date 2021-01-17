@@ -1,11 +1,11 @@
-<script context="module" lang="ts">
+<script context="module">
   import { PATHS } from "../imports/constants";
 
   export async function preload() {
-
-    const promises = Object.keys(PATHS).map(async (slug: string) => {
-      const response: Response = await this.fetch(`commits/${slug}.json`);
-      return await response.json();
+    const promises = Object.keys(PATHS).map(async (slug) => {
+      const response = await this.fetch(`commits/${slug}.json`);
+      const json = await response.json();
+      return json;
     });
 
     const commits = await Promise.all(promises);
@@ -14,11 +14,14 @@
   }
 </script>
 
-<script lang="ts">
+<script>
   import Statistics from '../components/Statistics.svelte';
 
-  export let commits: Record<string, Array<{ path: string; diff: string; datetime: Date; title: string; message: string; sha: string, url: string; stats: any; status: string; }>>;
+  export let commits;
 </script>
+
+<style>
+</style>
 
 <svelte:head>
   <title>Road Completion</title>
@@ -26,7 +29,9 @@
 
 <div class="container">
 
-  <h1 class="title is-1">Road Completion</h1>
+  <h1 class="title is-1">
+    <a href=".">Road Completion</a>
+  </h1>
 
   <hr>
 

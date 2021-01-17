@@ -2,16 +2,17 @@ import { Octokit } from "@octokit/rest";
 
 import { OWNER, REPOSITORY } from "../constants";
 
-export default async function (ref: string) {
+export default async function (path, ref) {
   const octokit = new Octokit({
     auth: process.env.TOKEN || null
   });
 
-  const response = await octokit.repos.getCommit({
+  const { data } = await octokit.repos.getContent({
     owner: OWNER,
     repo: REPOSITORY,
+    path,
     ref
   });
 
-  return response.data;
+  return JSON.parse(Buffer.from(data.content, data.encoding).toString('utf-8'));
 }
