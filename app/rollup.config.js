@@ -9,7 +9,7 @@ import babel from "@rollup/plugin-babel";
 import { terser } from "rollup-plugin-terser";
 import sveltePreprocess from "svelte-preprocess";
 import typescript from "@rollup/plugin-typescript";
-import config from "sapper/config/rollup.js";
+import config from "sapper/config/rollup";
 import pkg from "./package.json";
 
 dotenv.config();
