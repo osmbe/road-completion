@@ -20,7 +20,7 @@
   "dependencies": {
     "@mapbox/geojson-normalize": "0.0.1",
     "@mapbox/tile-reduce": "^3.3.0",
-    "@turf/boolean-within": "^6.0",
+    "@turf/boolean-within": "^6.2",
     "@turf/buffer": "^5.1.5",
     "@turf/flatten": "^5.1.5",
     "@turf/helpers": "^6.1",
