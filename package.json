@@ -24,7 +24,7 @@
     "@turf/buffer": "^5.1.5",
     "@turf/flatten": "^5.1.5",
     "@turf/helpers": "^6.1",
-    "@turf/meta": "^6.0",
+    "@turf/meta": "^6.3",
     "@turf/union": "^5.1",
     "event-stream": "^4.0.1",
     "jsonstream-next": "^3.0.0",
