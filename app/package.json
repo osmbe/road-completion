@@ -14,7 +14,7 @@
     "compression": "^1.7.4",
     "moment": "^2.29.1",
     "polka": "next",
-    "sirv": "^1.0.10"
+    "sirv": "^1.0.11"
   },
   "devDependencies": {
     "dotenv": "^8.2.0",
