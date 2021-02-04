@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "dotenv": "^8.2.0",
-    "sapper": "^0.29.0",
+    "sapper": "^0.29.1",
     "svelte": "^3.32.1",
     "@babel/core": "^7.12.13",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
