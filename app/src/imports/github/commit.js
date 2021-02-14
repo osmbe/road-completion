@@ -1,6 +1,6 @@
-import { Octokit } from "@octokit/rest";
+import { Octokit } from '@octokit/rest';
 
-import { OWNER, REPOSITORY } from "../constants";
+import { OWNER, REPOSITORY } from '../constants';
 
 export default async function (ref) {
   const octokit = new Octokit({

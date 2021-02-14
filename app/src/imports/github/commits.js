@@ -1,9 +1,9 @@
-import { Octokit } from "@octokit/rest";
+import { Octokit } from '@octokit/rest';
 
-import getCommit from "./commit";
-import getContent from "./content";
+import getCommit from './commit';
+import getContent from './content';
 
-import { OWNER, REPOSITORY } from "../constants";
+import { OWNER, REPOSITORY } from '../constants';
 
 export default async function (path) {
   const octokit = new Octokit({
@@ -40,8 +40,8 @@ export default async function (path) {
       const dirname = path.match(/.*\//);
       const diff = `https://github.com/${OWNER}/${REPOSITORY}/blob/${commit.sha}/${dirname}diff.geojson`;
 
-      const title = commit.commit.message.substring(0, commit.commit.message.indexOf("\n"));
-      const message = commit.commit.message.substring(commit.commit.message.indexOf("\n"));
+      const title = commit.commit.message.substring(0, commit.commit.message.indexOf('\n'));
+      const message = commit.commit.message.substring(commit.commit.message.indexOf('\n'));
 
       return {
         path,
