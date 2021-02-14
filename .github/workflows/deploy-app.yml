@@ -24,7 +24,9 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
+      working-directory: app
     - run: npm run lint
+      working-directory: app
 
   build-and-deploy:
     needs: lint
