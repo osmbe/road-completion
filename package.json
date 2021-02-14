@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc --removeComments",
-    "lint": "eslint script/src/*.ts",
-    "lint:fix": "eslint --fix script/src/*.ts"
+    "lint": "eslint --ext .ts \"script/src/**\"",
+    "lint:fix": "eslint --fix --ext .ts \"script/src/**\""
   },
   "repository": {
     "type": "git",
