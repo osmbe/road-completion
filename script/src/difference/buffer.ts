@@ -1,25 +1,25 @@
-"use strict";
+'use strict';
 
-import normalize from "@mapbox/geojson-normalize";
-import booleanWithin from "@turf/boolean-within";
-import flatten from "@turf/flatten";
-import { Feature, FeatureCollection, Polygon, Properties } from "@turf/helpers";
-import union from "@turf/union";
+import normalize from '@mapbox/geojson-normalize';
+import booleanWithin from '@turf/boolean-within';
+import flatten from '@turf/flatten';
+import { Feature, FeatureCollection, Polygon, Properties } from '@turf/helpers';
+import union from '@turf/union';
 
 module.exports = (
   sources: Record<
-    "buffer" | "road",
-    Record<"buffers" | "roads", FeatureCollection>
+    'buffer' | 'road',
+    Record<'buffers' | 'roads', FeatureCollection>
   >,
   tile: [number, number, number],
-  write: Function,
-  done: Function
+  write: any,
+  done: any
 ) => {
   const stats = {
     tile,
     roads: 0,
     buffers: 0,
-    notWithin: 0,
+    notWithin: 0
   };
 
   try {
