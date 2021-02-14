@@ -2,11 +2,11 @@
   "extends": "@tsconfig/recommended/tsconfig.json",
   "compilerOptions": {
     "pretty": true,
-    "outDir": "script/"
+    "outDir": "."
   },
   "include": [
-    "script/src/*.ts",
-    "script/src/difference/*.ts"
+    "src/*.ts",
+    "src/difference/*.ts"
   ],
   "exclude": []
 }
