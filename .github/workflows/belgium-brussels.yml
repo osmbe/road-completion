@@ -38,8 +38,10 @@ jobs:
         uses: ./.github/actions/install-tippecanoe
       - name: Install dependencies
         run: npm install
+        working-directory: script
       - name: Build
         run: npm run build
+        working-directory: script
       - name: Generate OpenStreetMap buffers
         uses: ./.github/actions/openstreetmap-buffers
         with:
