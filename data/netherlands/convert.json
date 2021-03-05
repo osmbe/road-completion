@@ -1,0 +1,18 @@
+{
+    "BST_CODE":{
+        "*": {
+            "highway": "unclassified"
+        },
+        "FP": {
+            "highway": "cycleway"
+        },
+        "VP": {
+            "highway": "footway"
+        },
+        "BU": {
+            "highway": "unclassified",
+            "access": "no",
+            "psv": "yes"
+        }
+    }
+}
