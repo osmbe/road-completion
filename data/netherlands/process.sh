@@ -29,7 +29,7 @@ ogr2ogr -f "GeoJSON" -progress \
   -lco COORDINATE_PRECISION=6 \
   -fieldTypeToString "All" \
   "./temp/Wegvakken.geojson" \
-  "./source/$FILENAME/Wegvakken/Wegvakken.shp"
+  "./source/$FILENAME/Wegvakken.shp"
 
 # Convert fields to OpenStreetMap tags
 
