@@ -1,1 +1,2 @@
-SELECT * FROM "Wegvakken"
+SELECT * FROM "Wegvakken" WHERE
+  "BST_CODE" IS NOT 'VD'
