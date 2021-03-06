@@ -1,2 +1,2 @@
 SELECT * FROM "Wegvakken" WHERE
-  "BST_CODE" IS NOT 'VD'
+  "BST_CODE" IS NOT IN ('VD', 'VV')
