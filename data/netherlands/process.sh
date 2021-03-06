@@ -29,7 +29,7 @@ ogr2ogr -f "GeoJSON" -progress \
   -lco COORDINATE_PRECISION=6 \
   -fieldTypeToString "All" \
   "./temp/Wegvakken.geojson" \
-  "./source/$FILENAME/Wegvakken/Wegvakken..shp"
+  "./source/$FILENAME/Wegvakken/Wegvakken.shp"
 
 # Convert fields to OpenStreetMap tags
 
@@ -55,7 +55,7 @@ tippecanoe --force --no-feature-limit --no-tile-size-limit \
   --maximum-zoom=14 --minimum-zoom=14 \
   --layer="buffers" \
   --output="./temp/netherlands-buffers.mbtiles" \
-  "../netherlands-lines-buffers.geojson" "../netherlands-polygons-buffers.geojson" "./temp/maproulette-buffers.geojson"
+  "netherlands-lines-buffers.geojson" "netherlands-polygons-buffers.geojson" "./temp/maproulette-buffers.geojson"
 
 # Difference
 
@@ -63,4 +63,4 @@ if [ -d "./difference" ]; then rm -r "./difference/"; fi
 
 mkdir -p "./difference"
 
-node "../../../script/difference.js" --output-dir="./difference" "./temp/WegvakkenTagged.mbtiles" "./temp/netherlands-buffers.mbtiles"
+node "../../script/difference.js" --output-dir="./difference" "./temp/WegvakkenTagged.mbtiles" "./temp/netherlands-buffers.mbtiles"
