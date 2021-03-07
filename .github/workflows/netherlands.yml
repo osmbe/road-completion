@@ -1,0 +1,114 @@
+name: 🇳🇱 Netherlands
+
+on:
+  # Run every Sunday at 12:00 UTC
+  schedule:
+    - cron: "0 12 * * 0"
+  push:
+    paths:
+      - ".github/workflows/netherlands.yml"
+      - ".github/actions/*/action.yml"
+      - "script/**/*.ts"
+      - "data/netherlands/convert.json"
+      - "data/netherlands/filter.sql"
+  pull_request:
+    paths:
+      - ".github/workflows/netherlands.yml"
+      - ".github/actions/*/action.yml"
+      - "script/**/*.ts"
+      - "data/netherlands/convert.json"
+      - "data/netherlands/filter.sql"
+
+jobs:
+
+  diff-flanders:
+    name: Generate difference for Netherlands
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Install GDAL
+        run: |
+          sudo apt-add-repository ppa:ubuntugis/ubuntugis-unstable
+          sudo apt update
+          sudo apt install gdal-bin
+      - name: Install Tippecanoe
+        uses: ./.github/actions/install-tippecanoe
+      - name: Install dependencies
+        run: npm install
+        working-directory: script
+      - name: Build
+        run: npm run build
+        working-directory: script
+      - name: Generate OpenStreetMap buffers
+        uses: ./.github/actions/openstreetmap-buffers
+        with:
+          country: europe/netherlands
+      - name: Download & Unzip NWB data
+        run: |
+          wget "https://www.rijkswaterstaat.nl/apps/geoservices/geodata/dmc/nwb-wegen/geogegevens/shapefile/Nederland_totaal/01-03-2021.zip"
+          unzip -j "01-03-2021.zip" "01-03-2021/Wegvakken/Wegvakken.*"
+      - name: Convert (and filter) NWB to GeoJSON
+        run: |
+          ogr2ogr -f "GeoJSON" -progress \
+            --config SHAPE_ENCODING "ISO-8859-1" \
+            -s_srs "EPSG:28992" -t_srs "EPSG:4326" \
+            -sql "@data/netherlands/filter.sql" \
+            -lco COORDINATE_PRECISION=6 \
+            -fieldTypeToString "All" \
+            "Wegvakken.geojson" \
+            "Wegvakken.shp"
+      - name: Convert NWB fields to OpenStreetMap tags
+        run: node "script/convert-tags.js" -c "data/netherlands/convert.json" "Wegvakken.geojson" "WegvakkenTagged.geojson"
+      - name: Generate NWB vector tiles
+        run: |
+          tippecanoe --force --no-feature-limit --no-tile-size-limit \
+            --buffer=0 \
+            --maximum-zoom=14 --minimum-zoom=14 \
+            --layer="roads" \
+            --output="WegvakkenTagged.mbtiles" "WegvakkenTagged.geojson"
+      - name: Generate MapRoulette buffers
+        uses: ./.github/actions/maproulette-buffers
+        with:
+          challenge-id: 17332
+      - name: Upload MapRoulette false positive
+        uses: actions/upload-artifact@v2
+        with:
+          name: MapRoulette-FalsePositive
+          path: maproulette.geojson
+      - name: Merge MapRoulette buffers to OpenStreetMap buffers and generate vector tiles
+        run: |
+          tippecanoe --force --no-feature-limit --no-tile-size-limit \
+            --maximum-zoom=14 --minimum-zoom=14 \
+            --layer="buffers" \
+            --output="netherlands-buffers.mbtiles" \
+            "openstreetmap-lines-buffers.geojson" "openstreetmap-polygons-buffers.geojson" "maproulette-buffers.geojson"
+      - name: Difference
+        run: node "script/difference.js" --output-dir="data/netherlands/difference" "WegvakkenTagged.mbtiles" "netherlands-buffers.mbtiles"
+      - name: Upload difference
+        uses: actions/upload-artifact@v2
+        with:
+          name: Netherlands-Difference
+          path: data/netherlands/difference/diff.geojson
+      - name: Upload statistics
+        uses: actions/upload-artifact@v2
+        with:
+          name: Netherlands-Statistics
+          path: data/netherlands/difference/stats.json
+      - name: Commit changes
+        if: ${{ github.event != 'pull_request' }}
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git pull
+          git add data/netherlands/difference/diff.geojson
+          git add data/netherlands/difference/stats.json
+          git commit -m "🗃 Update difference for Netherlands"
+      - name: Push changes
+        if: ${{ github.event != 'pull_request' }}
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.TOKEN }}
+          branch: ${{ github.ref }}
