@@ -1,0 +1,62 @@
+{
+    "BST_CODE":{
+        "*": {
+            "highway": "unclassified"
+        },
+        "BST": {
+            "highway": "service"
+        },
+        "BU": {
+            "highway": "service",
+            "access": "no",
+            "psv": "yes",
+            "fixme": "Access for taxis"
+        },
+        "CADO": {
+            "highway": "service",
+            "access": "no",
+            "emergency": "yes",
+            "service": "emergency_access"
+        },
+        "FP": {
+            "highway": "cycleway"
+        },
+        "NRB": {
+            "highway": "unclassified",
+            "junction": "roundabout",
+            "oneway": "yes"
+        },
+        "OVB": {
+            "highway": "service",
+            "access": "no",
+            "psv": "yes"
+        },
+        "PC": {
+            "highway": "service",
+            "service": "parking_aisle"
+        },
+        "PKB": {
+            "highway": "service"
+        },
+        "PKP": {
+            "highway": "service"
+        },
+        "PP": {
+            "highway": "service",
+            "service": "parking_aisle"
+        },
+        "PR": {
+            "highway": "service",
+            "service": "parking_aisle"
+        },
+        "TRB": {
+            "highway": "unclassified",
+            "junction": "roundabout",
+            "oneway": "yes"
+        },
+        "VP": {
+            "highway": "footway"
+        }
+        
+    }
+}
