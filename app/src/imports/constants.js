@@ -9,5 +9,6 @@ export const PATHS = {
   'be-wallonia-lie': 'data/belgium/wallonia/difference/LIE/stats.json',
   'be-wallonia-lux': 'data/belgium/wallonia/difference/LUX/stats.json',
   'be-wallonia-nam': 'data/belgium/wallonia/difference/NAM/stats.json',
+  nl: 'data/netherlands/difference/stats.json',
   xk: 'data/kosovo/difference/stats.json'
 };

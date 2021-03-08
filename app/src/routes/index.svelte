@@ -60,7 +60,12 @@
 
   <hr>
 
-  <h2 class="title is-2">Kosovo</h2>
+  <h2 class="title is-2">Netherlands</h2>
   <Statistics commits={commits[7]}></Statistics>
+
+  <hr>
+
+  <h2 class="title is-2">Kosovo</h2>
+  <Statistics commits={commits[8]}></Statistics>
 
 </div>
