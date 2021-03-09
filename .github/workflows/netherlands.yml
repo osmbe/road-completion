@@ -98,7 +98,7 @@ jobs:
           name: Netherlands-Statistics
           path: data/netherlands/difference/stats.json
       - name: Commit changes
-        if: ${{ github.event_name != 'pull_request' }
+        if: ${{ github.event_name != 'pull_request' }}
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
@@ -107,7 +107,7 @@ jobs:
           git add data/netherlands/difference/stats.json
           git commit -m "🗃 Update difference for Netherlands"
       - name: Push changes
-        if: ${{ github.event_name != 'pull_request' }
+        if: ${{ github.event_name != 'pull_request' }}
         uses: ad-m/github-push-action@v0.6.0
         with:
           github_token: ${{ secrets.TOKEN }}
