@@ -42,13 +42,13 @@ OpenStreetMap (OSM) is extremly good at quickly creating a usable map. It is les
 
 📉 [Statistics about datasets process](https://osmbe.github.io/road-completion/)
 
-| Country                   | Region                                   | Source                    | MapRoulette           |
-|---------------------------|------------------------------------------|---------------------------|-----------------------|
-| :belgium: Belgium         | [Bruxelles/Brussel (Brussels)][be-bru-1] | [UrbIS-Adm][be-bru-2]     | [Challenge][be-bru-3] |
-| :belgium: Belgium         | [Vlaanderen (Flanders)][be-vla-1]        | [Wegenregister][be-vla-2] | [Challenge][be-vla-3] |
-| :belgium: Belgium         | [Wallonie (Wallonia)][be-wal-1]          | [PICC][be-wal-2]          | [Challenge][be-wal-3] |
-| :kosovo: [Kosovo][xk-1]   |                                          | [AKK][xk-2]               |                       |
-| :netherlands: Netherlands |                                          | [NWB][nl-1]               | [Challenge][nl-2]
+| Country                           | Region                                   | Source                    | MapRoulette           |
+|-----------------------------------|------------------------------------------|---------------------------|-----------------------|
+| :belgium: Belgium                 | [Bruxelles/Brussel (Brussels)][be-bru-1] | [UrbIS-Adm][be-bru-2]     | [Challenge][be-bru-3] |
+| :belgium: Belgium                 | [Vlaanderen (Flanders)][be-vla-1]        | [Wegenregister][be-vla-2] | [Challenge][be-vla-3] |
+| :belgium: Belgium                 | [Wallonie (Wallonia)][be-wal-1]          | [PICC][be-wal-2]          | [Challenge][be-wal-3] |
+| :kosovo: [Kosovo][xk-1]           |                                          | [AKK][xk-2]               |                       |
+| :netherlands: [Netherlands][nl-1] |                                          | [NWB][nl-2]               | [Challenge][nl-3]     |
 
 [be-bru-1]: https://github.com/osmbe/road-completion/tree/master/data/belgium/brussels
 [be-bru-2]: https://bric.brussels/en/our-solutions/urbis-solutions/urbis-data/urbis-adm
@@ -61,8 +61,9 @@ OpenStreetMap (OSM) is extremly good at quickly creating a usable map. It is les
 [be-wal-3]: https://maproulette.org/browse/challenges/14681
 [xk-1]: https://github.com/osmbe/road-completion/tree/master/data/kosovo
 [xk-2]: https://ak.rks-gov.net/en/
-[nl-1]: https://nationaalwegenbestand.nl/
-[nl-2]: https://maproulette.org/browse/challenges/17332
+[nl-1]: https://github.com/osmbe/road-completion/tree/master/data/netherlands
+[nl-2]: https://nationaalwegenbestand.nl/
+[nl-3]: https://maproulette.org/browse/challenges/17332
 
 ## Replicate
 
