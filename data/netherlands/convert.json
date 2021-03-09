@@ -49,6 +49,9 @@
             "highway": "service",
             "service": "parking_aisle"
         },
+        "RP": {
+            "highway": "bridleway"
+        },
         "TRB": {
             "highway": "unclassified",
             "junction": "roundabout",
