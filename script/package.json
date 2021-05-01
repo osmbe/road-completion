@@ -20,7 +20,7 @@
   "homepage": "https://github.com/osmbe/road-completion#readme",
   "dependencies": {
     "@mapbox/geojson-normalize": "0.0.1",
-    "@mapbox/tile-reduce": "^3.3.0",
+    "@mapbox/tile-reduce": "^3.3.1",
     "@turf/boolean-within": "^6.3",
     "@turf/buffer": "^5.1.5",
     "@turf/flatten": "^5.1.5",
