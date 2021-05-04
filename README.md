@@ -8,7 +8,7 @@ OpenStreetMap (OSM) is extremly good at quickly creating a usable map. It is les
 
 ## History of the project
 
-- [Diary post](https://www.openstreetmap.org/user/joost%20schouppe/diary/39250) by [Joost Schouppe](https://github.com/joostschouppe)
+- [Diary post](https://www.openstreetmap.org/user/joost%20schouppe/diary/39250) by [Joost Schouppe](https://github.com/joostschouppe) (Feb 2017)
 - [Birds of a feather session at State of the Map 2016](https://wiki.openstreetmap.org/wiki/State_Of_The_Map_2016/Informal_Sessions#Mapping_with_open_geodata)
 - [Project page in OpenStreetMap wiki](https://wiki.openstreetmap.org/wiki/WikiProject_Belgium/Road_completion_project)
 - [Talk at FOSS4G Belgium 2017](https://slides.com/benabelshausen-1/deck-1) by [Ben Abelshausen](https://github.com/xivk)
