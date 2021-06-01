@@ -34,6 +34,7 @@
         scales: {
           x: {
             type: 'time',
+            max: new Date(),
             time: {
               displayFormats: {
                 month: 'MMM YYYY'
@@ -41,9 +42,7 @@
             }
           },
           y: {
-            ticks: {
-              beginAtZero: true
-            }
+            beginAtZero: true
           }
         }
       }
