@@ -42,7 +42,10 @@
             }
           },
           y: {
-            beginAtZero: true
+            beginAtZero: true,
+            ticks: {
+              precision: 0
+            }
           }
         }
       }
