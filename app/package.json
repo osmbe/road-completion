@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "chart.js": "^3.3.2",
+    "chartjs-adapter-moment": "^1.0.0",
     "compression": "^1.7.4",
     "moment": "^2.29.1",
     "polka": "next",

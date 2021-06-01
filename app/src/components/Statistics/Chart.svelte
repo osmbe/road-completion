@@ -6,16 +6,17 @@
   let container;
 
   onMount(async () => {
-    const { Chart } = await import("chart.js");
+    const Chart = await import("chart.js/auto");
+    await import("chartjs-adapter-moment");
 
     const data = commits.map((commit) => {
       return {
-        t: commit.datetime,
+        x: commit.datetime,
         y: commit.stats.notWithin
       }
     });
 
-    new Chart(container, {
+    new Chart.default(container, {
       type: 'line',
       data: {
         datasets: [{
@@ -25,25 +26,25 @@
         }]
       },
       options: {
-        legend: {
-          display: false
+        plugins: {
+          legend: {
+            display: false
+          },
         },
         scales: {
-          xAxes: [{
+          x: {
             type: 'time',
-            ticks: {
-              max: new Date()
-            },
             time: {
-              unit: 'week',
-              tooltipFormat: 'dddd, MMMM Do YYYY, HH:mm:ss'
+              displayFormats: {
+                month: 'MMM YYYY'
+              }
             }
-          }],
-          yAxes: [{
+          },
+          y: {
             ticks: {
               beginAtZero: true
             }
-          }]
+          }
         }
       }
     });
