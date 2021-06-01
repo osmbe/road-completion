@@ -12,7 +12,7 @@
     "lint:fix": "eslint --fix \"src/**/*.js\""
   },
   "dependencies": {
-    "chart.js": "^2.9.4",
+    "chart.js": "^3.3.2",
     "compression": "^1.7.4",
     "moment": "^2.29.1",
     "polka": "next",
@@ -21,25 +21,25 @@
   "devDependencies": {
     "@babel/core": "^7.14.0",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
-    "@babel/plugin-transform-runtime": "^7.13.15",
+    "@babel/plugin-transform-runtime": "^7.14.3",
     "@babel/preset-env": "^7.14.0",
     "@babel/runtime": "^7.14.0",
-    "@octokit/rest": "^18.5.3",
+    "@octokit/rest": "^18.5.5",
     "@rollup/plugin-babel": "^5.3.0",
     "@rollup/plugin-commonjs": "^18.0.0",
-    "@rollup/plugin-node-resolve": "^11.2.1",
+    "@rollup/plugin-node-resolve": "^13.0.0",
     "@rollup/plugin-replace": "^2.4.2",
     "@rollup/plugin-url": "^6.0.0",
     "dotenv": "^8.2.0",
-    "eslint": "^7.25.0",
+    "eslint": "^7.27.0",
     "eslint-config-standard": "^16.0.2",
-    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.3.1",
-    "rollup": "^2.46.0",
+    "rollup": "^2.50.5",
     "rollup-plugin-svelte": "^7.1.0",
     "rollup-plugin-terser": "^7.0.2",
     "sapper": "^0.29.1",
-    "svelte": "^3.38.0"
+    "svelte": "^3.38.2"
   }
 }
