@@ -1,13 +1,16 @@
 {
   "TRP_CLAS_L": {
+    "Autoroute": {
+      "highway": "motorway"
+    },
     "Nationale": {
       "highway": "primary"
     },
     "Chemin repris": {
       "highway": "secondary"
     },
-    "Autoroute": {
-      "highway": "motorway"
+    "Chemin vicinal": {
+      "highway": "residential"
     }
   },
   "TRP_NIVE_L": {
