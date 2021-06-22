@@ -1,0 +1,22 @@
+{
+  "TRP_CLAS_L": {
+    "Autoroute": {
+      "highway": "motorway"
+    },
+    "Nationale": {
+      "highway": "primary"
+    },
+    "Chemin repris": {
+      "highway": "secondary"
+    },
+    "Chemin vicinal": {
+      "highway": "residential"
+    }
+  },
+  "TRP_NIVE_L": {
+    "passage supérieur 1": {
+      "bridge": "yes",
+      "layer": "1"
+    }
+  }
+}
