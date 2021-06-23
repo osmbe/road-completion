@@ -35,13 +35,23 @@
 
   <hr>
 
-  <h2 class="title is-2">Belgium</h2>
-  <h3 class="title is-3">Bruxelles/Brussel (Brussels)</h3>
+  <h2 class="title is-2">🇧🇪 Belgium</h2>
+  <h3 class="title is-3">
+    Bruxelles/Brussel (Brussels)
+    <a target="_blank" href="https://github.com/osmbe/road-completion/actions/workflows/belgium-brussels.yml">
+      <img alt="GitHub Actions workflow" src="https://github.com/osmbe/road-completion/actions/workflows/belgium-brussels.yml/badge.svg">
+    </a>
+  </h3>
   <Statistics commits={commits[0]}></Statistics>
 
   <hr>
 
-  <h3 class="title is-3">Vlaanderen (Flanders)</h3>
+  <h3 class="title is-3">
+    Vlaanderen (Flanders)
+    <a target="_blank" href="https://github.com/osmbe/road-completion/actions/workflows/belgium-flanders.yml">
+      <img alt="GitHub Actions workflow" src="https://github.com/osmbe/road-completion/actions/workflows/belgium-flanders.yml/badge.svg">
+    </a>
+  </h3>
   <Statistics commits={commits[1]}></Statistics>
 
   <hr>
@@ -60,17 +70,27 @@
 
   <hr>
 
-  <h2 class="title is-2">Luxembourg</h2>
+  <h2 class="title is-2">
+    🇱🇺 Luxembourg
+    <a target="_blank" href="https://github.com/osmbe/road-completion/actions/workflows/luxembourg.yml">
+      <img alt="GitHub Actions workflow" src="https://github.com/osmbe/road-completion/actions/workflows/luxembourg.yml/badge.svg">
+    </a>
+  </h2>
   <Statistics commits={commits[7]}></Statistics>
 
   <hr>
 
-  <h2 class="title is-2">Netherlands</h2>
+  <h2 class="title is-2">
+    🇳🇱 Netherlands
+    <a target="_blank" href="https://github.com/osmbe/road-completion/actions/workflows/netherlands.yml">
+      <img alt="GitHub Actions workflow" src="https://github.com/osmbe/road-completion/actions/workflows/netherlands.yml/badge.svg">
+    </a>
+  </h2>
   <Statistics commits={commits[8]}></Statistics>
 
   <hr>
 
-  <h2 class="title is-2">Kosovo</h2>
+  <h2 class="title is-2">🇽🇰 Kosovo</h2>
   <Statistics commits={commits[9]}></Statistics>
 
 </div>
