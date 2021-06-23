@@ -1,0 +1,121 @@
+name: 🇱🇺 Luxembourg
+
+on:
+  # Run every Sunday at 12:00 UTC
+  schedule:
+    - cron: "0 12 * * 0"
+  push:
+    paths:
+      - ".github/workflows/luxembourg.yml"
+      - ".github/actions/*/action.yml"
+      - "script/**/*.ts"
+      - "data/luxembourg/convert.json"
+      - "data/luxembourg/filter.sql"
+  pull_request:
+    paths:
+      - ".github/workflows/luxembourg.yml"
+      - ".github/actions/*/action.yml"
+      - "script/**/*.ts"
+      - "data/luxembourg/convert.json"
+      - "data/luxembourg/filter.sql"
+
+jobs:
+
+  diff-luxembourg:
+    name: Generate difference for Luxembourg
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Install GDAL
+        run: |
+          sudo apt-add-repository ppa:ubuntugis/ubuntugis-unstable
+          sudo apt update
+          sudo apt install gdal-bin
+      - name: Install Tippecanoe
+        uses: ./.github/actions/install-tippecanoe
+      - name: Install dependencies
+        run: npm install
+        working-directory: script
+      - name: Build
+        run: npm run build
+        working-directory: script
+      - name: Generate OpenStreetMap buffers
+        uses: ./.github/actions/openstreetmap-buffers
+        with:
+          country: europe/luxembourg
+      - name: Download & Unzip UrbIS data
+        run: |
+          wget --no-check-certificate -O "transport-et-voies-de-communication-shape.zip" "https://data.public.lu/fr/datasets/r/e74aadad-77c2-441e-98fe-e08a441484a2"
+          unzip "transport-et-voies-de-communication-shape.zip" "TRP_VC.*"
+      - name: Convert (and filter) UrbIS to GeoJSON
+        run: |
+          ogr2ogr -f "GeoJSON" -progress \
+            --config SHAPE_ENCODING "ISO-8859-1" \
+            -s_srs "EPSG:2169" -t_srs "EPSG:4326" \
+            -sql "@data/luxembourg/filter.sql" \
+            -lco COORDINATE_PRECISION=6 \
+            -fieldTypeToString "All" \
+            "trpvc.geojson" \
+            "TRP_VC.shp"
+      - name: Download extra data
+        run: |
+          wget -O "csventrifuge_enhance_name.csv" "https://raw.githubusercontent.com/osmlu/csventrifuge/master/rules/luxembourg_addresses/rue.csv"
+          wget -O "csventrifuge_enhance_id.csv" "https://raw.githubusercontent.com/osmlu/csventrifuge/master/enhance/luxembourg_addresses/id_caclr_rue/rue.csv"
+      - name: Process extra data
+        run: |
+          node "data/luxembourg/build-extended-conversion.js" "csventrifuge_enhance_name.csv" "csventrifuge_enhance_id.csv" "convert.json" "convert-merged.json"
+      - name: Convert fields to OpenStreetMap tags
+        run: node "script/convert-tags.js" -c "data/luxembourg/convert-merged.json" "trpvc.geojson" "trpvcTagged.geojson"
+      - name: Generate vector tiles
+        run: |
+          tippecanoe --force --no-feature-limit --no-tile-size-limit \
+            --buffer=0 \
+            --maximum-zoom=14 --minimum-zoom=14 \
+            --layer="roads" \
+            --output="trpvcTagged.mbtiles" "trpvcTagged.geojson"
+      - name: Generate MapRoulette buffers
+        uses: ./.github/actions/maproulette-buffers
+        with:
+          challenge-id: 17749
+      - name: Upload MapRoulette false positive
+        uses: actions/upload-artifact@v2
+        with:
+          name: MapRoulette-FalsePositive
+          path: maproulette.geojson
+      - name: Merge MapRoulette buffers to OpenStreetMap buffers and generate vector tiles
+        run: |
+          tippecanoe --force --no-feature-limit --no-tile-size-limit \
+            --maximum-zoom=14 --minimum-zoom=14 \
+            --layer="buffers" \
+            --output="luxembourg-buffers.mbtiles" \
+            "openstreetmap-lines-buffers.geojson" "openstreetmap-polygons-buffers.geojson" "maproulette-buffers.geojson"
+      - name: Difference
+        run: node "script/difference.js" --output-dir="data/belgium/brussels/difference" "trpvcTagged.mbtiles" "luxembourg-buffers.mbtiles"
+      - name: Upload difference
+        uses: actions/upload-artifact@v2
+        with:
+          name: Luxembourg-Difference
+          path: data/luxembourg/difference/diff.geojson
+      - name: Upload statistics
+        uses: actions/upload-artifact@v2
+        with:
+          name: Luxembourg-Statistics
+          path: data/luxembourg/difference/stats.json
+      - name: Commit changes
+        if: ${{ github.event_name != 'pull_request' }}
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git pull
+          git add data/luxembourg/difference/diff.geojson
+          git add data/luxembourg/difference/stats.json
+          git commit -m "🗃 Update difference for Luxembourg"
+      - name: Push changes
+        if: ${{ github.event_name != 'pull_request' }}
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.TOKEN }}
+          branch: ${{ github.ref }}
