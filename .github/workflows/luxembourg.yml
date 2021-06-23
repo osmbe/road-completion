@@ -93,7 +93,7 @@ jobs:
             --output="luxembourg-buffers.mbtiles" \
             "openstreetmap-lines-buffers.geojson" "openstreetmap-polygons-buffers.geojson" "maproulette-buffers.geojson"
       - name: Difference
-        run: node "script/difference.js" --output-dir="data/belgium/brussels/difference" "trpvcTagged.mbtiles" "luxembourg-buffers.mbtiles"
+        run: node "script/difference.js" --output-dir="data/luxembourg/difference" "trpvcTagged.mbtiles" "luxembourg-buffers.mbtiles"
       - name: Upload difference
         uses: actions/upload-artifact@v2
         with:
