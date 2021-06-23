@@ -46,11 +46,11 @@ jobs:
         uses: ./.github/actions/openstreetmap-buffers
         with:
           country: europe/luxembourg
-      - name: Download & Unzip UrbIS data
+      - name: Download & Unzip source data
         run: |
           wget --no-check-certificate -O "transport-et-voies-de-communication-shape.zip" "https://data.public.lu/fr/datasets/r/e74aadad-77c2-441e-98fe-e08a441484a2"
           unzip "transport-et-voies-de-communication-shape.zip" "TRP_VC.*"
-      - name: Convert (and filter) UrbIS to GeoJSON
+      - name: Convert (and filter) source data to GeoJSON
         run: |
           ogr2ogr -f "GeoJSON" -progress \
             --config SHAPE_ENCODING "ISO-8859-1" \
@@ -66,9 +66,9 @@ jobs:
           wget -O "csventrifuge_enhance_id.csv" "https://raw.githubusercontent.com/osmlu/csventrifuge/master/enhance/luxembourg_addresses/id_caclr_rue/rue.csv"
       - name: Process extra data
         run: |
-          node "data/luxembourg/build-extended-conversion.js" "csventrifuge_enhance_name.csv" "csventrifuge_enhance_id.csv" "convert.json" "convert-merged.json"
+          node "data/luxembourg/build-extended-conversion.js" "csventrifuge_enhance_name.csv" "csventrifuge_enhance_id.csv" "data/luxembourg/convert.json" "convert-merged.json"
       - name: Convert fields to OpenStreetMap tags
-        run: node "script/convert-tags.js" -c "data/luxembourg/convert-merged.json" "trpvc.geojson" "trpvcTagged.geojson"
+        run: node "script/convert-tags.js" -c "convert-merged.json" "trpvc.geojson" "trpvcTagged.geojson"
       - name: Generate vector tiles
         run: |
           tippecanoe --force --no-feature-limit --no-tile-size-limit \
