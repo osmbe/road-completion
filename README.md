@@ -48,6 +48,7 @@ OpenStreetMap (OSM) is extremly good at quickly creating a usable map. It is les
 | :belgium: Belgium                 | [Vlaanderen (Flanders)][be-vla-1]        | [Wegenregister][be-vla-2] | [Challenge][be-vla-3] |
 | :belgium: Belgium                 | [Wallonie (Wallonia)][be-wal-1]          | [PICC][be-wal-2]          | [Challenge][be-wal-3] |
 | :kosovo: [Kosovo][xk-1]           |                                          | [AKK][xk-2]               |                       |
+| :luxembourg: [Luxembourg][lu-1]   |                                          | [TRP-VC][lu-2]            | [Challenge][lu-3]     |
 | :netherlands: [Netherlands][nl-1] |                                          | [NWB][nl-2]               | [Challenge][nl-3]     |
 
 [be-bru-1]: https://github.com/osmbe/road-completion/tree/master/data/belgium/brussels
@@ -61,6 +62,9 @@ OpenStreetMap (OSM) is extremly good at quickly creating a usable map. It is les
 [be-wal-3]: https://maproulette.org/browse/challenges/14681
 [xk-1]: https://github.com/osmbe/road-completion/tree/master/data/kosovo
 [xk-2]: https://ak.rks-gov.net/en/
+[lu-1]: https://github.com/osmbe/road-completion/tree/master/data/luxembourg
+[lu-2]: https://data.public.lu/en/datasets/transport-et-voies-de-communication/
+[lu-3]: https://maproulette.org/browse/challenges/17749
 [nl-1]: https://github.com/osmbe/road-completion/tree/master/data/netherlands
 [nl-2]: https://nationaalwegenbestand.nl/
 [nl-3]: https://maproulette.org/browse/challenges/17332
