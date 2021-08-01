@@ -35,7 +35,7 @@
     "@tsconfig/recommended": "^1.0.1",
     "@types/event-stream": "^3.3.34",
     "@types/geojson": "^7946.0.8",
-    "@types/minimist": "^1.2.1",
+    "@types/minimist": "^1.2.2",
     "@types/node": "^15.12.5",
     "@typescript-eslint/eslint-plugin": "^4.28.1",
     "@typescript-eslint/parser": "^4.28.5",
