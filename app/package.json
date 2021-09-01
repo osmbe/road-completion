@@ -17,7 +17,7 @@
     "compression": "^1.7.4",
     "moment": "^2.29.1",
     "polka": "next",
-    "sirv": "^1.0.12"
+    "sirv": "^1.0.17"
   },
   "devDependencies": {
     "@babel/core": "^7.14.8",
