@@ -1,10 +1,12 @@
+import.meta.hot;
+
 import { Octokit } from '@octokit/rest';
 
 import { OWNER, REPOSITORY } from '../constants';
 
 export default async function (path, ref) {
   const octokit = new Octokit({
-    auth: process.env.TOKEN || null
+    auth: __SNOWPACK_ENV__.SNOWPACK_PUBLIC_TOKEN || null
   });
 
   const { data } = await octokit.repos.getContent({
@@ -14,5 +16,5 @@ export default async function (path, ref) {
     ref
   });
 
-  return JSON.parse(Buffer.from(data.content, data.encoding).toString('utf-8'));
+  return typeof data.content !== 'undefined' ? JSON.parse(Buffer.from(data.content, data.encoding).toString('utf-8')) : [];
 }

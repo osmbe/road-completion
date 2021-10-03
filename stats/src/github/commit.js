@@ -1,10 +1,12 @@
+import.meta.hot;
+
 import { Octokit } from '@octokit/rest';
 
 import { OWNER, REPOSITORY } from '../constants';
 
 export default async function (ref) {
   const octokit = new Octokit({
-    auth: process.env.TOKEN || null
+    auth: __SNOWPACK_ENV__.SNOWPACK_PUBLIC_TOKEN || null
   });
 
   const { data } = await octokit.repos.getCommit({
