@@ -4,16 +4,6 @@
   export let commits;
 </script>
 
-<style>
-  .has-tooltip {
-    cursor: help;
-  }
-
-  td.nowrap {
-    white-space: nowrap;
-  }
-</style>
-
 <table class="table is-fullwidth is-striped">
   <thead>
     <tr>

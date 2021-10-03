@@ -53,7 +53,4 @@
   });
 </script>
 
-<style>
-</style>
-
 <canvas bind:this="{container}"></canvas>

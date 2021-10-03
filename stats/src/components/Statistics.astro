@@ -10,16 +10,6 @@ const { id } = Astro.props;
 const commits = await getCommits(PATHS[id]);
 ---
 
-<style>
-  .columns {
-    max-height: 300px;
-  }
-
-  .column {
-    overflow-y: auto;
-  }
-</style>
-
 <div class="columns">
   <div class="column is-4">
     <Chart {commits} />
