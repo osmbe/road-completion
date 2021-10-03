@@ -1,6 +1,6 @@
 # Road Completion - 🇧🇪 Belgium - Flanders
 
-Source: <https://download.vlaanderen.be/Producten/Detail?id=6367&title=Wegenregister_17_09_2020>
+Source: <https://download.vlaanderen.be/Producten/Detail?id=6675&title=Wegenregister_16_09_2021>
 
 ## Filters
 
