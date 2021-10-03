@@ -1,13 +1,21 @@
 version: 2
 updates:
 - package-ecosystem: npm
-  directory: "/app"
+  directory: "/stats"
+  labels:
+    - "dependencies"
+    # - "javascript"
+    - "stats"
   schedule:
     interval: monthly
     time: "04:00"
   open-pull-requests-limit: 10
 - package-ecosystem: npm
   directory: "/script"
+  labels:
+    - "dependencies"
+    # - "javascript"
+    - "script"
   schedule:
     interval: monthly
     time: "04:00"
