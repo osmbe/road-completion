@@ -5,7 +5,11 @@
 
   let container;
 
+  console.log('test');
+
   onMount(async () => {
+    console.log('onMount');
+
     const Chart = await import("chart.js/auto");
     await import("chartjs-adapter-moment");
 
@@ -55,5 +59,4 @@
 
 <style>
 </style>
-
 <canvas bind:this="{container}"></canvas>

@@ -1,5 +1,5 @@
 ---
-import Chart from './Statistics/Chart.svelte';
+import Chart from './Statistics/Chart.astro';
 import Table from './Statistics/Table.svelte';
 
 import { PATHS } from '../constants.js';
@@ -21,9 +21,8 @@ const commits = await getCommits(PATHS[id]);
 </style>
 
 <div class="columns">
-    {PATHS}
   <div class="column is-4">
-    <!--<Chart {commits} />-->
+    <Chart id={`${id}-chart`} {commits} />
   </div>
   <div class="column">
     <Table {commits} />
