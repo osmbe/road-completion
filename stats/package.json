@@ -1,0 +1,21 @@
+{
+  "name": "@example/starter",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "devDependencies": {
+    "@snowpack/plugin-dotenv": "^2.2.0",
+    "astro": "^0.20.9"
+  },
+  "dependencies": {
+    "@octokit/rest": "^18.11.4",
+    "chart.js": "^3.5.1",
+    "chartjs-adapter-moment": "^1.0.0",
+    "moment": "^2.29.1"
+  }
+}
