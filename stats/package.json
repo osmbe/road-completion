@@ -11,7 +11,7 @@
   "devDependencies": {
     "@astrojs/renderer-svelte": "^0.1.2",
     "@snowpack/plugin-dotenv": "^2.2.0",
-    "astro": "^0.20.9"
+    "astro": "^0.20.12"
   },
   "dependencies": {
     "@octokit/rest": "^18.11.4",
