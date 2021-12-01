@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.1",
-    "@types/event-stream": "^3.3.34",
+    "@types/event-stream": "^4.0.0",
     "@types/geojson": "^7946.0.8",
     "@types/minimist": "^1.2.2",
     "@types/node": "^16.4.9",
