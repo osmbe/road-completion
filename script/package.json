@@ -26,7 +26,7 @@
     "@turf/flatten": "^5.1.5",
     "@turf/helpers": "^6.5",
     "@turf/meta": "^6.5",
-    "@turf/union": "^5.1",
+    "@turf/union": "^6.5",
     "event-stream": "^4.0.1",
     "jsonstream-next": "^3.0.0",
     "minimist": "^1.2.5"
