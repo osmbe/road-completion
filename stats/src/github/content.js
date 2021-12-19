@@ -6,7 +6,7 @@ import { OWNER, REPOSITORY } from '../constants';
 
 export default async function (path, ref) {
   const octokit = new Octokit({
-    auth: __SNOWPACK_ENV__.SNOWPACK_PUBLIC_TOKEN || null
+    auth: import.meta.env.SNOWPACK_PUBLIC_TOKEN || null
   });
 
   const { data } = await octokit.repos.getContent({
