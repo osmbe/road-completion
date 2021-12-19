@@ -43,7 +43,7 @@ jobs:
           npm run build
         working-directory: stats
         env:
-          SNOWPACK_PUBLIC_TOKEN: ${{ secrets.TOKEN }}
+          PUBLIC_GITHUB_TOKEN: ${{ secrets.TOKEN }}
 
       - name: Deploy
         if: ${{ github.event_name == 'push' }}
