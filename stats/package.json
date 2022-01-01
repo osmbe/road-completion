@@ -9,7 +9,7 @@
     "preview": "astro preview"
   },
   "devDependencies": {
-    "@astrojs/renderer-svelte": "^0.2.1",
+    "@astrojs/renderer-svelte": "^0.3.0",
     "@snowpack/plugin-dotenv": "^2.2.0",
     "astro": "^0.21.13"
   },
