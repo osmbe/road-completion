@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@octokit/rest": "^18.12.0",
-    "chart.js": "^3.6.1",
+    "chart.js": "^3.7.0",
     "chartjs-adapter-moment": "^1.0.0",
     "moment": "^2.29.1"
   }
