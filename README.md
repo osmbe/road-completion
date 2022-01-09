@@ -56,7 +56,7 @@ OpenStreetMap (OSM) is extremly good at quickly creating a usable map. It is les
 [be-bru-3]: https://maproulette.org/browse/challenges/14675
 [be-vla-1]: https://github.com/osmbe/road-completion/tree/master/data/belgium/flanders
 [be-vla-2]: https://download.vlaanderen.be/Producten/Detail?id=7698&title=Wegenregister_16_12_2021
-[be-vla-3]: https://maproulette.org/browse/challenges/14645
+[be-vla-3]: https://maproulette.org/browse/challenges/24090
 [be-wal-1]: https://github.com/osmbe/road-completion/tree/master/data/belgium/wallonia
 [be-wal-2]: http://geoportail.wallonie.be/catalogue/b795de68-726c-4bdf-a62a-a42686aa5b6f.html
 [be-wal-3]: https://maproulette.org/browse/challenges/14681
