@@ -1,6 +1,8 @@
 # Road Completion - 🇧🇪 Belgium - Brussels
 
-Source: <https://bric.brussels/en/our-solutions/urbis-solutions/urbis-data/urbis-adm>
+[![🇧🇪 Brussels, Belgium](https://github.com/osmbe/road-completion/actions/workflows/belgium-brussels.yml/badge.svg)](https://github.com/osmbe/road-completion/actions/workflows/belgium-brussels.yml)
+
+> Source: <https://bric.brussels/en/our-solutions/urbis-solutions/urbis-data/urbis-adm>
 
 ## Filters
 
