@@ -1,35 +1,19 @@
-name: Build and Deploy statistics page
+name: Build and Deploy report page
 
 on:
   push:
     paths:
       - ".github/workflows/deploy-stats-page.yml"
-      - "stats/**"
+      - "report/**"
       - "data/**/diff.geojson"
       - "data/**/stats.json"
   pull_request:
     paths:
-      - "stats/**"
+      - "report/**"
 
 jobs:
-  # lint:
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     matrix:
-  #       node-version: [12.x, 14.x, 16.x]
-  #   steps:
-  #   - uses: actions/checkout@v2
-  #   - name: Use Node.js ${{ matrix.node-version }}
-  #     uses: actions/setup-node@v1
-  #     with:
-  #       node-version: ${{ matrix.node-version }}
-  #   - run: npm ci
-  #     working-directory: stats
-  #   - run: npm run lint
-  #     working-directory: stats
 
   build-and-deploy:
-    # needs: lint
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -41,7 +25,7 @@ jobs:
         run: |
           npm install
           npm run build
-        working-directory: stats
+        working-directory: report
         env:
           PUBLIC_GITHUB_TOKEN: ${{ secrets.TOKEN }}
 
@@ -51,5 +35,5 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: stats/dist # The folder the action should deploy.
+          FOLDER: report/dist # The folder the action should deploy.
           CLEAN: true # Automatically remove deleted files from the deploy branch
