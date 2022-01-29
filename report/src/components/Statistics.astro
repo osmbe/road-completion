@@ -1,0 +1,11 @@
+---
+import Chart from './Statistics/Chart.svelte';
+import History from './Statistics/History.svelte';
+
+const { id } = Astro.props;
+---
+
+<div>
+  <Chart client:visible {id} />
+  <History client:visible {id} />
+</div>

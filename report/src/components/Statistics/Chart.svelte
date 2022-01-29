@@ -1,13 +1,16 @@
 <script>
-  import { onMount } from "svelte";
+  import { onMount } from 'svelte';
 
-  export let commits;
+  export let id;
 
   let container;
 
   onMount(async () => {
-    const Chart = await import("chart.js/auto");
-    await import("chartjs-adapter-moment");
+    const Chart = await import('chart.js/auto');
+    await import('chartjs-adapter-moment');
+
+    const response = await fetch(`data/${id}.json`);
+    const commits = await response.json();
 
     const data = commits.map((commit) => {
       return {
@@ -21,11 +24,12 @@
       data: {
         datasets: [{
           data,
-          cubicInterpolationMode: "monotone",
+          cubicInterpolationMode: 'monotone',
           fill: true,
         }]
       },
       options: {
+        maintainAspectRatio: false,
         plugins: {
           legend: {
             display: false
@@ -53,4 +57,6 @@
   });
 </script>
 
-<canvas bind:this="{container}"></canvas>
+<div id={`${id}-chart`} style="height: 150px;">
+  <canvas bind:this='{container}'></canvas>
+</div>

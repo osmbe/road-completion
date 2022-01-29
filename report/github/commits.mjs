@@ -1,20 +1,19 @@
-import.meta.hot;
-
 import { Octokit } from '@octokit/rest';
 
-import getCommit from './commit';
-import getContent from './content';
+import getCommit from './commit.mjs';
+import getContent from './content.mjs';
 
-import { OWNER, REPOSITORY } from '../constants';
+import { OWNER, REPOSITORY } from './constants.mjs';
 
 export default async function (path) {
   const octokit = new Octokit({
-    auth: import.meta.env.PUBLIC_GITHUB_TOKEN || null
+    auth: process.env.PUBLIC_GITHUB_TOKEN || null
   });
 
   const { data } = await octokit.repos.listCommits({
     owner: OWNER,
     repo: REPOSITORY,
+    per_page: 52,
     path
   });
 

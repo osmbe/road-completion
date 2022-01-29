@@ -1,15 +1,13 @@
 version: 2
 updates:
 - package-ecosystem: npm
-  directory: "/stats"
+  directory: "/report"
   labels:
     - "dependencies"
     # - "javascript"
-    - "stats"
+    - "report"
   schedule:
     interval: monthly
-    time: "04:00"
-  open-pull-requests-limit: 10
 - package-ecosystem: npm
   directory: "/script"
   labels:
@@ -18,5 +16,3 @@ updates:
     - "script"
   schedule:
     interval: monthly
-    time: "04:00"
-  open-pull-requests-limit: 10

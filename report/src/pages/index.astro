@@ -1,0 +1,62 @@
+---
+// Component Imports
+import Nav from '../components/Nav.astro';
+import Report from '../components/Report.astro';
+
+// Component Script:
+let title = 'Road Completion';
+
+// Full Astro Component Syntax:
+// https://docs.astro.build/core-concepts/astro-components/
+---
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>{title}</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <style global>
+    @import "../styles/global.css";
+  </style>
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1 class="title is-1">{title}</h1>
+    </header>
+
+    <Nav />
+
+    <section>
+      <h2 class="title is-2">🇧🇪 Belgium</h2>
+
+      <Report id="be-brussels" title="Brussels (Bruxelles/Brussel)" ga="belgium-brussels" />
+      <Report id="be-flanders" title="Flanders (Vlaanderen)" ga="belgium-flanders" />
+      <Report id="be-wallonia-bra" title="Wallonia (Wallonie) - Brabant-Wallon" />
+      <Report id="be-wallonia-hai" title="Wallonia (Wallonie) - Hainaut" />
+      <Report id="be-wallonia-lie" title="Wallonia (Wallonie) - Liège" />
+      <Report id="be-wallonia-lux" title="Wallonia (Wallonie) - Luxembourg" />
+      <Report id="be-wallonia-nam" title="Wallonia (Wallonie) - Namur" />
+    </section>
+
+    <section>
+      <h2 class="title is-2">🇱🇺 Luxembourg</h2>
+
+      <Report id="lu-luxembourg" title="Luxembourg" ga="luxembourg" />
+    </section>
+
+    <section>
+      <h2 class="title is-2">🇳🇱 Netherlands</h2>
+
+      <Report id="nl-netherlands" title="Netherlands" ga="netherlands" />
+    </section>
+
+    <section>
+      <h2 class="title is-2">🇽🇰 Kosovo</h2>
+
+      <Report id="xk-kosovo" title="Kosovo" />
+    </section>
+  </main>
+</body>
+</html>

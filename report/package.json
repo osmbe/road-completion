@@ -1,21 +1,18 @@
 {
-  "name": "@example/starter",
-  "version": "0.0.1",
-  "private": true,
+  "name": "road-completion-report",
   "scripts": {
+    "prebuild": "node ./github/index.mjs",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview"
   },
   "devDependencies": {
-    "@astrojs/renderer-svelte": "^0.2.1",
-    "@snowpack/plugin-dotenv": "^2.2.0",
-    "astro": "^0.21.13"
+    "@octokit/rest": "^18.12.0",
+    "astro": "^0.22.20"
   },
   "dependencies": {
-    "@octokit/rest": "^18.12.0",
-    "chart.js": "^3.6.1",
+    "chart.js": "^3.7.0",
     "chartjs-adapter-moment": "^1.0.0",
     "moment": "^2.29.1"
   }

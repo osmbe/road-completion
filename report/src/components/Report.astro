@@ -1,0 +1,29 @@
+---
+import Statistics from './Statistics.astro';
+
+const { id, title, ga } = Astro.props;
+---
+
+<section {id}>
+  <div class="is-flex is-justify-content-space-between is-align-items-center">
+    <h3 class="title is-3 mb-0">{title}</h3>
+
+    {ga && (
+      <a target="_blank" href={`https://github.com/osmbe/road-completion/actions/workflows/${ga}.yml`}>
+        <img alt="GitHub Actions workflow" src={`https://github.com/osmbe/road-completion/actions/workflows/${ga}.yml/badge.svg`}>
+      </a>
+    )}
+  </div>
+
+  <Statistics {id} />
+</section>
+
+<style>
+  section {
+    padding-bottom: 50px;
+  }
+  section > div.flex {
+    align-items: center;
+    justify-content: space-between;
+  }
+</style>
