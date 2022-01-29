@@ -1,0 +1,19 @@
+{
+  "name": "road-completion-report",
+  "scripts": {
+    "prebuild": "node ./github/index.mjs",
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "devDependencies": {
+    "@octokit/rest": "^18.12.0",
+    "astro": "^0.22.20"
+  },
+  "dependencies": {
+    "chart.js": "^3.7.0",
+    "chartjs-adapter-moment": "^1.0.0",
+    "moment": "^2.29.1"
+  }
+}
