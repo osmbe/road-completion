@@ -38,6 +38,7 @@
         scales: {
           x: {
             type: 'time',
+            min: (new Date().setFullYear(new Date().getFullYear() - 1)),
             max: new Date(),
             time: {
               displayFormats: {
