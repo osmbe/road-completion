@@ -1,6 +1,6 @@
 #!/bin/sh
 
-FILENAME="Wegenregister_SHAPE_20211216"
+FILENAME="Wegenregister_SHAPE_20220317"
 MAPROULETTE_CHALLENGE=24090
 
 # Make script directory working directory
