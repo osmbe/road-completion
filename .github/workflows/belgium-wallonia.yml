@@ -430,6 +430,11 @@ jobs:
           if [ -f "data/belgium/wallonia/difference/LIE/diff.geojson" ]; then rm "data/belgium/wallonia/difference/LIE/diff.geojson"; fi
           if [ -f "data/belgium/wallonia/difference/LUX/diff.geojson" ]; then rm "data/belgium/wallonia/difference/LUX/diff.geojson"; fi
           if [ -f "data/belgium/wallonia/difference/NAM/diff.geojson" ]; then rm "data/belgium/wallonia/difference/NAM/diff.geojson"; fi
+          if [ -f "data/belgium/wallonia/difference/BRA/stats.geojson" ]; then rm "data/belgium/wallonia/difference/BRA/stats.geojson"; fi
+          if [ -f "data/belgium/wallonia/difference/HAI/stats.geojson" ]; then rm "data/belgium/wallonia/difference/HAI/stats.geojson"; fi
+          if [ -f "data/belgium/wallonia/difference/LIE/stats.geojson" ]; then rm "data/belgium/wallonia/difference/LIE/stats.geojson"; fi
+          if [ -f "data/belgium/wallonia/difference/LUX/stats.geojson" ]; then rm "data/belgium/wallonia/difference/LUX/stats.geojson"; fi
+          if [ -f "data/belgium/wallonia/difference/NAM/stats.geojson" ]; then rm "data/belgium/wallonia/difference/NAM/stats.geojson"; fi
       - name: Download difference for Brabant Wallon, Wallonia, Belgium
         uses: actions/download-artifact@v3
         with:
@@ -455,9 +460,6 @@ jobs:
         with:
           name: Namur-Difference
           path: data/belgium/wallonia/difference/NAM
-      - name: Display structure of downloaded files
-        run: ls -R
-        working-directory: data/belgium/wallonia/difference
       - name: Merge differences
         run: |
           if [ -f "data/belgium/wallonia/difference/diff.geojson" ]; then rm "data/belgium/wallonia/difference/diff.geojson"; fi
@@ -471,6 +473,31 @@ jobs:
         with:
           name: Wallonia-Difference
           path: data/belgium/wallonia/difference/diff.geojson
+      - name: Download statistics for Brabant Wallon, Wallonia, Belgium
+        uses: actions/download-artifact@v3
+        with:
+          name: BrabantWallon-Statistics
+          path: data/belgium/wallonia/difference/BRA
+      - name: Download statistics for Hainaut, Wallonia, Belgium
+        uses: actions/download-artifact@v3
+        with:
+          name: Hainaut-Statistics
+          path: data/belgium/wallonia/difference/HAI
+      - name: Download statistics for Liège, Wallonia, Belgium
+        uses: actions/download-artifact@v3
+        with:
+          name: Liege-Statistics
+          path: data/belgium/wallonia/difference/LIE
+      - name: Download statistics for Luxembourg, Wallonia, Belgium
+        uses: actions/download-artifact@v3
+        with:
+          name: Luxembourg-Statistics
+          path: data/belgium/wallonia/difference/LUX
+      - name: Download statistics for Namur, Wallonia, Belgium
+        uses: actions/download-artifact@v3
+        with:
+          name: Namur-Statistics
+          path: data/belgium/wallonia/difference/NAM
       - name: Commit changes
         if: ${{ github.event_name != 'pull_request' }}
         run: |
@@ -478,6 +505,7 @@ jobs:
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git pull
           git add data/belgium/wallonia/difference/*/diff.geojson
+          git add data/belgium/wallonia/difference/*/stats.geojson
           git add data/belgium/wallonia/difference/diff.geojson
           git commit -m "🗃 Update difference for Wallonia, Belgium"
       - name: Push changes
