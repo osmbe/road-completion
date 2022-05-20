@@ -100,21 +100,6 @@ jobs:
         with:
           name: BrabantWallon-Statistics
           path: data/belgium/wallonia/difference/BRA/stats.json
-      - name: Commit changes
-        if: ${{ github.event_name != 'pull_request' }}
-        run: |
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git pull
-          git add data/belgium/wallonia/difference/BRA/diff.geojson
-          git add data/belgium/wallonia/difference/BRA/stats.json
-          git commit -m "🗃 Update difference for Brabant Wallon, Wallonia, Belgium"
-      - name: Push changes
-        if: ${{ github.event_name != 'pull_request' }}
-        uses: ad-m/github-push-action@v0.6.0
-        with:
-          github_token: ${{ secrets.TOKEN }}
-          branch: ${{ github.ref }}
 
   diff-hai:
     name: Generate difference for Hainaut, Wallonia, Belgium
@@ -192,21 +177,6 @@ jobs:
         with:
           name: Hainaut-Statistics
           path: data/belgium/wallonia/difference/HAI/stats.json
-      - name: Commit changes
-        if: ${{ github.event_name != 'pull_request' }}
-        run: |
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git pull
-          git add data/belgium/wallonia/difference/HAI/diff.geojson
-          git add data/belgium/wallonia/difference/HAI/stats.json
-          git commit -m "🗃 Update difference for Hainaut, Wallonia, Belgium"
-      - name: Push changes
-        if: ${{ github.event_name != 'pull_request' }}
-        uses: ad-m/github-push-action@v0.6.0
-        with:
-          github_token: ${{ secrets.TOKEN }}
-          branch: ${{ github.ref }}
 
   diff-lie:
     name: Generate difference for Liège, Wallonia, Belgium
@@ -284,21 +254,6 @@ jobs:
         with:
           name: Liege-Statistics
           path: data/belgium/wallonia/difference/LIE/stats.json
-      - name: Commit changes
-        if: ${{ github.event_name != 'pull_request' }}
-        run: |
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git pull
-          git add data/belgium/wallonia/difference/LIE/diff.geojson
-          git add data/belgium/wallonia/difference/LIE/stats.json
-          git commit -m "🗃 Update difference for Liège, Wallonia, Belgium"
-      - name: Push changes
-        if: ${{ github.event_name != 'pull_request' }}
-        uses: ad-m/github-push-action@v0.6.0
-        with:
-          github_token: ${{ secrets.TOKEN }}
-          branch: ${{ github.ref }}
 
   diff-lux:
     name: Generate difference for Luxembourg, Wallonia, Belgium
@@ -376,21 +331,6 @@ jobs:
         with:
           name: Luxembourg-Statistics
           path: data/belgium/wallonia/difference/LUX/stats.json
-      - name: Commit changes
-        if: ${{ github.event_name != 'pull_request' }}
-        run: |
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git pull
-          git add data/belgium/wallonia/difference/LUX/diff.geojson
-          git add data/belgium/wallonia/difference/LUX/stats.json
-          git commit -m "🗃 Update difference for Luxembourg, Wallonia, Belgium"
-      - name: Push changes
-        if: ${{ github.event_name != 'pull_request' }}
-        uses: ad-m/github-push-action@v0.6.0
-        with:
-          github_token: ${{ secrets.TOKEN }}
-          branch: ${{ github.ref }}
 
   diff-nam:
     name: Generate difference for Namur, Wallonia, Belgium
@@ -468,21 +408,6 @@ jobs:
         with:
           name: Namur-Statistics
           path: data/belgium/wallonia/difference/NAM/stats.json
-      - name: Commit changes
-        if: ${{ github.event_name != 'pull_request' }}
-        run: |
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git pull
-          git add data/belgium/wallonia/difference/NAM/diff.geojson
-          git add data/belgium/wallonia/difference/NAM/stats.json
-          git commit -m "🗃 Update difference for Namur, Wallonia, Belgium"
-      - name: Push changes
-        if: ${{ github.event_name != 'pull_request' }}
-        uses: ad-m/github-push-action@v0.6.0
-        with:
-          github_token: ${{ secrets.TOKEN }}
-          branch: ${{ github.ref }}
 
   merge:
     name: Generate difference for Wallonia, Belgium (merge)
@@ -493,39 +418,44 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 0
+      - name: Install GDAL
+        run: |
+          sudo apt-add-repository ppa:ubuntugis/ubuntugis-unstable
+          sudo apt update
+          sudo apt install gdal-bin
       - name: Download difference for Brabant Wallon, Wallonia, Belgium
         uses: actions/download-artifact@v3
         with:
           name: BrabantWallon-Difference
-          path: bra-diff.geojson
+          path: data/belgium/wallonia/difference/BRA/diff.geojson
       - name: Download difference for Hainaut, Wallonia, Belgium
         uses: actions/download-artifact@v3
         with:
           name: Hainaut-Difference
-          path: hai-diff.geojson
+          path: data/belgium/wallonia/difference/HAI/diff.geojson
       - name: Download difference for Liège, Wallonia, Belgium
         uses: actions/download-artifact@v3
         with:
           name: Liege-Difference
-          path: lie-diff.geojson
+          path: data/belgium/wallonia/difference/LIE/diff.geojson
       - name: Download difference for Luxembourg, Wallonia, Belgium
         uses: actions/download-artifact@v3
         with:
           name: Luxembourg-Difference
-          path: lux-diff.geojson
+          path: data/belgium/wallonia/difference/LUX/diff.geojson
       - name: Download difference for Namur, Wallonia, Belgium
         uses: actions/download-artifact@v3
         with:
           name: Namur-Difference
-          path: nam-diff.geojson
+          path: data/belgium/wallonia/difference/NAM/diff.geojson
       - name: Merge differences
         run: |
           if [ -f "data/belgium/wallonia/difference/diff.geojson" ]; then rm "data/belgium/wallonia/difference/diff.geojson"; fi
-          ogr2ogr -f "GeoJSON" -progress "data/belgium/wallonia/difference/diff.geojson" "bra-diff.geojson"
-          ogr2ogr -f "GeoJSON" -progress -append "data/belgium/wallonia/difference/diff.geojson" "hai-diff.geojson"
-          ogr2ogr -f "GeoJSON" -progress -append "data/belgium/wallonia/difference/diff.geojson" "lie-diff.geojson"
-          ogr2ogr -f "GeoJSON" -progress -append "data/belgium/wallonia/difference/diff.geojson" "nam-diff.geojson"
-          ogr2ogr -f "GeoJSON" -progress -append "data/belgium/wallonia/difference/diff.geojson" "lux-diff.geojson"
+          ogr2ogr -f "GeoJSON" -progress "data/belgium/wallonia/difference/diff.geojson" "data/belgium/wallonia/difference/BRA/diff.geojson"
+          ogr2ogr -f "GeoJSON" -progress -append "data/belgium/wallonia/difference/diff.geojson" "data/belgium/wallonia/difference/HAI/diff.geojson"
+          ogr2ogr -f "GeoJSON" -progress -append "data/belgium/wallonia/difference/diff.geojson" "data/belgium/wallonia/difference/LIE/diff.geojson"
+          ogr2ogr -f "GeoJSON" -progress -append "data/belgium/wallonia/difference/diff.geojson" "data/belgium/wallonia/difference/NAM/diff.geojson"
+          ogr2ogr -f "GeoJSON" -progress -append "data/belgium/wallonia/difference/diff.geojson" "data/belgium/wallonia/difference/LUX/diff.geojson"
       - name: Upload difference
         uses: actions/upload-artifact@v2
         with:
@@ -537,7 +467,8 @@ jobs:
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git pull
-          git add data/belgium/wallonia/difference/BRA/diff.geojson
+          git add data/belgium/wallonia/difference/*/diff.geojson
+          git add data/belgium/wallonia/difference/diff.geojson
           git commit -m "🗃 Update difference for Wallonia, Belgium"
       - name: Push changes
         if: ${{ github.event_name != 'pull_request' }}
