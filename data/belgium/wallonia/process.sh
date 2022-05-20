@@ -10,29 +10,30 @@ cd `dirname "$(realpath $0)"`
 
 mkdir -p "./source/"
 
+URL="https://geoservices.wallonie.be/geotraitement/spwdatadownload/get/b795de68-726c-4bdf-a62a-a42686aa5b6f"
 FILENAME="PICC_vDIFF_SHAPE_31370_PROV_BRABANT_WALLON"
 if [ ! -d "./source/$FILENAME" ]; then
-  wget -O "./source/$FILENAME.zip" "https://geoservices.wallonie.be/geotraitement/spwdatadownload/results/b795de68-726c-4bdf-a62a-a42686aa5b6f/$FILENAME.zip"
+  wget -O "./source/$FILENAME.zip" "$URL/$FILENAME.zip"
   unzip "./source/$FILENAME.zip" -d "./source/$FILENAME/" "VOIRIE_AXE.*"
 fi
 FILENAME="PICC_vDIFF_SHAPE_31370_PROV_HAINAUT"
 if [ ! -d "./source/$FILENAME" ]; then
-  wget -O "./source/$FILENAME.zip" "https://geoservices.wallonie.be/geotraitement/spwdatadownload/results/b795de68-726c-4bdf-a62a-a42686aa5b6f/$FILENAME.zip"
+  wget -O "./source/$FILENAME.zip" "$URL/$FILENAME.zip"
   unzip "./source/$FILENAME.zip" -d "./source/$FILENAME/" "VOIRIE_AXE.*"
 fi
 FILENAME="PICC_vDIFF_SHAPE_31370_PROV_LIEGE"
 if [ ! -d "./source/$FILENAME" ]; then
-  wget -O "./source/$FILENAME.zip" "https://geoservices.wallonie.be/geotraitement/spwdatadownload/results/b795de68-726c-4bdf-a62a-a42686aa5b6f/$FILENAME.zip"
+  wget -O "./source/$FILENAME.zip" "$URL/$FILENAME.zip"
   unzip "./source/$FILENAME.zip" -d "./source/$FILENAME/" "VOIRIE_AXE.*"
 fi
 FILENAME="PICC_vDIFF_SHAPE_31370_PROV_NAMUR"
 if [ ! -d "./source/$FILENAME" ]; then
-  wget -O "./source/$FILENAME.zip" "https://geoservices.wallonie.be/geotraitement/spwdatadownload/results/b795de68-726c-4bdf-a62a-a42686aa5b6f/$FILENAME.zip"
+  wget -O "./source/$FILENAME.zip" "$URL/$FILENAME.zip"
   unzip "./source/$FILENAME.zip" -d "./source/$FILENAME/" "VOIRIE_AXE.*"
 fi
 FILENAME="PICC_vDIFF_SHAPE_31370_PROV_LUXEMBOURG"
 if [ ! -d "./source/$FILENAME" ]; then
-  wget -O "./source/$FILENAME.zip" "https://geoservices.wallonie.be/geotraitement/spwdatadownload/results/b795de68-726c-4bdf-a62a-a42686aa5b6f/$FILENAME.zip"
+  wget -O "./source/$FILENAME.zip" "$URL/$FILENAME.zip"
   unzip "./source/$FILENAME.zip" -d "./source/$FILENAME/" "VOIRIE_AXE.*"
 fi
 
