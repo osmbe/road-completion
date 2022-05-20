@@ -208,6 +208,98 @@ jobs:
           github_token: ${{ secrets.TOKEN }}
           branch: ${{ github.ref }}
 
+  diff-lie:
+    name: Generate difference for Liège, Wallonia, Belgium
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Install GDAL
+        run: |
+          sudo apt-add-repository ppa:ubuntugis/ubuntugis-unstable
+          sudo apt update
+          sudo apt install gdal-bin
+      - name: Install Tippecanoe
+        uses: ./.github/actions/install-tippecanoe
+      - name: Install dependencies
+        run: npm install
+        working-directory: script
+      - name: Build
+        run: npm run build
+        working-directory: script
+      - name: Generate OpenStreetMap buffers
+        uses: ./.github/actions/openstreetmap-buffers
+        with:
+          country: europe/belgium
+      - name: Download & Unzip PICC data
+        run: |
+          wget "https://geoservices.wallonie.be/geotraitement/spwdatadownload/get/b795de68-726c-4bdf-a62a-a42686aa5b6f/PICC_vDIFF_SHAPE_31370_PROV_LIEGE.zip"
+          unzip -j "PICC_vDIFF_SHAPE_31370_PROV_LIEGE.zip" "VOIRIE_AXE.*"
+      - name: Convert (and filter) PICC to GeoJSON
+        run: |
+          ogr2ogr -f "GeoJSON" -progress \
+            -s_srs "EPSG:31370" -t_srs "EPSG:4326" -dim "XY" \
+            -makevalid \
+            -sql "@data/belgium/wallonia/filter.sql" \
+            -lco COORDINATE_PRECISION=6 \
+            -fieldTypeToString "All" \
+            "LIE_VOIRIE_AXE.geojson" \
+            "VOIRIE_AXE.shp"
+      - name: Convert PICC fields to OpenStreetMap tags
+        run: node "script/convert-tags.js" -c "data/belgium/wallonia/convert.json" "LIE_VOIRIE_AXE.geojson" "LIE_VOIRIE_AXETagged.geojson"
+      - name: Generate PICC vector tiles
+        run: |
+          tippecanoe --force --no-feature-limit --no-tile-size-limit \
+            --buffer=0 \
+            --maximum-zoom=14 --minimum-zoom=14 \
+            --layer="roads" \
+            --output="LIE_VOIRIE_AXETagged.mbtiles" "LIE_VOIRIE_AXETagged.geojson"
+      - name: Generate MapRoulette buffers
+        uses: ./.github/actions/maproulette-buffers
+        with:
+          challenge-id: ${{ env.MAPROULETTE_CHALLENGE }}
+      - name: Upload MapRoulette false positive
+        uses: actions/upload-artifact@v2
+        with:
+          name: MapRoulette-FalsePositive
+          path: maproulette.geojson
+      - name: Merge MapRoulette buffers to OpenStreetMap buffers and generate vector tiles
+        run: |
+          tippecanoe --force --no-feature-limit --no-tile-size-limit \
+            --maximum-zoom=14 --minimum-zoom=14 \
+            --layer="buffers" \
+            --output="belgium-buffers.mbtiles" \
+            "openstreetmap-lines-buffers.geojson" "openstreetmap-polygons-buffers.geojson" "maproulette-buffers.geojson"
+      - name: Difference
+        run: node "script/difference.js" --output-dir="data/belgium/wallonia/difference/LIE" "LIE_VOIRIE_AXETagged.mbtiles" "belgium-buffers.mbtiles"
+      - name: Upload difference
+        uses: actions/upload-artifact@v2
+        with:
+          name: Liege-Difference
+          path: data/belgium/wallonia/difference/LIE/diff.geojson
+      - name: Upload statistics
+        uses: actions/upload-artifact@v2
+        with:
+          name: Liege-Statistics
+          path: data/belgium/wallonia/difference/LIE/stats.json
+      - name: Commit changes
+        if: ${{ github.event_name != 'pull_request' }}
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git pull
+          git add data/belgium/wallonia/difference/LIE/diff.geojson
+          git add data/belgium/wallonia/difference/LIE/stats.json
+          git commit -m "🗃 Update difference for Liège, Wallonia, Belgium"
+      - name: Push changes
+        if: ${{ github.event_name != 'pull_request' }}
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.TOKEN }}
+          branch: ${{ github.ref }}
+
   # merge:
   #   name: Generate difference for Wallonia, Belgium (merge)
   #   runs-on: ubuntu-latest
