@@ -206,7 +206,7 @@ jobs:
         uses: ad-m/github-push-action@v0.6.0
         with:
           github_token: ${{ secrets.TOKEN }}
-          hainch: ${{ github.ref }}
+          branch: ${{ github.ref }}
 
   # merge:
   #   name: Generate difference for Wallonia, Belgium (merge)
