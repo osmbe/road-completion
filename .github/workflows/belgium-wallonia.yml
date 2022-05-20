@@ -58,7 +58,7 @@ jobs:
           ogr2ogr -f "GeoJSON" -progress \
             -s_srs "EPSG:31370" -t_srs "EPSG:4326" -dim "XY" \
             -makevalid \
-            -sql "@filter.sql" \
+            -sql "@data/belgium/wallonia/filter.sql" \
             -lco COORDINATE_PRECISION=6 \
             -fieldTypeToString "All" \
             "BRA_VOIRIE_AXE.geojson" \
