@@ -434,27 +434,30 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: BrabantWallon-Difference
-          path: data/belgium/wallonia/difference/BRA/diff.geojson
+          path: data/belgium/wallonia/difference/BRA
       - name: Download difference for Hainaut, Wallonia, Belgium
         uses: actions/download-artifact@v3
         with:
           name: Hainaut-Difference
-          path: data/belgium/wallonia/difference/HAI/diff.geojson
+          path: data/belgium/wallonia/difference/HAI
       - name: Download difference for Liège, Wallonia, Belgium
         uses: actions/download-artifact@v3
         with:
           name: Liege-Difference
-          path: data/belgium/wallonia/difference/LIE/diff.geojson
+          path: data/belgium/wallonia/difference/LIE
       - name: Download difference for Luxembourg, Wallonia, Belgium
         uses: actions/download-artifact@v3
         with:
           name: Luxembourg-Difference
-          path: data/belgium/wallonia/difference/LUX/diff.geojson
+          path: data/belgium/wallonia/difference/LUX
       - name: Download difference for Namur, Wallonia, Belgium
         uses: actions/download-artifact@v3
         with:
           name: Namur-Difference
-          path: data/belgium/wallonia/difference/NAM/diff.geojson
+          path: data/belgium/wallonia/difference/NAM
+      - name: Display structure of downloaded files
+        run: ls -R
+        working-directory: data/belgium/wallonia/difference
       - name: Merge differences
         run: |
           if [ -f "data/belgium/wallonia/difference/diff.geojson" ]; then rm "data/belgium/wallonia/difference/diff.geojson"; fi
