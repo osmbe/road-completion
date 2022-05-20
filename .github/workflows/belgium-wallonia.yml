@@ -115,3 +115,65 @@ jobs:
         with:
           github_token: ${{ secrets.TOKEN }}
           branch: ${{ github.ref }}
+
+  # merge:
+  #   name: Generate difference for Wallonia, Belgium (merge)
+  #   runs-on: ubuntu-latest
+  #   needs: [diff-bra, diff-hai, diff-lie, diff-lux, diff-nam]
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #       with:
+  #         persist-credentials: false
+  #         fetch-depth: 0
+  #     - name: Download difference for Brabant Wallon, Wallonia, Belgium
+  #       uses: actions/download-artifact@v3
+  #       with:
+  #         name: BrabantWallon-Difference
+  #         path: bra-diff.geojson
+  #     - name: Download difference for Hainaut, Wallonia, Belgium
+  #       uses: actions/download-artifact@v3
+  #       with:
+  #         name: Hainaut-Difference
+  #         path: hai-diff.geojson
+  #     - name: Download difference for Liège, Wallonia, Belgium
+  #       uses: actions/download-artifact@v3
+  #       with:
+  #         name: Liege-Difference
+  #         path: lie-diff.geojson
+  #     - name: Download difference for Luxembourg, Wallonia, Belgium
+  #       uses: actions/download-artifact@v3
+  #       with:
+  #         name: Luxembourg-Difference
+  #         path: lux-diff.geojson
+  #     - name: Download difference for Namur, Wallonia, Belgium
+  #       uses: actions/download-artifact@v3
+  #       with:
+  #         name: Namur-Difference
+  #         path: nam-diff.geojson
+  #     - name: Merge differences
+  #       run: |
+  #         if [ -f "data/belgium/wallonia/difference/diff.geojson" ]; then rm "data/belgium/wallonia/difference/diff.geojson"; fi
+  #         ogr2ogr -f "GeoJSON" -progress "data/belgium/wallonia/difference/diff.geojson" "bra-diff.geojson"
+  #         ogr2ogr -f "GeoJSON" -progress -append "data/belgium/wallonia/difference/diff.geojson" "hai-diff.geojson"
+  #         ogr2ogr -f "GeoJSON" -progress -append "data/belgium/wallonia/difference/diff.geojson" "lie-diff.geojson"
+  #         ogr2ogr -f "GeoJSON" -progress -append "data/belgium/wallonia/difference/diff.geojson" "nam-diff.geojson"
+  #         ogr2ogr -f "GeoJSON" -progress -append "data/belgium/wallonia/difference/diff.geojson" "lux-diff.geojson"
+  #     - name: Upload difference
+  #       uses: actions/upload-artifact@v2
+  #       with:
+  #         name: Wallonia-Difference
+  #         path: data/belgium/wallonia/difference/diff.geojson
+  #     - name: Commit changes
+  #       if: ${{ github.event_name != 'pull_request' }}
+  #       run: |
+  #         git config user.name github-actions[bot]
+  #         git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+  #         git pull
+  #         git add data/belgium/wallonia/difference/BRA/diff.geojson
+  #         git commit -m "🗃 Update difference for Wallonia, Belgium"
+  #     - name: Push changes
+  #       if: ${{ github.event_name != 'pull_request' }}
+  #       uses: ad-m/github-push-action@v0.6.0
+  #       with:
+  #         github_token: ${{ secrets.TOKEN }}
+  #         branch: ${{ github.ref }}
