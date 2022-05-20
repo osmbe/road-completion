@@ -423,6 +423,13 @@ jobs:
           sudo apt-add-repository ppa:ubuntugis/ubuntugis-unstable
           sudo apt update
           sudo apt install gdal-bin
+      - name: Clean
+        run: |
+          if [ -f "data/belgium/wallonia/difference/BRA/diff.geojson" ]; then rm "data/belgium/wallonia/difference/BRA/diff.geojson"; fi
+          if [ -f "data/belgium/wallonia/difference/HAI/diff.geojson" ]; then rm "data/belgium/wallonia/difference/HAI/diff.geojson"; fi
+          if [ -f "data/belgium/wallonia/difference/LIE/diff.geojson" ]; then rm "data/belgium/wallonia/difference/LIE/diff.geojson"; fi
+          if [ -f "data/belgium/wallonia/difference/LUX/diff.geojson" ]; then rm "data/belgium/wallonia/difference/LUX/diff.geojson"; fi
+          if [ -f "data/belgium/wallonia/difference/NAM/diff.geojson" ]; then rm "data/belgium/wallonia/difference/NAM/diff.geojson"; fi
       - name: Download difference for Brabant Wallon, Wallonia, Belgium
         uses: actions/download-artifact@v3
         with:
