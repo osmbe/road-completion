@@ -430,11 +430,11 @@ jobs:
           if [ -f "data/belgium/wallonia/difference/LIE/diff.geojson" ]; then rm "data/belgium/wallonia/difference/LIE/diff.geojson"; fi
           if [ -f "data/belgium/wallonia/difference/LUX/diff.geojson" ]; then rm "data/belgium/wallonia/difference/LUX/diff.geojson"; fi
           if [ -f "data/belgium/wallonia/difference/NAM/diff.geojson" ]; then rm "data/belgium/wallonia/difference/NAM/diff.geojson"; fi
-          if [ -f "data/belgium/wallonia/difference/BRA/stats.geojson" ]; then rm "data/belgium/wallonia/difference/BRA/stats.geojson"; fi
-          if [ -f "data/belgium/wallonia/difference/HAI/stats.geojson" ]; then rm "data/belgium/wallonia/difference/HAI/stats.geojson"; fi
-          if [ -f "data/belgium/wallonia/difference/LIE/stats.geojson" ]; then rm "data/belgium/wallonia/difference/LIE/stats.geojson"; fi
-          if [ -f "data/belgium/wallonia/difference/LUX/stats.geojson" ]; then rm "data/belgium/wallonia/difference/LUX/stats.geojson"; fi
-          if [ -f "data/belgium/wallonia/difference/NAM/stats.geojson" ]; then rm "data/belgium/wallonia/difference/NAM/stats.geojson"; fi
+          if [ -f "data/belgium/wallonia/difference/BRA/stats.json" ]; then rm "data/belgium/wallonia/difference/BRA/stats.json"; fi
+          if [ -f "data/belgium/wallonia/difference/HAI/stats.json" ]; then rm "data/belgium/wallonia/difference/HAI/stats.json"; fi
+          if [ -f "data/belgium/wallonia/difference/LIE/stats.json" ]; then rm "data/belgium/wallonia/difference/LIE/stats.json"; fi
+          if [ -f "data/belgium/wallonia/difference/LUX/stats.json" ]; then rm "data/belgium/wallonia/difference/LUX/stats.json"; fi
+          if [ -f "data/belgium/wallonia/difference/NAM/stats.json" ]; then rm "data/belgium/wallonia/difference/NAM/stats.json"; fi
       - name: Download difference for Brabant Wallon, Wallonia, Belgium
         uses: actions/download-artifact@v3
         with:
@@ -505,7 +505,7 @@ jobs:
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git pull
           git add data/belgium/wallonia/difference/*/diff.geojson
-          git add data/belgium/wallonia/difference/*/stats.geojson
+          git add data/belgium/wallonia/difference/*/stats.json
           git add data/belgium/wallonia/difference/diff.geojson
           git commit -m "🗃 Update difference for Wallonia, Belgium"
       - name: Push changes
