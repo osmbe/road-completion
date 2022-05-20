@@ -143,8 +143,8 @@ jobs:
           country: europe/belgium
       - name: Download & Unzip PICC data
         run: |
-          wget "https://geoservices.wallonie.be/geotraitement/spwdatadownload/get/b795de68-726c-4bdf-a62a-a42686aa5b6f/PICC_vDIFF_SHAPE_31370_PROV_BRABANT_WALLON.zip"
-          unzip -j "PICC_vDIFF_SHAPE_31370_PROV_BRABANT_WALLON.zip" "VOIRIE_AXE.*"
+          wget "https://geoservices.wallonie.be/geotraitement/spwdatadownload/get/b795de68-726c-4bdf-a62a-a42686aa5b6f/PICC_vDIFF_SHAPE_31370_PROV_HAINAUT.zip"
+          unzip -j "PICC_vDIFF_SHAPE_31370_PROV_HAINAUT.zip" "VOIRIE_AXE.*"
       - name: Convert (and filter) PICC to GeoJSON
         run: |
           ogr2ogr -f "GeoJSON" -progress \
@@ -153,17 +153,17 @@ jobs:
             -sql "@data/belgium/wallonia/filter.sql" \
             -lco COORDINATE_PRECISION=6 \
             -fieldTypeToString "All" \
-            "BRA_VOIRIE_AXE.geojson" \
+            "HAI_VOIRIE_AXE.geojson" \
             "VOIRIE_AXE.shp"
       - name: Convert PICC fields to OpenStreetMap tags
-        run: node "script/convert-tags.js" -c "data/belgium/wallonia/convert.json" "BRA_VOIRIE_AXE.geojson" "BRA_VOIRIE_AXETagged.geojson"
+        run: node "script/convert-tags.js" -c "data/belgium/wallonia/convert.json" "HAI_VOIRIE_AXE.geojson" "HAI_VOIRIE_AXETagged.geojson"
       - name: Generate PICC vector tiles
         run: |
           tippecanoe --force --no-feature-limit --no-tile-size-limit \
             --buffer=0 \
             --maximum-zoom=14 --minimum-zoom=14 \
             --layer="roads" \
-            --output="BRA_VOIRIE_AXETagged.mbtiles" "BRA_VOIRIE_AXETagged.geojson"
+            --output="HAI_VOIRIE_AXETagged.mbtiles" "HAI_VOIRIE_AXETagged.geojson"
       - name: Generate MapRoulette buffers
         uses: ./.github/actions/maproulette-buffers
         with:
@@ -181,7 +181,7 @@ jobs:
             --output="belgium-buffers.mbtiles" \
             "openstreetmap-lines-buffers.geojson" "openstreetmap-polygons-buffers.geojson" "maproulette-buffers.geojson"
       - name: Difference
-        run: node "script/difference.js" --output-dir="data/belgium/wallonia/difference/HAI" "BRA_VOIRIE_AXETagged.mbtiles" "belgium-buffers.mbtiles"
+        run: node "script/difference.js" --output-dir="data/belgium/wallonia/difference/HAI" "HAI_VOIRIE_AXETagged.mbtiles" "belgium-buffers.mbtiles"
       - name: Upload difference
         uses: actions/upload-artifact@v2
         with:
