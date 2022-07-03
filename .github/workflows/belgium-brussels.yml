@@ -1,6 +1,7 @@
 name: 🇧🇪 Brussels, Belgium
 
 on:
+  workflow_dispatch:
   # Run every Sunday at 12:00 UTC
   schedule:
     - cron: "0 12 * * 0"
