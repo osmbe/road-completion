@@ -23,7 +23,15 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
       working-directory: script
-    - run: npm run lint
-      working-directory: script
     - run: npm run build
+      working-directory: script
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+    - run: npm ci
+      working-directory: script
+    - run: npm run lint
       working-directory: script
