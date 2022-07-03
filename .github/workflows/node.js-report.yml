@@ -10,7 +10,7 @@ on:
       - "report/**"
 
 jobs:
-  build:
+  build-report:
     runs-on: ubuntu-latest
     strategy:
       matrix:
