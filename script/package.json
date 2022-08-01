@@ -34,7 +34,7 @@
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.1",
     "@types/event-stream": "^4.0.0",
-    "@types/geojson": "^7946.0.8",
+    "@types/geojson": "^7946.0.10",
     "@types/minimist": "^1.2.2",
     "@types/node": "^16.11.32",
     "@typescript-eslint/eslint-plugin": "^5.30.4",
