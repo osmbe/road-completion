@@ -3,24 +3,27 @@ name: Build and Deploy report page
 on:
   push:
     paths:
-      - ".github/workflows/deploy-stats-page.yml"
+      - ".github/workflows/deploy-report-page.yml"
       - "report/**"
       - "data/**/diff.geojson"
       - "data/**/stats.json"
-  pull_request:
-    paths:
-      - "report/**"
+
+# Allow one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
 
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.3.1
+        uses: actions/checkout@v3
         with:
           persist-credentials: false
-
+      - name: Setup Pages
+        uses: actions/configure-pages@v2
       - name: Install and Build
         run: |
           npm install
@@ -28,12 +31,29 @@ jobs:
         working-directory: report
         env:
           PUBLIC_GITHUB_TOKEN: ${{ secrets.TOKEN }}
-
-      - name: Deploy
-        if: ${{ github.event_name == 'push' }}
-        uses: JamesIves/github-pages-deploy-action@3.6.2
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: report/dist # The folder the action should deploy.
-          CLEAN: true # Automatically remove deleted files from the deploy branch
+          path: report/dist
+      # - name: Deploy
+      #   if: ${{ github.event_name == 'push' }}
+      #   uses: JamesIves/github-pages-deploy-action@3.6.2
+      #   with:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     BRANCH: gh-pages # The branch the action should deploy to.
+      #     FOLDER: report/dist # The folder the action should deploy.
+      #     CLEAN: true # Automatically remove deleted files from the deploy branch
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
