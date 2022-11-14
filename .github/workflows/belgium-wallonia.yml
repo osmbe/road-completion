@@ -20,6 +20,11 @@ on:
       - "data/belgium/wallonia/convert.json"
       - "data/belgium/wallonia/filter.sql"
 
+# Allow one concurrent deployment
+concurrency:
+  group: "belgium-wallonia"
+  cancel-in-progress: true
+
 env:
   MAPROULETTE_CHALLENGE: 14681
 
