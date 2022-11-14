@@ -20,6 +20,11 @@ on:
       - "data/belgium/brussels/convert.json"
       - "data/belgium/brussels/filter.sql"
 
+# Allow one concurrent deployment
+concurrency:
+  group: "belgium-brussels"
+  cancel-in-progress: true
+  
 jobs:
 
   diff-brussels:
