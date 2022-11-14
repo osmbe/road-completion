@@ -19,6 +19,11 @@ on:
       - "data/luxembourg/convert.json"
       - "data/luxembourg/filter.sql"
 
+# Allow one concurrent deployment
+concurrency:
+  group: "luxembourg"
+  cancel-in-progress: true
+
 jobs:
 
   diff-luxembourg:
