@@ -20,6 +20,11 @@ on:
       - "data/belgium/flanders/convert.json"
       - "data/belgium/flanders/filter.sql"
 
+# Allow one concurrent deployment
+concurrency:
+  group: "belgium-flanders"
+  cancel-in-progress: true
+
 jobs:
 
   diff-flanders:
