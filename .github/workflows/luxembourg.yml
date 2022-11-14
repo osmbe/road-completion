@@ -81,7 +81,7 @@ jobs:
         with:
           challenge-id: 17749
       - name: Upload MapRoulette false positive
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: MapRoulette-FalsePositive
           path: maproulette.geojson
@@ -95,12 +95,12 @@ jobs:
       - name: Difference
         run: node "script/difference.js" --output-dir="data/luxembourg/difference" "trpvcTagged.mbtiles" "luxembourg-buffers.mbtiles"
       - name: Upload difference
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Luxembourg-Difference
           path: data/luxembourg/difference/diff.geojson
       - name: Upload statistics
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Luxembourg-Statistics
           path: data/luxembourg/difference/stats.json
