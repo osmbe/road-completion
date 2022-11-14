@@ -10,7 +10,7 @@
   "devDependencies": {
     "@astrojs/svelte": "1.0.2",
     "@octokit/rest": "^19.0.4",
-    "astro": "^1.6.2"
+    "astro": "^1.6.8"
   },
   "dependencies": {
     "chart.js": "^3.9.1",
