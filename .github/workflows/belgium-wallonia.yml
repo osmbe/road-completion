@@ -29,7 +29,7 @@ jobs:
     name: Generate difference for Brabant Wallon, Wallonia, Belgium
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -106,7 +106,7 @@ jobs:
     name: Generate difference for Hainaut, Wallonia, Belgium
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -183,7 +183,7 @@ jobs:
     name: Generate difference for Liège, Wallonia, Belgium
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -260,7 +260,7 @@ jobs:
     name: Generate difference for Luxembourg, Wallonia, Belgium
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -337,7 +337,7 @@ jobs:
     name: Generate difference for Namur, Wallonia, Belgium
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -415,7 +415,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [diff-bra, diff-hai, diff-lie, diff-lux, diff-nam]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           persist-credentials: false
           fetch-depth: 0
