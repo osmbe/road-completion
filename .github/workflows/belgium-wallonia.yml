@@ -22,7 +22,7 @@ on:
 
 # Allow one concurrent deployment
 concurrency:
-  group: "belgium-wallonia"
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 env:
