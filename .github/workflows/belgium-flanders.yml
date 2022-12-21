@@ -30,6 +30,8 @@ jobs:
   diff-flanders:
     name: Generate difference for Flanders, Belgium
     runs-on: ubuntu-latest
+    env:
+      MAPROULETTE_CHALLENGE_ID: 14645
     steps:
       - uses: actions/checkout@v3
         with:
@@ -78,7 +80,7 @@ jobs:
       - name: Generate MapRoulette buffers
         uses: ./.github/actions/maproulette-buffers
         with:
-          challenge-id: 14645
+          challenge-id: ${{ env.MAPROULETTE_CHALLENGE_ID }}
       - name: Upload MapRoulette false positive
         uses: actions/upload-artifact@v3
         with:
@@ -118,3 +120,8 @@ jobs:
         with:
           github_token: ${{ secrets.TOKEN }}
           branch: ${{ github.ref }}
+      - name: Rebuild MapRoulette challenge
+        run: |
+          curl -X "PUT" "https://maproulette.org/api/v2/challenge/${{ env.MAPROULETTE_CHALLENGE_ID }}/rebuild?removeUnmatched=true&skipSnapshot=false" \
+            -H "Accept: application/json" \
+            -H "apiKey: ${{ secrets.MAPROULETTE_API_KEY }}"
