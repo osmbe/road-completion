@@ -56,8 +56,8 @@ jobs:
           country: europe/belgium
       - name: Download & Unzip Wegenregister data
         run: |
-          wget "https://downloadagiv.blob.core.windows.net/wegenregister/Wegenregister_SHAPE_20220915.zip"
-          unzip -j "Wegenregister_SHAPE_20220915.zip" "Wegenregister_SHAPE_20220915/Shapefile/Wegsegment.*"
+          wget "https://downloadagiv.blob.core.windows.net/wegenregister/Wegenregister_SHAPE_20221216.zip"
+          unzip -j "Wegenregister_SHAPE_20221216.zip" "Wegenregister_SHAPE_20221216/Shapefile/Wegsegment.*"
       - name: Convert (and filter) Wegenregister to GeoJSON
         run: |
           ogr2ogr -f "GeoJSON" -progress \
