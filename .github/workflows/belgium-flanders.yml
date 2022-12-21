@@ -31,7 +31,7 @@ jobs:
     name: Generate difference for Flanders, Belgium
     runs-on: ubuntu-latest
     env:
-      MAPROULETTE_CHALLENGE_ID: 14645
+      MAPROULETTE_CHALLENGE_ID: 24090
     steps:
       - uses: actions/checkout@v3
         with:
