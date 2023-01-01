@@ -37,7 +37,7 @@
     "@types/geojson": "^7946.0.10",
     "@types/minimist": "^1.2.2",
     "@types/node": "^18.11.10",
-    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/eslint-plugin": "^5.47.1",
     "@typescript-eslint/parser": "^5.45.0",
     "eslint": "^8.28.0",
     "eslint-config-standard": "^17.0.0",
