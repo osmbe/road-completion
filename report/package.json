@@ -13,7 +13,7 @@
     "astro": "^1.8.0"
   },
   "dependencies": {
-    "chart.js": "^3.9.1",
+    "chart.js": "^4.1.1",
     "chartjs-adapter-moment": "^1.0.1",
     "moment": "^2.29.4"
   }
