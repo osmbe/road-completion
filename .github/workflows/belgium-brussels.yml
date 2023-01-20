@@ -107,18 +107,13 @@ jobs:
       - name: Commit changes
         if: ${{ github.event_name != 'pull_request' }}
         run: |
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git config user.name github-actions
+          git config user.email github-actions@github.com
           git pull
           git add data/belgium/brussels/difference/diff.geojson
           git add data/belgium/brussels/difference/stats.json
           git commit -m "🗃 Update difference for Brussels, Belgium"
-      - name: Push changes
-        if: ${{ github.event_name != 'pull_request' }}
-        uses: ad-m/github-push-action@v0.6.0
-        with:
-          github_token: ${{ secrets.TOKEN }}
-          branch: ${{ github.ref }}
+          git push
       - name: Rebuild MapRoulette challenge
         run: |
           curl -X "PUT" "https://maproulette.org/api/v2/challenge/${{ env.MAPROULETTE_CHALLENGE_ID }}/rebuild?removeUnmatched=true&skipSnapshot=false" \
