@@ -34,9 +34,6 @@ jobs:
       MAPROULETTE_CHALLENGE_ID: 14675
     steps:
       - uses: actions/checkout@v3
-        with:
-          persist-credentials: false
-          fetch-depth: 0
       - name: Install GDAL
         run: |
           sudo apt-add-repository ppa:ubuntugis/ubuntugis-unstable
