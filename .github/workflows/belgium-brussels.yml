@@ -25,13 +25,14 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  MAPROULETTE_CHALLENGE_ID: 14675
+
 jobs:
 
-  diff-brussels:
+  diff:
     name: Generate difference for Brussels, Belgium
     runs-on: ubuntu-latest
-    env:
-      MAPROULETTE_CHALLENGE_ID: 14675
     steps:
       - uses: actions/checkout@v3
       - name: Install GDAL
@@ -101,18 +102,31 @@ jobs:
         with:
           name: Brussels-Statistics
           path: data/belgium/brussels/difference/stats.json
-      - name: Commit changes
-        if: ${{ github.event_name != 'pull_request' }}
-        run: |
+
+  commit:
+    name: Commit & Push changes
+    needs: diff
+    if: ${{ github.event_name != 'pull_request' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@v3
+        with:
+          path: data/belgium/brussels/difference
+      - run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git pull
           git add data/belgium/brussels/difference/diff.geojson
           git add data/belgium/brussels/difference/stats.json
           git commit -m "🗃 Update difference for Brussels, Belgium"
           git push
-      - name: Rebuild MapRoulette challenge
-        run: |
+          
+  mr-rebuild:
+    name: Rebuild MapRoulette challenge
+    needs: commit
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
           curl -X "PUT" "https://maproulette.org/api/v2/challenge/${{ env.MAPROULETTE_CHALLENGE_ID }}/rebuild?removeUnmatched=true&skipSnapshot=false" \
             -H "Accept: application/json" \
             -H "apiKey: ${{ secrets.MAPROULETTE_API_KEY }}"
