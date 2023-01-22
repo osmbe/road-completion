@@ -1,6 +1,6 @@
 #!/bin/sh
 
-FILENAME="01-12-2022"
+FILENAME="05-01-2023"
 MAPROULETTE_CHALLENGE=17332
 
 # Make script directory working directory
