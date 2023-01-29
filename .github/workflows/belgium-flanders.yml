@@ -25,18 +25,16 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  MAPROULETTE_CHALLENGE_ID: 24090
+
 jobs:
 
-  diff-flanders:
+  diff:
     name: Generate difference for Flanders, Belgium
     runs-on: ubuntu-latest
-    env:
-      MAPROULETTE_CHALLENGE_ID: 24090
     steps:
       - uses: actions/checkout@v3
-        with:
-          persist-credentials: false
-          fetch-depth: 0
       - name: Install GDAL
         run: |
           sudo apt-add-repository ppa:ubuntugis/ubuntugis-unstable
@@ -105,8 +103,23 @@ jobs:
         with:
           name: Flanders-Statistics
           path: data/belgium/flanders/difference/stats.json
-      - name: Commit changes
-        if: ${{ github.event_name != 'pull_request' }}
+
+  commit:
+    name: Commit & Push changes
+    needs: diff
+    if: ${{ github.event_name != 'pull_request' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@v3
+        with:
+          name: Flanders-Difference
+          path: data/belgium/flanders/difference
+      - uses: actions/download-artifact@v3
+        with:
+          name: Flanders-Statistics
+          path: data/belgium/flanders/difference
+      - name: Commit & Push
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
@@ -114,13 +127,14 @@ jobs:
           git add data/belgium/flanders/difference/diff.geojson
           git add data/belgium/flanders/difference/stats.json
           git commit -m "🗃 Update difference for Flanders, Belgium"
-      - name: Push changes
-        if: ${{ github.event_name != 'pull_request' }}
-        uses: ad-m/github-push-action@v0.6.0
-        with:
-          github_token: ${{ secrets.TOKEN }}
-          branch: ${{ github.ref }}
-      - name: Rebuild MapRoulette challenge
+          git push
+
+  mr-rebuild:
+    name: Rebuild MapRoulette challenge
+    needs: commit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call MapRoulette API
         run: |
           curl -X "PUT" "https://maproulette.org/api/v2/challenge/${{ env.MAPROULETTE_CHALLENGE_ID }}/rebuild?removeUnmatched=true&skipSnapshot=false" \
             -H "Accept: application/json" \
