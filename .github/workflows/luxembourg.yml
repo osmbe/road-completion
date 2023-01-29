@@ -1,6 +1,7 @@
 name: 🇱🇺 Luxembourg
 
 on:
+  workflow_dispatch:
   # Run every Sunday at 12:00 UTC
   schedule:
     - cron: "0 12 * * 0"
@@ -24,16 +25,16 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  MAPROULETTE_CHALLENGE_ID: 17749
+
 jobs:
 
-  diff-luxembourg:
+  diff:
     name: Generate difference for Luxembourg
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          persist-credentials: false
-          fetch-depth: 0
       - name: Install GDAL
         run: |
           sudo apt-add-repository ppa:ubuntugis/ubuntugis-unstable
@@ -84,7 +85,7 @@ jobs:
       - name: Generate MapRoulette buffers
         uses: ./.github/actions/maproulette-buffers
         with:
-          challenge-id: 17749
+          challenge-id: ${{ env.MAPROULETTE_CHALLENGE_ID }}
       - name: Upload MapRoulette false positive
         uses: actions/upload-artifact@v3
         with:
@@ -109,18 +110,39 @@ jobs:
         with:
           name: Luxembourg-Statistics
           path: data/luxembourg/difference/stats.json
-      - name: Commit changes
-        if: ${{ github.event_name != 'pull_request' }}
+
+  commit:
+    name: Commit & Push changes
+    needs: diff
+    if: ${{ github.event_name != 'pull_request' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@v3
+        with:
+          name: Luxembourg-Difference
+          path: data/belgium/luxembourg/difference
+      - uses: actions/download-artifact@v3
+        with:
+          name: Luxembourg-Statistics
+          path: data/belgium/luxembourg/difference
+      - name: Commit & Push
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git pull
-          git add data/luxembourg/difference/diff.geojson
-          git add data/luxembourg/difference/stats.json
+          git add data/belgium/luxembourg/difference/diff.geojson
+          git add data/belgium/luxembourg/difference/stats.json
           git commit -m "🗃 Update difference for Luxembourg"
-      - name: Push changes
-        if: ${{ github.event_name != 'pull_request' }}
-        uses: ad-m/github-push-action@v0.6.0
-        with:
-          github_token: ${{ secrets.TOKEN }}
-          branch: ${{ github.ref }}
+          git push
+
+  # mr-rebuild:
+  #   name: Rebuild MapRoulette challenge
+  #   needs: commit
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Call MapRoulette API
+  #       run: |
+  #         curl -X "PUT" "https://maproulette.org/api/v2/challenge/${{ env.MAPROULETTE_CHALLENGE_ID }}/rebuild?removeUnmatched=true&skipSnapshot=false" \
+  #           -H "Accept: application/json" \
+  #           -H "apiKey: ${{ secrets.MAPROULETTE_API_KEY }}"
