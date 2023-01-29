@@ -54,8 +54,8 @@ jobs:
           country: europe/netherlands
       - name: Download & Unzip NWB data
         run: |
-          wget --no-check-certificate "https://www.rijkswaterstaat.nl/apps/geoservices/geodata/dmc/nwb-wegen/geogegevens/shapefile/Nederland_totaal/05-01-2023.zip"
-          unzip -j "05-01-2023.zip" "05-01-2023/Wegvakken/Wegvakken.*"
+          wget --no-check-certificate "https://downloads.rijkswaterstaatdata.nl/nwb-wegen/geogegevens/shapefile/Nederland_totaal/01-12-2022.zip"
+          unzip -j "01-12-2022.zip" "01-12-2022/Wegvakken/Wegvakken.*"
       - name: Convert (and filter) NWB to GeoJSON
         run: |
           ogr2ogr -f "GeoJSON" -progress \
