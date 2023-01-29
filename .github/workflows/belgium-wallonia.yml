@@ -35,9 +35,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          persist-credentials: false
-          fetch-depth: 0
       - name: Install GDAL
         run: |
           sudo apt-add-repository ppa:ubuntugis/ubuntugis-unstable
@@ -112,9 +109,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          persist-credentials: false
-          fetch-depth: 0
       - name: Install GDAL
         run: |
           sudo apt-add-repository ppa:ubuntugis/ubuntugis-unstable
@@ -189,9 +183,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          persist-credentials: false
-          fetch-depth: 0
       - name: Install GDAL
         run: |
           sudo apt-add-repository ppa:ubuntugis/ubuntugis-unstable
@@ -266,9 +257,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          persist-credentials: false
-          fetch-depth: 0
       - name: Install GDAL
         run: |
           sudo apt-add-repository ppa:ubuntugis/ubuntugis-unstable
@@ -343,9 +331,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          persist-credentials: false
-          fetch-depth: 0
       - name: Install GDAL
         run: |
           sudo apt-add-repository ppa:ubuntugis/ubuntugis-unstable
@@ -479,33 +464,59 @@ jobs:
         with:
           name: Wallonia-Difference
           path: data/belgium/wallonia/difference/diff.geojson
-      - name: Download statistics for Brabant Wallon, Wallonia, Belgium
-        uses: actions/download-artifact@v3
+
+  commit:
+    name: Commit & Push changes
+    needs: merge
+    if: ${{ github.event_name != 'pull_request' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@v3
+        with:
+          name: BrabantWallon-Difference
+          path: data/belgium/wallonia/difference/BRA
+      - uses: actions/download-artifact@v3
         with:
           name: BrabantWallon-Statistics
           path: data/belgium/wallonia/difference/BRA
-      - name: Download statistics for Hainaut, Wallonia, Belgium
-        uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v3
+        with:
+          name: Hainaut-Difference
+          path: data/belgium/wallonia/difference/HAI
+      - uses: actions/download-artifact@v3
         with:
           name: Hainaut-Statistics
           path: data/belgium/wallonia/difference/HAI
-      - name: Download statistics for Liège, Wallonia, Belgium
-        uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v3
+        with:
+          name: Liege-Difference
+          path: data/belgium/wallonia/difference/LIE
+      - uses: actions/download-artifact@v3
         with:
           name: Liege-Statistics
           path: data/belgium/wallonia/difference/LIE
-      - name: Download statistics for Luxembourg, Wallonia, Belgium
-        uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v3
+        with:
+          name: Luxembourg-Difference
+          path: data/belgium/wallonia/difference/LUX
+      - uses: actions/download-artifact@v3
         with:
           name: Luxembourg-Statistics
           path: data/belgium/wallonia/difference/LUX
-      - name: Download statistics for Namur, Wallonia, Belgium
-        uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v3
+        with:
+          name: Namur-Difference
+          path: data/belgium/wallonia/difference/NAM
+      - uses: actions/download-artifact@v3
         with:
           name: Namur-Statistics
           path: data/belgium/wallonia/difference/NAM
-      - name: Commit changes
-        if: ${{ github.event_name != 'pull_request' }}
+      - uses: actions/download-artifact@v3
+        with:
+          name: Wallonia-Difference
+          path: data/belgium/wallonia/difference/diff.geojson
+      - name: Commit & Push
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
@@ -514,13 +525,14 @@ jobs:
           git add data/belgium/wallonia/difference/*/stats.json
           git add data/belgium/wallonia/difference/diff.geojson
           git commit -m "🗃 Update difference for Wallonia, Belgium"
-      - name: Push changes
-        if: ${{ github.event_name != 'pull_request' }}
-        uses: ad-m/github-push-action@v0.6.0
-        with:
-          github_token: ${{ secrets.TOKEN }}
-          branch: ${{ github.ref }}
-      - name: Rebuild MapRoulette challenge
+          git push
+
+  mr-rebuild:
+    name: Rebuild MapRoulette challenge
+    needs: commit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call MapRoulette API
         run: |
           curl -X "PUT" "https://maproulette.org/api/v2/challenge/${{ env.MAPROULETTE_CHALLENGE_ID }}/rebuild?removeUnmatched=true&skipSnapshot=false" \
             -H "Accept: application/json" \
