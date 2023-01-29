@@ -1,6 +1,7 @@
 name: 🇳🇱 Netherlands
 
 on:
+  workflow_dispatch:
   # Run every Sunday at 12:00 UTC
   schedule:
     - cron: "0 12 * * 0"
@@ -24,16 +25,16 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  MAPROULETTE_CHALLENGE_ID: 17332
+
 jobs:
 
-  diff-flanders:
+  diff:
     name: Generate difference for Netherlands
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          persist-credentials: false
-          fetch-depth: 0
       - name: Install GDAL
         run: |
           sudo apt-add-repository ppa:ubuntugis/ubuntugis-unstable
@@ -53,7 +54,7 @@ jobs:
           country: europe/netherlands
       - name: Download & Unzip NWB data
         run: |
-          wget "https://www.rijkswaterstaat.nl/apps/geoservices/geodata/dmc/nwb-wegen/geogegevens/shapefile/Nederland_totaal/05-01-2023.zip"
+          wget --no-check-certificate "https://www.rijkswaterstaat.nl/apps/geoservices/geodata/dmc/nwb-wegen/geogegevens/shapefile/Nederland_totaal/05-01-2023.zip"
           unzip -j "05-01-2023.zip" "05-01-2023/Wegvakken/Wegvakken.*"
       - name: Convert (and filter) NWB to GeoJSON
         run: |
@@ -77,7 +78,7 @@ jobs:
       - name: Generate MapRoulette buffers
         uses: ./.github/actions/maproulette-buffers
         with:
-          challenge-id: 17332
+          challenge-id: ${{ env.MAPROULETTE_CHALLENGE_ID }}
       - name: Upload MapRoulette false positive
         uses: actions/upload-artifact@v3
         with:
@@ -102,18 +103,39 @@ jobs:
         with:
           name: Netherlands-Statistics
           path: data/netherlands/difference/stats.json
-      - name: Commit changes
-        if: ${{ github.event_name != 'pull_request' }}
+
+  commit:
+    name: Commit & Push changes
+    needs: diff
+    if: ${{ github.event_name != 'pull_request' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@v3
+        with:
+          name: Netherlands-Difference
+          path: data/belgium/netherlands/difference
+      - uses: actions/download-artifact@v3
+        with:
+          name: Netherlands-Statistics
+          path: data/belgium/netherlands/difference
+      - name: Commit & Push
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git pull
-          git add data/netherlands/difference/diff.geojson
-          git add data/netherlands/difference/stats.json
+          git add data/belgium/netherlands/difference/diff.geojson
+          git add data/belgium/netherlands/difference/stats.json
           git commit -m "🗃 Update difference for Netherlands"
-      - name: Push changes
-        if: ${{ github.event_name != 'pull_request' }}
-        uses: ad-m/github-push-action@v0.6.0
-        with:
-          github_token: ${{ secrets.TOKEN }}
-          branch: ${{ github.ref }}
+          git push
+
+  # mr-rebuild:
+  #   name: Rebuild MapRoulette challenge
+  #   needs: commit
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Call MapRoulette API
+  #       run: |
+  #         curl -X "PUT" "https://maproulette.org/api/v2/challenge/${{ env.MAPROULETTE_CHALLENGE_ID }}/rebuild?removeUnmatched=true&skipSnapshot=false" \
+  #           -H "Accept: application/json" \
+  #           -H "apiKey: ${{ secrets.MAPROULETTE_API_KEY }}"
