@@ -25,3 +25,5 @@ jobs:
       working-directory: report
     - run: npm run build
       working-directory: report
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

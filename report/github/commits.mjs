@@ -1,3 +1,4 @@
+import { createActionAuth } from '@octokit/auth-action';
 import { Octokit } from '@octokit/rest';
 
 import getCommit from './commit.mjs';
@@ -6,8 +7,12 @@ import getContent from './content.mjs';
 import { OWNER, REPOSITORY } from './constants.mjs';
 
 export default async function (path) {
+  const auth = createActionAuth();
+  const authentication = await auth();
+
   const octokit = new Octokit({
-    auth: process.env.PUBLIC_GITHUB_TOKEN || null
+    authStrategy: createActionAuth,
+    auth: authentication,
   });
 
   const { data } = await octokit.repos.listCommits({
@@ -19,8 +24,8 @@ export default async function (path) {
 
   return Promise.all(
     data.map(async (commit) => {
-      const content = await getContent(path, commit.sha);
-      const details = await getCommit(commit.sha);
+      const content = await getContent(authentication, path, commit.sha);
+      const details = await getCommit(authentication, commit.sha);
 
       const stats = {
         tiles: 0,

@@ -1,10 +1,12 @@
+import { createActionAuth } from '@octokit/auth-action';
 import { Octokit } from '@octokit/rest';
 
 import { OWNER, REPOSITORY } from './constants.mjs';
 
-export default async function (ref) {
+export default async function (auth, ref) {
   const octokit = new Octokit({
-    auth: process.env.PUBLIC_GITHUB_TOKEN || null
+    authStrategy: createActionAuth,
+    auth,
   });
 
   const { data } = await octokit.repos.getCommit({
