@@ -8,7 +8,7 @@
     "preview": "astro preview"
   },
   "devDependencies": {
-    "@astrojs/svelte": "1.0.2",
+    "@astrojs/svelte": "^2.0.1",
     "@octokit/rest": "^19.0.7",
     "astro": "^2.0.6"
   },
