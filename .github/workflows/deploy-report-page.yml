@@ -7,6 +7,7 @@ on:
       - "report/**"
       - "data/**/diff.geojson"
       - "data/**/stats.json"
+  workflow_dispatch:
 
 # Allow one concurrent deployment
 concurrency:
@@ -30,7 +31,7 @@ jobs:
           npm run build
         working-directory: report
         env:
-          PUBLIC_GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
