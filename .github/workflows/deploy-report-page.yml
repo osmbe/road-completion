@@ -19,16 +19,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          persist-credentials: false
+      - uses: actions/checkout@v3
       - name: Setup Pages
         uses: actions/configure-pages@v3
-      - name: Install and Build
-        run: |
-          npm install
-          npm run build
+      - run: npm install
+        working-directory: report
+      - run: npm run build
         working-directory: report
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -36,14 +32,6 @@ jobs:
         uses: actions/upload-pages-artifact@v1
         with:
           path: report/dist
-      # - name: Deploy
-      #   if: ${{ github.event_name == 'push' }}
-      #   uses: JamesIves/github-pages-deploy-action@3.6.2
-      #   with:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     BRANCH: gh-pages # The branch the action should deploy to.
-      #     FOLDER: report/dist # The folder the action should deploy.
-      #     CLEAN: true # Automatically remove deleted files from the deploy branch
 
   deploy:
     runs-on: ubuntu-latest
