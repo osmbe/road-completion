@@ -9,7 +9,7 @@ const { id, title, ga } = Astro.props;
     <h3 class="title is-3 mb-0">{title}</h3>
 
     {ga && (
-      <a target="_blank" href={`https://github.com/osmbe/road-completion/actions/workflows/${ga}.yml`}>
+      <a target="_blank" rel="external noreferrer" href={`https://github.com/osmbe/road-completion/actions/workflows/${ga}.yml`}>
         <img alt="GitHub Actions workflow" src={`https://github.com/osmbe/road-completion/actions/workflows/${ga}.yml/badge.svg`}>
       </a>
     )}

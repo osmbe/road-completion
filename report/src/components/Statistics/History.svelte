@@ -28,7 +28,7 @@
           <td></td>
           {/if}
           <td>
-            <a target="_blank" rel="external" href="{ commit.url }">
+            <a target="_blank" rel="external noreferrer" href="{ commit.url }">
               { commit.title || commit.message }
             </a>
           </td>
@@ -41,7 +41,7 @@
           <td class="has-text-right">{ commit.stats.roads }</td>
           <td class="has-text-right">{ commit.stats.buffers }</td>
           <td class="has-text-right">
-            <a target="_blank" rel="external" href="{ commit.diff }">
+            <a target="_blank" rel="external noreferrer" href="{ commit.diff }">
             { commit.stats.notWithin }
             </a>
           </td>
