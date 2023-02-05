@@ -512,6 +512,9 @@ jobs:
         with:
           name: Namur-Statistics
           path: data/belgium/wallonia/difference/NAM
+      - name: Clean
+        run: |
+          if [ -f "data/belgium/wallonia/difference/diff.geojson" ]; then rm "data/belgium/wallonia/difference/diff.geojson"; fi
       - uses: actions/download-artifact@v3
         with:
           name: Wallonia-Difference
