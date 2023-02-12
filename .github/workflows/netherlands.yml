@@ -114,18 +114,18 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: Netherlands-Difference
-          path: data/belgium/netherlands/difference
+          path: data/netherlands/difference
       - uses: actions/download-artifact@v3
         with:
           name: Netherlands-Statistics
-          path: data/belgium/netherlands/difference
+          path: data/netherlands/difference
       - name: Commit & Push
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git pull
-          git add data/belgium/netherlands/difference/diff.geojson
-          git add data/belgium/netherlands/difference/stats.json
+          git add data/netherlands/difference/diff.geojson
+          git add data/netherlands/difference/stats.json
           git commit -m "🗃 Update difference for Netherlands"
           git push
 
