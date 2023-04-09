@@ -56,7 +56,7 @@ jobs:
       - name: Download & Unzip Wegenregister data
         run: |
           wget "https://downloadagiv.blob.core.windows.net/wegenregister/${{ env.FILENAME }}.zip"
-          unzip -j "${{ env.FILENAME }}.zip" "${{ env.FILENAME }}/Shapefile/Wegsegment.*"
+          unzip -j "${{ env.FILENAME }}.zip" "Shapefile/Wegsegment.*"
       - name: Convert (and filter) Wegenregister to GeoJSON
         run: |
           ogr2ogr -f "GeoJSON" -progress \
