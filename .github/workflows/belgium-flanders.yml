@@ -27,6 +27,7 @@ concurrency:
 
 env:
   MAPROULETTE_CHALLENGE_ID: 24090
+  FILENAME: Wegenregister_SHAPE_20230323
 
 jobs:
 
@@ -54,8 +55,8 @@ jobs:
           country: europe/belgium
       - name: Download & Unzip Wegenregister data
         run: |
-          wget "https://downloadagiv.blob.core.windows.net/wegenregister/Wegenregister_SHAPE_20221216.zip"
-          unzip -j "Wegenregister_SHAPE_20221216.zip" "Wegenregister_SHAPE_20221216/Shapefile/Wegsegment.*"
+          wget "https://downloadagiv.blob.core.windows.net/wegenregister/${{ env.FILENAME }}.zip"
+          unzip -j "${{ env.FILENAME }}.zip" "${{ env.FILENAME }}/Shapefile/Wegsegment.*"
       - name: Convert (and filter) Wegenregister to GeoJSON
         run: |
           ogr2ogr -f "GeoJSON" -progress \
