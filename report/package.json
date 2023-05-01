@@ -11,7 +11,7 @@
     "@astrojs/svelte": "^2.1.0",
     "@octokit/auth-action": "^2.0.3",
     "@octokit/rest": "^19.0.7",
-    "astro": "^2.1.9"
+    "astro": "^2.3.2"
   },
   "dependencies": {
     "chart.js": "^4.2.1",
