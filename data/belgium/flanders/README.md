@@ -2,7 +2,7 @@
 
 [![🇧🇪 Flanders, Belgium](https://github.com/osmbe/road-completion/actions/workflows/belgium-flanders.yml/badge.svg)](https://github.com/osmbe/road-completion/actions/workflows/belgium-flanders.yml)
 
-> Source: <https://download.vlaanderen.be/Producten/Detail?id=8106&title=Wegenregister_23_03_2023>
+> Source: <https://download.vlaanderen.be/bff/v1/Orders/39063/download/8106b71f-ebdb-46c3-93aa-7261842b4c81>
 
 ## Filters
 
