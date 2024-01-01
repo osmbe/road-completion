@@ -81,7 +81,7 @@ jobs:
         with:
           challenge-id: ${{ env.MAPROULETTE_CHALLENGE_ID }}
       - name: Upload MapRoulette false positive
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: MapRoulette-FalsePositive
           path: maproulette.geojson
@@ -95,12 +95,12 @@ jobs:
       - name: Difference
         run: node "script/difference.js" --output-dir="data/belgium/flanders/difference" "WegsegmentTagged.mbtiles" "belgium-buffers.mbtiles"
       - name: Upload difference
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Flanders-Difference
           path: data/belgium/flanders/difference/diff.geojson
       - name: Upload statistics
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Flanders-Statistics
           path: data/belgium/flanders/difference/stats.json
