@@ -427,27 +427,27 @@ jobs:
           if [ -f "data/belgium/wallonia/difference/LUX/stats.json" ]; then rm "data/belgium/wallonia/difference/LUX/stats.json"; fi
           if [ -f "data/belgium/wallonia/difference/NAM/stats.json" ]; then rm "data/belgium/wallonia/difference/NAM/stats.json"; fi
       - name: Download difference for Brabant Wallon, Wallonia, Belgium
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: BrabantWallon-Difference
           path: data/belgium/wallonia/difference/BRA
       - name: Download difference for Hainaut, Wallonia, Belgium
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: Hainaut-Difference
           path: data/belgium/wallonia/difference/HAI
       - name: Download difference for Liège, Wallonia, Belgium
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: Liege-Difference
           path: data/belgium/wallonia/difference/LIE
       - name: Download difference for Luxembourg, Wallonia, Belgium
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: Luxembourg-Difference
           path: data/belgium/wallonia/difference/LUX
       - name: Download difference for Namur, Wallonia, Belgium
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: Namur-Difference
           path: data/belgium/wallonia/difference/NAM
@@ -472,47 +472,47 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: BrabantWallon-Difference
           path: data/belgium/wallonia/difference/BRA
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: BrabantWallon-Statistics
           path: data/belgium/wallonia/difference/BRA
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: Hainaut-Difference
           path: data/belgium/wallonia/difference/HAI
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: Hainaut-Statistics
           path: data/belgium/wallonia/difference/HAI
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: Liege-Difference
           path: data/belgium/wallonia/difference/LIE
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: Liege-Statistics
           path: data/belgium/wallonia/difference/LIE
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: Luxembourg-Difference
           path: data/belgium/wallonia/difference/LUX
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: Luxembourg-Statistics
           path: data/belgium/wallonia/difference/LUX
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: Namur-Difference
           path: data/belgium/wallonia/difference/NAM
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: Namur-Statistics
           path: data/belgium/wallonia/difference/NAM
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: Wallonia-Difference
           path: data/belgium/wallonia/difference
