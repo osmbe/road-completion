@@ -54,7 +54,7 @@ jobs:
           country: europe/belgium
       - name: Download & Unzip UrbIS data
         run: |
-          wget --no-check-certificate "https://s.irisnet.be/v1/AUTH_ce3f7c74-fbd7-4b46-8d85-53d10d86904f/UrbAdm/UrbAdm_SHP.zip"
+          wget --no-check-certificate "https://urbisdownload.datastore.brussels/UrbIS/Vector/M7/2D/UrbAdm/Daily/SHP_LITE/UrbAdm_SHP.zip"
           unzip "UrbAdm_SHP.zip" "shp/UrbAdm_STREET_AXIS.*"
       - name: Convert (and filter) UrbIS to GeoJSON
         run: |
@@ -127,7 +127,7 @@ jobs:
           git add data/belgium/brussels/difference/stats.json
           git commit -m "🗃 Update difference for Brussels, Belgium"
           git push
-          
+
   mr-rebuild:
     name: Rebuild MapRoulette challenge
     needs: commit
