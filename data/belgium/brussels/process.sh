@@ -11,7 +11,7 @@ cd `dirname "$(realpath $0)"`
 mkdir -p "./source/"
 
 if [ ! -d "./source/UrbAdm_SHP" ]; then
-  wget -O "./source/UrbAdm_SHP.zip" "https://s.irisnet.be/v1/AUTH_ce3f7c74-fbd7-4b46-8d85-53d10d86904f/UrbAdm/UrbAdm_SHP.zip"
+  wget -O "./source/UrbAdm_SHP.zip" "https://urbisdownload.datastore.brussels/UrbIS/Vector/M7/2D/UrbAdm/Daily/SHP_LITE/UrbAdm_SHP.zip"
   unzip "./source/UrbAdm_SHP.zip" -d "./source/UrbAdm_SHP/" "shp/UrbAdm_STREET_AXIS.*"
 fi
 
