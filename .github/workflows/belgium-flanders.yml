@@ -27,7 +27,7 @@ concurrency:
 
 env:
   MAPROULETTE_CHALLENGE_ID: 24090
-  FILENAME: Wegenregister_SHAPE_20230623
+  FILENAME: Wegenregister_SHAPE_20240620
 
 jobs:
 
