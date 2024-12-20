@@ -2,9 +2,9 @@ name: 🇧🇪 Brussels, Belgium
 
 on:
   workflow_dispatch:
-  # Run every Sunday at 12:00 UTC
+  # Run every Sunday at 10:00 UTC
   schedule:
-    - cron: "0 12 * * 0"
+    - cron: "0 10 * * 0"
   push:
     paths:
       - ".github/workflows/belgium-brussels.yml"
