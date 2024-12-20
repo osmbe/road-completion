@@ -27,6 +27,8 @@ concurrency:
 
 env:
   MAPROULETTE_CHALLENGE_ID: 24090
+  WEGENREGISTER_URL: "https://download.vlaanderen.be/bff/v1/Orders/306141/download/65f6195e-d0d7-427e-84f3-c7d7669fad5b"
+  WEGENREGISTER_DATE: "20241219"
 
 jobs:
 
@@ -52,11 +54,19 @@ jobs:
         uses: ./.github/actions/openstreetmap-buffers
         with:
           country: europe/belgium
+      - name: Cache WegenRegister data
+        id: cache-wegenregister
+        uses: actions/cache@v4
+        with:
+          path: Wegsegment.geojson
+          key: wegenregister-${{ env.WEGENREGISTER_DATE }}
       - name: Download & Unzip Wegenregister data
+        if: ${{ steps.cache-wegenregister.outputs.cache-hit != 'true' }}
         run: |
-          wget --content-disposition "https://download.vlaanderen.be/bff/v1/Orders/306141/download/65f6195e-d0d7-427e-84f3-c7d7669fad5b"
-          unzip -j "Wegenregister_SHAPE_20241219.zip" "Shapefile/Wegsegment.*"
+          wget --content-disposition ${{ env.WEGENREGISTER_URL }}
+          unzip -j "Wegenregister_SHAPE_${{ env.WEGENREGISTER_DATE }}.zip" "Shapefile/Wegsegment.*"
       - name: Convert (and filter) Wegenregister to GeoJSON
+        if: ${{ steps.cache-wegenregister.outputs.cache-hit != 'true' }}
         run: |
           ogr2ogr -f "GeoJSON" -progress \
             --config SHAPE_ENCODING "ISO-8859-1" \
