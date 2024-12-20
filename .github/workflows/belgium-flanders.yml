@@ -54,8 +54,8 @@ jobs:
           country: europe/belgium
       - name: Download & Unzip Wegenregister data
         run: |
-          wget --content-disposition "https://download.vlaanderen.be/bff/v1/Orders/248409/download/7fae9d05-e147-48d3-8dfa-d66de16a2fb6"
-          unzip -j "Wegenregister_SHAPE_20240620.zip" "Shapefile/Wegsegment.*"
+          wget --content-disposition "https://download.vlaanderen.be/bff/v1/Orders/306141/download/65f6195e-d0d7-427e-84f3-c7d7669fad5b"
+          unzip -j "Wegenregister_SHAPE_20241219.zip" "Shapefile/Wegsegment.*"
       - name: Convert (and filter) Wegenregister to GeoJSON
         run: |
           ogr2ogr -f "GeoJSON" -progress \

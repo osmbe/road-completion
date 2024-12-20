@@ -1,6 +1,6 @@
 #!/bin/sh
 
-FILENAME="Wegenregister_SHAPE_20240620"
+FILENAME="Wegenregister_SHAPE_20241219"
 MAPROULETTE_CHALLENGE=24090
 
 # Make script directory working directory
@@ -12,7 +12,7 @@ cd `dirname "$(realpath $0)"`
 mkdir -p "./source/"
 
 if [ ! -d "./source/$FILENAME" ]; then
-  wget -O "./source/$FILENAME.zip" "https://downloadagiv.blob.core.windows.net/wegenregister/$FILENAME.zip"
+  wget -O "./source/$FILENAME.zip" "https://download.vlaanderen.be/bff/v1/Orders/306141/download/65f6195e-d0d7-427e-84f3-c7d7669fad5b"
   unzip -j "./source/$FILENAME.zip" -d "./source/$FILENAME/" "$FILENAME/Shapefile/Wegsegment.*"
 fi
 
