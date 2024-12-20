@@ -8,10 +8,23 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Get current date
+      id: date
+      run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+    - name: Cache result
+      id: cache-buffers
+      uses: actions/cache@v2
+      with:
+        path: |
+          openstreetmap-lines-buffers.geojson
+          openstreetmap-polygons-buffers.geojson
+        key: openstreetmap-buffers-${{ inputs.country }}-${{ steps.date.outputs.date }}
     - name: Download OpenStreetMap extract
+      if: ${{ steps.cache-buffers.outputs.cache-hit != 'true' }}
       run: wget -O openstreetmap-latest.osm.pbf https://download.geofabrik.de/${{ inputs.country }}-latest.osm.pbf
       shell: bash
     - name: Convert (and filter) OpenStreetMap to GeoJSON
+      if: ${{ steps.cache-buffers.outputs.cache-hit != 'true' }}
       run: |
         ogr2ogr -f "GeoJSON" -progress \
           -sql "SELECT name, highway FROM lines WHERE highway IS NOT NULL" \
@@ -23,6 +36,7 @@ runs:
           "openstreetmap-latest.osm.pbf"
       shell: bash
     - name: Generate OpenStreetMap buffers
+      if: ${{ steps.cache-buffers.outputs.cache-hit != 'true' }}
       run: |
         node "script/buffer.js" --radius=20 "openstreetmap-lines.geojson" "openstreetmap-lines-buffers.geojson"
         node "script/buffer.js" --radius=5 "openstreetmap-polygons.geojson" "openstreetmap-polygons-buffers.geojson"
