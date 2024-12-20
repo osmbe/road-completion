@@ -32,7 +32,7 @@
     "minimist": "^1.2.8"
   },
   "devDependencies": {
-    "@tsconfig/recommended": "^1.0.3",
+    "@tsconfig/recommended": "^1.0.8",
     "@types/event-stream": "^4.0.5",
     "@types/geojson": "^7946.0.10",
     "@types/minimist": "^1.2.5",
