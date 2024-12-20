@@ -14,7 +14,7 @@ runs:
       shell: bash
     - name: Cache result
       id: cache-buffers
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: |
           openstreetmap-lines-buffers.geojson
