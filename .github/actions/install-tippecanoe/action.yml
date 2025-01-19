@@ -5,6 +5,9 @@ description: "Install Tippecanoe from source (GitHub repository)"
 runs:
   using: "composite"
   steps:
+    - name: Install dependencies
+      run: apt install libsqlite3-dev
+      shell: bash
     - run: git clone https://github.com/mapbox/tippecanoe.git
       shell: bash
     - run: |
