@@ -6,7 +6,7 @@ runs:
   using: "composite"
   steps:
     - name: Install dependencies
-      run: apt install libsqlite3-dev
+      run: sudo apt install libsqlite3-dev
       shell: bash
     - run: git clone https://github.com/mapbox/tippecanoe.git
       shell: bash
