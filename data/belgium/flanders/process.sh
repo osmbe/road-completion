@@ -12,7 +12,7 @@ cd `dirname "$(realpath $0)"`
 mkdir -p "./source/"
 
 if [ ! -d "./source/$FILENAME" ]; then
-  wget -O "./source/$FILENAME.zip" "https://download.vlaanderen.be/bff/v1/Orders/306141/download/65f6195e-d0d7-427e-84f3-c7d7669fad5b"
+  wget -O "./source/$FILENAME.zip" "https://download.vlaanderen.be/bff/v1/Orders/318961/download/d04a1c07-b34f-4b38-ac86-18352ef4317b"
   unzip -j "./source/$FILENAME.zip" -d "./source/$FILENAME/" "$FILENAME/Shapefile/Wegsegment.*"
 fi
 
