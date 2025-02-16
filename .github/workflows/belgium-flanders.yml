@@ -2,9 +2,9 @@ name: 🇧🇪 Flanders, Belgium
 
 on:
   workflow_dispatch:
-  # Run every Sunday at 12:00 UTC
+  # Run at 12:00 UTC every 5 days (to make sure cache doesn't expire)
   schedule:
-    - cron: "0 12 * * 0"
+    - cron: "0 12 */5 * *"
   push:
     paths:
       - ".github/workflows/belgium-flanders.yml"
@@ -27,8 +27,8 @@ concurrency:
 
 env:
   MAPROULETTE_CHALLENGE_ID: 24090
-  WEGENREGISTER_URL: "https://download.vlaanderen.be/bff/v1/Orders/318961/download/d04a1c07-b34f-4b38-ac86-18352ef4317b"
-  WEGENREGISTER_DATE: "20241219"
+  WEGENREGISTER_URL: "https://download.vlaanderen.be/bff/v1/Orders/337327/download/79c09c5d-e2c5-45c0-a5fa-52734128aa01"
+  WEGENREGISTER_DATE: "20250130"
 
 jobs:
 
