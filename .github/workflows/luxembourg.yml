@@ -34,7 +34,7 @@ jobs:
     name: Generate difference for Luxembourg
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install GDAL
         run: |
           sudo apt-add-repository ppa:ubuntugis/ubuntugis-unstable
@@ -117,7 +117,7 @@ jobs:
     if: ${{ github.event_name != 'pull_request' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/download-artifact@v4
         with:
           name: Luxembourg-Difference
