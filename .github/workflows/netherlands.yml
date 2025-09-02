@@ -34,7 +34,7 @@ jobs:
     name: Generate difference for Netherlands
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install GDAL
         run: |
           sudo apt-add-repository ppa:ubuntugis/ubuntugis-unstable
@@ -110,7 +110,7 @@ jobs:
     if: ${{ github.event_name != 'pull_request' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/download-artifact@v4
         with:
           name: Netherlands-Difference
