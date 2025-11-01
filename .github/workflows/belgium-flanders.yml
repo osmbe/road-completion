@@ -121,11 +121,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: actions/download-artifact@v5
+      - uses: actions/download-artifact@v6
         with:
           name: Flanders-Difference
           path: data/belgium/flanders/difference
-      - uses: actions/download-artifact@v5
+      - uses: actions/download-artifact@v6
         with:
           name: Flanders-Statistics
           path: data/belgium/flanders/difference
