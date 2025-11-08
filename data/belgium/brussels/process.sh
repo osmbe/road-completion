@@ -1,6 +1,7 @@
 #!/bin/sh
 
 MAPROULETTE_CHALLENGE=14675
+URBIS_DATE="20251004"
 
 # Make script directory working directory
 
@@ -10,9 +11,9 @@ cd `dirname "$(realpath $0)"`
 
 mkdir -p "./source/"
 
-if [ ! -d "./source/UrbAdm_SHP" ]; then
-  wget -O "./source/UrbAdm_SHP.zip" "https://urbisdownload.datastore.brussels/UrbIS/Vector/M7/2D/UrbAdm/Daily/SHP_LITE/UrbAdm_SHP.zip"
-  unzip "./source/UrbAdm_SHP.zip" -d "./source/UrbAdm_SHP/" "shp/UrbAdm_STREET_AXIS.*"
+if [ ! -d "./source/UrbISVector" ]; then
+  wget -O "./source/UrbISVector.zip" "https://urbisdownload.datastore.brussels/UrbIS/Vector/M8/UrbIS-Vector/GPKG/UrbISVector_31370_GPKG_04000_${URBIS_DATE}.zip"
+  unzip "./source/UrbISVector.zip" -d "./source/UrbISVector/"
 fi
 
 # Convert to GeoJSON
@@ -26,12 +27,12 @@ ogr2ogr -f "GeoJSON" -progress \
   -sql "@filter.sql" \
   -lco COORDINATE_PRECISION=6 \
   -fieldTypeToString "All" \
-  "./temp/UrbAdm_STREET_AXIS.geojson" \
-  "./source/UrbAdm_SHP/shp/UrbAdm_STREET_AXIS.shp"
+  "./temp/StreetAxes.geojson" \
+  "./source/UrbISVector/gpkg/UrbISVector_04000.gpkg" "StreetAxes"
 
 # Convert fields to OpenStreetMap tags
 
-node "../../../script/convert-tags.js" -c "./convert.json" "./temp/UrbAdm_STREET_AXIS.geojson" "UrbAdm_STREET_AXISTagged.geojson"
+node "../../../script/convert-tags.js" -c "./convert.json" "./temp/StreetAxes.geojson" "StreetAxesTagged.geojson"
 
 # Generate vector tiles
 
@@ -39,7 +40,7 @@ tippecanoe --force --no-feature-limit --no-tile-size-limit \
   --buffer=0 \
   --maximum-zoom=14 --minimum-zoom=14 \
   --layer="roads" \
-  --output="./temp/UrbAdm_STREET_AXISTagged.mbtiles" "./temp/UrbAdm_STREET_AXISTagged.geojson"
+  --output="./temp/StreetAxesTagged.mbtiles" "./temp/StreetAxesTagged.geojson"
 
 # Generate MapRoulette NotAnIssue buffers vector tiles
 
@@ -61,4 +62,4 @@ if [ -d "./difference" ]; then rm -r "./difference/"; fi
 
 mkdir -p "./difference"
 
-node "../../../script/difference.js" --output-dir="./difference" "./temp/UrbAdm_STREET_AXISTagged.mbtiles" "./temp/belgium-buffers.mbtiles"
+node "../../../script/difference.js" --output-dir="./difference" "./temp/StreetAxesTagged.mbtiles" "./temp/belgium-buffers.mbtiles"
