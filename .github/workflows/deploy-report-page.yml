@@ -1,6 +1,8 @@
 name: Build and Deploy report page
 
 on:
+  schedule:
+    - cron: "0 12 1 * *"
   push:
     paths:
       - ".github/workflows/deploy-report-page.yml"
