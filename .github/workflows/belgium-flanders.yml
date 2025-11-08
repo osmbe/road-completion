@@ -27,8 +27,8 @@ concurrency:
 
 env:
   MAPROULETTE_CHALLENGE_ID: 24090
-  WEGENREGISTER_URL: "https://download.vlaanderen.be/bff/v1/Orders/337327/download/79c09c5d-e2c5-45c0-a5fa-52734128aa01"
-  WEGENREGISTER_DATE: "20250130"
+  WEGENREGISTER_URL: "https://download.vlaanderen.be/bff/v1/Orders/480308/download/f5caa4db-9ad9-4464-bcea-96ec997c488e"
+  WEGENREGISTER_DATE: "20251107"
 
 jobs:
 
