@@ -64,7 +64,7 @@ jobs:
         if: ${{ steps.cache-wegenregister.outputs.cache-hit != 'true' }}
         run: |
           wget --content-disposition ${{ env.WEGENREGISTER_URL }}
-          unzip -j "Wegenregister_SHAPE_${{ env.WEGENREGISTER_DATE }}.zip" "Shapefile/Wegsegment.*"
+          unzip -j "Wegenregister.zip" "Shapefile/Wegsegment.*"
       - name: Convert (and filter) Wegenregister to GeoJSON
         if: ${{ steps.cache-wegenregister.outputs.cache-hit != 'true' }}
         run: |
