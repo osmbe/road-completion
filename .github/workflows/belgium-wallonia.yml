@@ -1,5 +1,8 @@
 name: 🇧🇪 Wallonia, Belgium
 
+permissions:
+  contents: read
+
 on:
   workflow_dispatch:
   # Run every Sunday at 12:00 UTC
@@ -467,6 +470,8 @@ jobs:
 
   commit:
     name: Commit & Push changes
+    permissions:
+      contents: write
     needs: merge
     if: ${{ github.event_name != 'pull_request' }}
     runs-on: ubuntu-latest

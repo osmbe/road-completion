@@ -1,5 +1,8 @@
 name: 🇧🇪 Brussels, Belgium
 
+permissions:
+  contents: read
+
 on:
   workflow_dispatch:
   # Run every Sunday at 10:00 UTC
@@ -106,6 +109,8 @@ jobs:
 
   commit:
     name: Commit & Push changes
+    permissions:
+      contents: write
     needs: diff
     if: ${{ github.event_name != 'pull_request' }}
     runs-on: ubuntu-latest

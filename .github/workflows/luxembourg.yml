@@ -1,5 +1,8 @@
 name: 🇱🇺 Luxembourg
 
+permissions:
+  contents: read
+
 on:
   workflow_dispatch:
   # Run every Monday at 16:00 UTC. Dataset gets updated at around 11 UTC.
@@ -113,6 +116,8 @@ jobs:
 
   commit:
     name: Commit & Push changes
+    permissions:
+      contents: write
     needs: diff
     if: ${{ github.event_name != 'pull_request' }}
     runs-on: ubuntu-latest

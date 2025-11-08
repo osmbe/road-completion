@@ -1,5 +1,8 @@
 name: 🇧🇪 Flanders, Belgium
 
+permissions:
+  contents: read
+
 on:
   workflow_dispatch:
   # Run at 12:00 UTC every 5 days (to make sure cache doesn't expire)
@@ -116,6 +119,8 @@ jobs:
 
   commit:
     name: Commit & Push changes
+    permissions:
+      contents: write
     needs: diff
     if: ${{ github.event_name != 'pull_request' }}
     runs-on: ubuntu-latest
