@@ -1,5 +1,8 @@
 name: "Node.js CI - Report"
 
+permissions:
+  contents: read
+
 on:
   push:
     paths:

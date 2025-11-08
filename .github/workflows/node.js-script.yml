@@ -1,5 +1,8 @@
 name: "Node.js CI - Script"
 
+permissions:
+  contents: read
+
 on:
   push:
     paths:
