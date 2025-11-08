@@ -1,2 +1,2 @@
-SELECT * FROM "UrbAdm_STREET_AXIS" WHERE
+SELECT * FROM "StreetAxes" WHERE
   "TYPE" NOT IN ('M', 'O', 'MS', 'RS', 'RT', 'MT')
