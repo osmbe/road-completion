@@ -83,7 +83,7 @@ jobs:
         with:
           challenge-id: ${{ env.MAPROULETTE_CHALLENGE_ID }}
       - name: Upload MapRoulette false positive
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: MapRoulette-FalsePositive
           path: maproulette.geojson
@@ -97,12 +97,12 @@ jobs:
       - name: Difference
         run: node "script/difference.js" --output-dir="data/belgium/wallonia/difference/BRA" "BRA_VOIRIE_AXETagged.mbtiles" "belgium-buffers.mbtiles"
       - name: Upload difference
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: BrabantWallon-Difference
           path: data/belgium/wallonia/difference/BRA/diff.geojson
       - name: Upload statistics
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: BrabantWallon-Statistics
           path: data/belgium/wallonia/difference/BRA/stats.json
@@ -157,7 +157,7 @@ jobs:
         with:
           challenge-id: ${{ env.MAPROULETTE_CHALLENGE_ID }}
       # - name: Upload MapRoulette false positive
-      #   uses: actions/upload-artifact@v5
+      #   uses: actions/upload-artifact@v6
       #   with:
       #     name: MapRoulette-FalsePositive
       #     path: maproulette.geojson
@@ -171,12 +171,12 @@ jobs:
       - name: Difference
         run: node "script/difference.js" --output-dir="data/belgium/wallonia/difference/HAI" "HAI_VOIRIE_AXETagged.mbtiles" "belgium-buffers.mbtiles"
       - name: Upload difference
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: Hainaut-Difference
           path: data/belgium/wallonia/difference/HAI/diff.geojson
       - name: Upload statistics
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: Hainaut-Statistics
           path: data/belgium/wallonia/difference/HAI/stats.json
@@ -231,7 +231,7 @@ jobs:
         with:
           challenge-id: ${{ env.MAPROULETTE_CHALLENGE_ID }}
       # - name: Upload MapRoulette false positive
-      #   uses: actions/upload-artifact@v5
+      #   uses: actions/upload-artifact@v6
       #   with:
       #     name: MapRoulette-FalsePositive
       #     path: maproulette.geojson
@@ -245,12 +245,12 @@ jobs:
       - name: Difference
         run: node "script/difference.js" --output-dir="data/belgium/wallonia/difference/LIE" "LIE_VOIRIE_AXETagged.mbtiles" "belgium-buffers.mbtiles"
       - name: Upload difference
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: Liege-Difference
           path: data/belgium/wallonia/difference/LIE/diff.geojson
       - name: Upload statistics
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: Liege-Statistics
           path: data/belgium/wallonia/difference/LIE/stats.json
@@ -305,7 +305,7 @@ jobs:
         with:
           challenge-id: ${{ env.MAPROULETTE_CHALLENGE_ID }}
       # - name: Upload MapRoulette false positive
-      #   uses: actions/upload-artifact@v5
+      #   uses: actions/upload-artifact@v6
       #   with:
       #     name: MapRoulette-FalsePositive
       #     path: maproulette.geojson
@@ -319,12 +319,12 @@ jobs:
       - name: Difference
         run: node "script/difference.js" --output-dir="data/belgium/wallonia/difference/LUX" "LUX_VOIRIE_AXETagged.mbtiles" "belgium-buffers.mbtiles"
       - name: Upload difference
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: Luxembourg-Difference
           path: data/belgium/wallonia/difference/LUX/diff.geojson
       - name: Upload statistics
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: Luxembourg-Statistics
           path: data/belgium/wallonia/difference/LUX/stats.json
@@ -379,7 +379,7 @@ jobs:
         with:
           challenge-id: ${{ env.MAPROULETTE_CHALLENGE_ID }}
       # - name: Upload MapRoulette false positive
-      #   uses: actions/upload-artifact@v5
+      #   uses: actions/upload-artifact@v6
       #   with:
       #     name: MapRoulette-FalsePositive
       #     path: maproulette.geojson
@@ -393,12 +393,12 @@ jobs:
       - name: Difference
         run: node "script/difference.js" --output-dir="data/belgium/wallonia/difference/NAM" "NAM_VOIRIE_AXETagged.mbtiles" "belgium-buffers.mbtiles"
       - name: Upload difference
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: Namur-Difference
           path: data/belgium/wallonia/difference/NAM/diff.geojson
       - name: Upload statistics
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: Namur-Statistics
           path: data/belgium/wallonia/difference/NAM/stats.json
@@ -463,7 +463,7 @@ jobs:
           ogr2ogr -f "GeoJSON" -progress -append "data/belgium/wallonia/difference/diff.geojson" "data/belgium/wallonia/difference/NAM/diff.geojson"
           ogr2ogr -f "GeoJSON" -progress -append "data/belgium/wallonia/difference/diff.geojson" "data/belgium/wallonia/difference/LUX/diff.geojson"
       - name: Upload difference
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: Wallonia-Difference
           path: data/belgium/wallonia/difference/diff.geojson
