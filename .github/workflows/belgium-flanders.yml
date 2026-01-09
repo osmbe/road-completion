@@ -59,7 +59,7 @@ jobs:
           country: europe/belgium
       - name: Cache WegenRegister data
         id: cache-wegenregister
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: Wegsegment.geojson
           key: wegenregister-${{ env.WEGENREGISTER_DATE }}
