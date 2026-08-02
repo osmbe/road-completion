@@ -21,7 +21,7 @@ jobs:
     steps:
     - uses: actions/checkout@v6
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v6
+      uses: actions/setup-node@v7
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm install
@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v6
-    - uses: actions/setup-node@v6
+    - uses: actions/setup-node@v7
     - run: npm ci
       working-directory: script
     - run: npm run lint
